@@ -7,21 +7,25 @@ import java.util.Vector;
 
 import com.njue.mis.model.Operator;
 
-public interface OperatorServicesHandler
-{
+public interface OperatorServicesHandler {
 	/**
 	 * 查询用户名和密码是否正确
+	 *
 	 * @param username 用户名
 	 * @param password 密码
+	 * @param dept     部门
 	 * @return 查询结果
 	 */
-	boolean loginCheck(String username,String password);
+	boolean loginCheck(String username, String password, String dept);
+
 	/**
 	 * 向数据库中田间新的操作员
+	 *
 	 * @param operator 封装好的操作员
 	 * @return 执行结果
 	 */
 	boolean addOperator(Operator operator);
+
 	/**
 	 * 删除操作员信息
 	 * @param username 被删除的操作员名称 
