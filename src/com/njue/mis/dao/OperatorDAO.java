@@ -23,28 +23,27 @@ public class OperatorDAO
 	
 	/**
 	 * 查询用户名和密码是否正确
+	 *
 	 * @param username 用户名
+	 * @param password 密码
 	 * @param password 密码
 	 * @return 查询结果
 	 */
-	public boolean loginCheck(String username,String password)
-	{
-		boolean result=false;
-		try
-		{
-			String sql="select * from tb_operator where username=? and password=?";
-			Object[] params=new Object[]{username,password};
-			ResultSet rs=manage.executeQuery(sql, params,Constants.PSTM_TYPE);
-			while(rs.next())
-				result=true;
+	public boolean loginCheck(String username, String password, String dept) {
+		boolean result = false;
+		try {
+			String sql = "select * from tb_operator where username=? and password=? and dept=?";
+			Object[] params = new Object[]{username, password, dept};
+			ResultSet rs = manage.executeQuery(sql, params, Constants.PSTM_TYPE);
+			while (rs.next())
+				result = true;
 			manage.closeDB();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			ErrorManager.printError("OperatorDAO.loginCheck", e);
 		}
 		return result;
 	}
+
 	/**
 	 * 向数据库中田间新的操作员
 	 * @param operator 封装好的操作员
