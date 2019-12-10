@@ -31,7 +31,7 @@ public class LoginFrame extends JFrame implements ActionListener
 
 	public LoginFrame()
 	{
-		super("小超市进销存管理系统");
+		super("崴食品公司管理系统");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(screenSize.width / 3, screenSize.height / 3, 330, 230);
 		this.setResizable(false);
@@ -82,9 +82,8 @@ public class LoginFrame extends JFrame implements ActionListener
 					MainFrame.getMainFrame().setVisible(true);
 					this.setVisible(false);
 				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "登陆失败,用户名或密码错误！(如果在此弹窗之前已经有弹窗提示数据库有错误，那说明你数据库还没有配置好，请仔细按照视频教程配置好数据库了再运行，否则就是真的输错了登录名和密码)","警告",JOptionPane.WARNING_MESSAGE);
+				else {
+					JOptionPane.showMessageDialog(null, "登陆失败,用户名或密码错误！)", "警告", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 	}
