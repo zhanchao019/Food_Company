@@ -9,29 +9,21 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.handler.OperatorServicesHandler;
 
-public class LoginFrame extends JFrame implements ActionListener
-{
+public class LoginFrame extends JFrame implements ActionListener {
 
 	JTextField username;
 	JPasswordField password;
 	JButton submit;
 	JButton cancel;
+	JComboBox department;
 
-	public LoginFrame()
-	{
-		super("崴食品公司管理系统");
+	public LoginFrame() {
+		super("食品公司管理系统");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(screenSize.width / 3, screenSize.height / 3, 330, 230);
 		this.setResizable(false);
@@ -40,11 +32,14 @@ public class LoginFrame extends JFrame implements ActionListener
 		submit = new JButton("确定");
 		submit.addActionListener(this);
 
+		department = new JComboBox();
+		String[] selected = {"管理员", "销售部", "财务部", "成品库", "原料库", "生产车间", "生产计划科"};
+		department.setModel(new DefaultComboBoxModel(selected));
+		department.setBounds(15, 15, 100, 25);
+
 		cancel = new JButton("取消");
-		cancel.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
+		cancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
@@ -55,51 +50,45 @@ public class LoginFrame extends JFrame implements ActionListener
 
 	}
 
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		String usernameString = username.getText();
 		String passwordString = String.valueOf(password.getPassword());
-
- 		if (usernameString.trim().length() == 0)
-		{
-			JOptionPane.showMessageDialog(null, "用户名不能为空！","警告",JOptionPane.WARNING_MESSAGE);
+		String selected_department = department.getSelectedItem().toString().trim();
+		System.out.println(selected_department);
+		if (usernameString.trim().length() == 0) {
+			JOptionPane.showMessageDialog(null, "用户名不能为空！", "警告", JOptionPane.WARNING_MESSAGE);
+		} else if (passwordString.trim().length() == 0) {
+			JOptionPane.showMessageDialog(null, "密码不能为空！", "警告", JOptionPane.WARNING_MESSAGE);
+		} else {
+			OperatorServicesHandler operator = CommonFactory
+					.getOperatorServices();
+			boolean isPass = operator.loginCheck(usernameString,
+					passwordString, selected_department);
+			if (isPass) {
+				MainFrame.username = usernameString;
+				MainFrame.power = operator.getPower(usernameString);
+				MainFrame.getMainFrame().setVisible(true);
+				this.setVisible(false);
+			} else {
+				JOptionPane.showMessageDialog(null, "登陆失败,用户名或密码错误！)", "警告", JOptionPane.WARNING_MESSAGE);
+			}
 		}
-		else
-			if (passwordString.trim().length() == 0)
-			{
-				JOptionPane.showMessageDialog(null, "密码不能为空！","警告",JOptionPane.WARNING_MESSAGE);
-			}
-			else
-			{
-				OperatorServicesHandler operator = CommonFactory
-						.getOperatorServices();
-				boolean isPass = operator.loginCheck(usernameString,
-						passwordString);
-				if (isPass)
-				{
-					MainFrame.username=usernameString;
-					MainFrame.power=operator.getPower(usernameString);
-					MainFrame.getMainFrame().setVisible(true);
-					this.setVisible(false);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "登陆失败,用户名或密码错误！)", "警告", JOptionPane.WARNING_MESSAGE);
-				}
-			}
 	}
 
 	/**
 	 * 窗体布局
 	 */
-	private void loginLayout()
-	{
+	private void loginLayout() {
 		JLabel name;
 		JLabel passwordLabel;
 		JPanel panel_center, panel_south;
 		JLabel label;
+		JLabel departmentLabel;
 		name = new JLabel("用户名:  ", JLabel.RIGHT);
 		name.setForeground(new Color(0, 128, 255));
 		passwordLabel = new JLabel("密码:  ", JLabel.RIGHT);
+		departmentLabel = new JLabel("部门:  ", JLabel.RIGHT);
+		departmentLabel.setForeground(new Color(0, 128, 255));
 		passwordLabel.setForeground(new Color(0, 128, 255));
 		username = new JTextField();
 		username.setColumns(10);
@@ -132,8 +121,12 @@ public class LoginFrame extends JFrame implements ActionListener
 		label = new JLabel();
 		label.setPreferredSize(new Dimension(70, 1));
 		panel_south.add(label);
+		panel_center.add(departmentLabel);
+		panel_center.add(department);
 		panel_south.add(submit);
 		panel_south.add(cancel);
+
+
 		panel_center.setOpaque(false);
 		panel_south.setOpaque(false);
 		this.getContentPane().add(panel_center, BorderLayout.EAST);
