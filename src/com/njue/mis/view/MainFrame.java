@@ -1,15 +1,7 @@
 package com.njue.mis.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
 
 
 public class MainFrame extends JFrame
@@ -19,31 +11,32 @@ public class MainFrame extends JFrame
 	
 	private JDesktopPane desktopPane;
 	private static MainFrame mainFrame;
+
 	/**
 	 * 创建主窗体
 	 */
-	private MainFrame()
-	{
-		super("食品公司管理系统");
+	private MainFrame() {
 
+		super("食品公司管理系统");
+		System.out.print("show main frame");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setBounds(screenSize.width/6,screenSize.height/6, screenSize.width*2/3,
-				screenSize.height*2/3);
+		this.setBounds(screenSize.width / 6, screenSize.height / 6, screenSize.width * 2 / 3,
+				screenSize.height * 2 / 3);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		desktopPane=new JDesktopPane();
-		
+
+		desktopPane = new JDesktopPane();
+
 		desktopPane.setOpaque(true);
 
 		this.setContentPane(desktopPane);
 		this.setJMenuBar(createMenuBar());
-		
+
 		//Set up the backgound image,设置主界面背景颜色
-		desktopPane.setBackground(new Color(56,142,143));
+		desktopPane.setBackground(new Color(56, 142, 143));
 		// Make dragging a little faster but perhaps uglier.
 		desktopPane.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
 	}
-	
+
 	public static MainFrame getMainFrame()
 	{
 		if(mainFrame==null)

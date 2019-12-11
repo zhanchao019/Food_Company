@@ -1,18 +1,12 @@
 package com.njue.mis.view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.*;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.handler.OperatorServicesHandler;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame implements ActionListener {
 
@@ -65,9 +59,55 @@ public class LoginFrame extends JFrame implements ActionListener {
 			boolean isPass = operator.loginCheck(usernameString,
 					passwordString, selected_department);
 			if (isPass) {
+				/*
 				MainFrame.username = usernameString;
 				MainFrame.power = operator.getPower(usernameString);
 				MainFrame.getMainFrame().setVisible(true);
+				this.setVisible(false);
+				*/
+
+				switch (selected_department) {//这里打算对不同的部门进行设计不同的显示框
+					//"管理员", "销售部", "财务部", "成品库", "原料库", "生产车间", "生产计划科"
+					case "管理员":
+						MainFrame.username = usernameString;
+						MainFrame.power = operator.getPower(usernameString);
+						MainFrame.getMainFrame().setVisible(true);
+						break;
+					case "销售部":
+						SaleDeptFrame.username = usernameString;
+						SaleDeptFrame.power = operator.getPower(usernameString);
+						SaleDeptFrame.getSaleDeptFrame().setVisible(true);
+						break;
+					case "财务部":
+						CounterDeptFrame.username = usernameString;
+						CounterDeptFrame.power = operator.getPower(usernameString);
+						CounterDeptFrame.getCounterDeptFrame().setVisible(true);
+						break;
+					case "成品库":
+						System.out.print("成品");
+						ChengpinDeptFrame.username = usernameString;
+						ChengpinDeptFrame.power = operator.getPower(usernameString);
+						System.out.print("成品");
+						ChengpinDeptFrame.getChengpinDeptFrame().setVisible(true);
+						break;
+					case "原料库":
+						RawDeptFrame.username = usernameString;
+						RawDeptFrame.power = operator.getPower(usernameString);
+						RawDeptFrame.getSaleDeptFrame().setVisible(true);
+						break;
+					case "生产车间":
+						ProducingDeptFrame.username = usernameString;
+						ProducingDeptFrame.power = operator.getPower(usernameString);
+						ProducingDeptFrame.getProducingDeptFrame().setVisible(true);
+						break;
+					case "生产计划科":
+						ScheduleDeptFrame.username = usernameString;
+						ScheduleDeptFrame.power = operator.getPower(usernameString);
+						ScheduleDeptFrame.getScheduleDeptFrame().setVisible(true);
+						break;
+
+
+				}
 				this.setVisible(false);
 			} else {
 				JOptionPane.showMessageDialog(null, "登陆失败,用户名或密码错误！)", "警告", JOptionPane.WARNING_MESSAGE);
