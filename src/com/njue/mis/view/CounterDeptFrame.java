@@ -10,12 +10,12 @@ import java.awt.*;
 /**
  * @author unknown
  */
-public class CounterFrame extends JFrame {
+public class CounterDeptFrame extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
     private JLabel label1;
 
-    public CounterFrame() {
+    public CounterDeptFrame() {
         initComponents();
     }
 
