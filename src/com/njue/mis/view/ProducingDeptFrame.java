@@ -14,9 +14,21 @@ public class ProducingDeptFrame extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
     private JLabel label1;
+    public static String power;
+    public static String username;
+    private static ProducingDeptFrame producingDeptFrame;
 
     public ProducingDeptFrame() {
+
+        super("食品公司管理系统");
         initComponents();
+    }
+
+    public static ProducingDeptFrame getProducingDeptFrame() {
+        if (producingDeptFrame == null) {
+            producingDeptFrame = new ProducingDeptFrame();
+        }
+        return producingDeptFrame;
     }
 
     private void initComponents() {

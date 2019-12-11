@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 11/12/2019 21:26:20
+ Date: 11/12/2019 21:55:42
 */
 
 SET NAMES utf8mb4;
@@ -128,7 +128,12 @@ CREATE TABLE `tb_operator`  (
 -- Records of tb_operator
 -- ----------------------------
 INSERT INTO `tb_operator` VALUES ('admin', 'admin', 'shark', '操作员', '管理员');
+INSERT INTO `tb_operator` VALUES ('chengpin', '123', 'shark', '操作员', '成品部');
+INSERT INTO `tb_operator` VALUES ('counter', '123', 'shark', '操作员', '财务部');
+INSERT INTO `tb_operator` VALUES ('product', '123', 'shark', '操作员', '生产车间');
+INSERT INTO `tb_operator` VALUES ('raw', '123', 'shark', '操作员', '原料部');
 INSERT INTO `tb_operator` VALUES ('sale', '123', 'shark', '操作员', '销售部');
+INSERT INTO `tb_operator` VALUES ('schedule', '123', 'shark', '操作员', '生产计划课');
 INSERT INTO `tb_operator` VALUES ('刘裕圆', '123', 'shark', '操作员', '操作员');
 
 -- ----------------------------

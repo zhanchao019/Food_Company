@@ -14,9 +14,20 @@ public class ChengpinDeptFrame extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
     private JLabel label1;
+    public static String power;
+    public static String username;
+    private static ChengpinDeptFrame chengpinDeptFrame;
 
     public ChengpinDeptFrame() {
+        super("食品公司管理系统");
         initComponents();
+    }
+
+    public static ChengpinDeptFrame getChengpinDeptFrame() {
+        if (chengpinDeptFrame == null) {
+            chengpinDeptFrame = new ChengpinDeptFrame();
+        }
+        return chengpinDeptFrame;
     }
 
     private void initComponents() {
