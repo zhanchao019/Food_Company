@@ -21,6 +21,7 @@ public class RawDeptFrame extends JFrame {
     public RawDeptFrame() {
         super("食品公司管理系统");
         initComponents();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static RawDeptFrame getSaleDeptFrame() {

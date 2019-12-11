@@ -21,6 +21,7 @@ public class CounterDeptFrame extends JFrame {
     public CounterDeptFrame() {
         super("食品公司管理系统");
         initComponents();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static CounterDeptFrame getCounterDeptFrame() {
