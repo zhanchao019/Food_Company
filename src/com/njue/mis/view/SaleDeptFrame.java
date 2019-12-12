@@ -1,5 +1,5 @@
 /*
- * Created by JFormDesigner on Wed Dec 11 20:51:21 CST 2019
+ * Created by JFormDesigner on Thu Dec 12 16:39:52 CST 2019
  */
 
 package com.njue.mis.view;
@@ -11,42 +11,20 @@ import java.awt.*;
  * @author unknown
  */
 public class SaleDeptFrame extends JFrame {
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
+    private JMenuBar menuBar1;
     public static String power;
     public static String username;
     private static SaleDeptFrame saleDeptFrame;
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
-    private JLabel label1;
-
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
+    private JMenu menu1;
+    private JMenu menu2;
+    private JMenu menu3;
 
     public SaleDeptFrame() {
-
-        super("食品公司管理系统");
         initComponents();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-
-    private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
-        label1 = new JLabel();
-
-        //======== this ========
-        Container contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout());
-
-        //---- label1 ----
-        label1.setText("\u6211\u662f\u9500\u552e\u90e8");
-        contentPane.add(label1, BorderLayout.NORTH);
-        pack();
-        setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents
-    }
-
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
     public static SaleDeptFrame getSaleDeptFrame() {
         if (saleDeptFrame == null) {
             saleDeptFrame = new SaleDeptFrame();
@@ -54,4 +32,43 @@ public class SaleDeptFrame extends JFrame {
         return saleDeptFrame;
     }
 
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - unknown
+        menuBar1 = new JMenuBar();
+        menu1 = new JMenu();
+        menu2 = new JMenu();
+        menu3 = new JMenu();
+
+        //======== this ========
+        Container contentPane = getContentPane();
+        contentPane.setLayout(new BorderLayout());
+
+        //======== menuBar1 ========
+        {
+
+            //======== menu1 ========
+            {
+                menu1.setText("123");
+            }
+            menuBar1.add(menu1);
+
+            //======== menu2 ========
+            {
+                menu2.setText("234");
+            }
+            menuBar1.add(menu2);
+
+            //======== menu3 ========
+            {
+                menu3.setText("456");
+            }
+            menuBar1.add(menu3);
+        }
+        setJMenuBar(menuBar1);
+        pack();
+        setLocationRelativeTo(getOwner());
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

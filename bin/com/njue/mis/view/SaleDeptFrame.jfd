@@ -9,15 +9,15 @@ new FormModel {
 				name: "menuBar1"
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "menu1"
-					"text": "text"
+					"text": "123"
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "menu2"
-					"text": "text"
+					"text": "234"
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "menu3"
-					"text": "text"
+					"text": "456"
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
