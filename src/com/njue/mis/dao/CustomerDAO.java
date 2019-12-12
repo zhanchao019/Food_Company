@@ -137,7 +137,7 @@ public class CustomerDAO extends PersonDAO
     	Vector<Customer>result=new Vector<Customer>();
     	try
 		{
-			String sql="{call pr_getAllCustomer()}";
+			String sql="{call pr_getAllCustomer(?,?)}";
 			ResultSet rs=manage.executeQuery(sql, null, Constants.CALL_TYPE);
 			while(rs.next())
 			{
