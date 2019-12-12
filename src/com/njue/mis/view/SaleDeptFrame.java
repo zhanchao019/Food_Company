@@ -11,12 +11,13 @@ import java.awt.*;
  * @author unknown
  */
 public class SaleDeptFrame extends JFrame {
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
-    private JLabel label1;
     public static String power;
     public static String username;
     private static SaleDeptFrame saleDeptFrame;
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
+    private JLabel label1;
+
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 
@@ -27,12 +28,6 @@ public class SaleDeptFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public static SaleDeptFrame getSaleDeptFrame() {
-        if (saleDeptFrame == null) {
-            saleDeptFrame = new SaleDeptFrame();
-        }
-        return saleDeptFrame;
-    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -50,5 +45,13 @@ public class SaleDeptFrame extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
+
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+    public static SaleDeptFrame getSaleDeptFrame() {
+        if (saleDeptFrame == null) {
+            saleDeptFrame = new SaleDeptFrame();
+        }
+        return saleDeptFrame;
+    }
+
 }
