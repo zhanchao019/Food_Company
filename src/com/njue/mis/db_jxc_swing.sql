@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 11/12/2019 22:16:38
+ Date: 12/12/2019 22:59:13
 */
 
 SET NAMES utf8mb4;
@@ -43,6 +43,8 @@ CREATE TABLE `tb_customer`  (
 INSERT INTO `tb_customer` VALUES ('001', '猿来入此', '201600', '上海 浦东新区', '13555555555', '猿来入此站长', '18888888888', '上海银行', '1888888888888888', 'llqqxf@163.com', '021-5656565', 1);
 INSERT INTO `tb_customer` VALUES ('1', '张三', '734100', '北京', '1535283645', '小三', '16283548102', '中国银行', '74937264912', '11111@qq.com', '23641162', 1);
 INSERT INTO `tb_customer` VALUES ('2', '李四', '384612', '上海', '18465739371', '小李', '18345429870', '建设银行', '82736459283', '22222@qq.com', '28374622', 2);
+INSERT INTO `tb_customer` VALUES ('23', '213', '3213', '321', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13);
+INSERT INTO `tb_customer` VALUES ('252000', '展超', '252000', '山东大学威海', '15166585337', '312313', '13213', '中国人民银行', '123231', '123133@mail.com', '13213', 1);
 INSERT INTO `tb_customer` VALUES ('3', '王五', '793648', '天津', '18593648262', '小屋', '12874645263', '工商银行', '6480273645', '33333@qq.com', '36451272', 3);
 INSERT INTO `tb_customer` VALUES ('4', '赵六', '658422', '南京', '12365421534', '小赵', '1986547382', '农业银行', '37465152635', '44444@qq.com', '48372651', 4);
 INSERT INTO `tb_customer` VALUES ('5', '冯七', '673511', '广州', '17635218265', '小七', '1635482635328', '招商银行', '8374648362', '55555@qq.com', '37646553', 5);
@@ -128,7 +130,7 @@ CREATE TABLE `tb_operator`  (
 -- Records of tb_operator
 -- ----------------------------
 INSERT INTO `tb_operator` VALUES ('admin', 'admin', 'shark', '操作员', '管理员');
-INSERT INTO `tb_operator` VALUES ('chengpin', '123', 'shark', '操作员', '成品部');
+INSERT INTO `tb_operator` VALUES ('chengpin', '123', 'shark', '操作员', '成品库');
 INSERT INTO `tb_operator` VALUES ('counter', '123', 'shark', '操作员', '财务部');
 INSERT INTO `tb_operator` VALUES ('product', '123', 'shark', '操作员', '生产车间');
 INSERT INTO `tb_operator` VALUES ('raw', '123', 'shark', '操作员', '原料库');
@@ -272,7 +274,21 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllCustomer`()
 BEGIN
      select * from tb_customer where available!=0;
-    END
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_searchCustomer
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchCustomer`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchCustomer`(in ky varchar(50),in val varchar(50) )
+BEGIN
+	set @state = CONCAT(' select * from (tb_customer) where tb_customer.',ky," = \'",val,"\' ");
+	PREPARE tmp from @state;
+	EXECUTE tmp ;
+END
 ;;
 delimiter ;
 
