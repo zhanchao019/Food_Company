@@ -3,13 +3,13 @@
  */
 package com.njue.mis.dao;
 
-import java.sql.ResultSet;
-import java.util.Vector;
-
 import com.njue.mis.common.Constants;
 import com.njue.mis.common.ErrorManager;
 import com.njue.mis.model.Goods;
 import com.njue.mis.model.StorageGoods;
+
+import java.sql.ResultSet;
+import java.util.Vector;
 
 public class GoodsDAO
 {
@@ -30,14 +30,14 @@ public class GoodsDAO
 	public boolean addGoods(Goods goods)
 	{
 		boolean result=false;
-		try
-		{
-			Object[] params=new Object[]{goods.getId(),goods.getGoodsName(),goods.getProducePlace(),
-					                     goods.getSize(),goods.get_package(),goods.getProductCode(),
-					                     goods.getPromitCode(),goods.getDescription(),goods.getPrice(),
-					                     goods.getProviderId()};
-			String sql="insert into tb_goods(id,goodsname,produceplace,size,package,productcode,promitcode,description,price,providerid,available) values(?,?,?,?,?,?,?,?,?,?,1)";
-			result=manage.executeUpdate(sql, params, Constants.PSTM_TYPE);
+		try {
+			Object[] params = new Object[]{goods.getId(), goods.getGoodsName(), goods.getProducePlace(),
+					goods.getSize(), goods.get_package(), goods.getProductCode(),
+					goods.getPromitCode(), goods.getDescription(), goods.getPrice(),
+					goods.getProviderId()};
+			String sql = "insert into tb_goods(id,goodsname,produceplace,size,package,productcode,promitcode,description,price,providerid,available) values(?,?,?,?,?,?,?,?,?,?,1)";
+			result = manage.executeUpdate(sql, params, Constants.PSTM_TYPE);
+			System.out.println("ÃÌº”ÕÍ≥…£ø");
 			manage.closeDB();
 		}
 		catch (Exception e)

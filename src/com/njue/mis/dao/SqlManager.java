@@ -7,15 +7,9 @@
 
 package com.njue.mis.dao;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.swing.*;
+import java.sql.*;
 import java.util.PropertyResourceBundle;
-
-import javax.swing.JOptionPane;
 
 public class SqlManager
 {
@@ -145,14 +139,14 @@ public class SqlManager
 		}
 		catch (SQLException e)
 		{
-			if(e.getErrorCode() == 0){
-				JOptionPane.showMessageDialog(null, "大哥，数据库还没启动呢，请确保数据库已经按照视频教程全部配置好了再运行！","警告",JOptionPane.WARNING_MESSAGE);
+			if(e.getErrorCode() == 0) {
+				JOptionPane.showMessageDialog(null, "数据库未启动", "警告", JOptionPane.WARNING_MESSAGE);
 			}
-			if(e.getErrorCode() == 1045){
-				JOptionPane.showMessageDialog(null, "数据库连接密码错误,请仔细观看导入视频，正确设置你自己的数据库用户名密码！","警告",JOptionPane.WARNING_MESSAGE);
+			if(e.getErrorCode() == 1045) {
+				JOptionPane.showMessageDialog(null, "数据库连接密码错误,", "警告", JOptionPane.WARNING_MESSAGE);
 			}
-			if(e.getErrorCode() == 1049){
-				JOptionPane.showMessageDialog(null, "数据库名称错误，请仔细看视频，数据库名字保持跟视频一模一样！","警告",JOptionPane.WARNING_MESSAGE);
+			if(e.getErrorCode() == 1049) {
+				JOptionPane.showMessageDialog(null, "数据库名称错误", "警告", JOptionPane.WARNING_MESSAGE);
 			}
 			System.err.println(e.getErrorCode()+"connectDB Error!" + e.getMessage());
 			e.printStackTrace();
