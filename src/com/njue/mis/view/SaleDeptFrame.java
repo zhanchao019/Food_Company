@@ -28,6 +28,8 @@ public class SaleDeptFrame extends JFrame {
         }
         return saleDeptFrame;
     }
+
+
     private JMenu menu1;
     private JMenuItem menuItem1;
     private JMenu menu2;
@@ -105,6 +107,7 @@ public class SaleDeptFrame extends JFrame {
             //======== menu2 ========
             {
                 menu2.setText("\u4f9b\u5e94\u5546\u4fe1\u606f\u7ba1\u7406");
+
 
                 //---- menuItem3 ----
                 menuItem3.setText("\u7ba1\u7406\u4f9b\u5e94\u5546\u4fe1\u606f");
