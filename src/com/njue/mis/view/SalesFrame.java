@@ -1,34 +1,23 @@
 package com.njue.mis.view;
 
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.AbstractTableModel;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.handler.CustomerServicesHandler;
 import com.njue.mis.handler.GoodsServicesHandler;
 import com.njue.mis.handler.SalesInServicesHandler;
 import com.njue.mis.model.Goods;
 import com.njue.mis.model.SalesIn;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 
 public class SalesFrame extends JInternalFrame
 {
@@ -99,31 +88,30 @@ public class SalesFrame extends JInternalFrame
 				goodsPrices=Double.valueOf(goodsTable.getValueAt(index, 8).toString());
 			}
 		});
-		
-		goodsTable.setPreferredScrollableViewportSize(new Dimension(screenSize.width * 2 / 3-60,
-				screenSize.height  / 3));
+
+		goodsTable.setPreferredScrollableViewportSize(new Dimension(screenSize.width * 2 / 3 - 60,
+				screenSize.height / 3));
 		goodScrollPane.setViewportView(goodsTable);
 		panel3.add(goodScrollPane);
-		
+
 		JPanel panel4 = new JPanel();
 		JLabel goodsLabel = new JLabel("商品编号:");
 		goodsField = new JTextField(10);
 		JLabel explainLabel = new JLabel("商品注释:");
 		explainField = new JTextField(20);
-		JButton addButton = new JButton("添加");
-		addButton.addActionListener(new ActionListener()
-		{
-			
-			public void actionPerformed(ActionEvent e)
-			{
-				Date date=new Date();
-				SimpleDateFormat formate=new SimpleDateFormat("yyyyMMddHHmmss");
-				ID_salestextField.setText("SI"+formate.format(date));
-				formate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		JButton addButton = new JButton("添加订单基本信息");
+		addButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				Date date = new Date();
+				SimpleDateFormat formate = new SimpleDateFormat("yyyyMMddHHmmss");
+				ID_salestextField.setText("SI" + formate.format(date));
+				formate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				salestimeField.setText(formate.format(date));
 				operaterField.setText(MainFrame.username);
 				numberField.setText("");
 				setEnableTrue();
+
 			}
 			
 		});
@@ -169,27 +157,26 @@ public class SalesFrame extends JInternalFrame
 				}
 				if(goodsID==null||goodsID.trim().length()==0)
 				{
-					JOptionPane.showMessageDialog(null,"请选择商品","警告",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "请选择商品", "警告", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				CustomerServicesHandler handler1=CommonFactory.getCustomerServices();
-				if(!handler1.isExited(customerId))
-				{
-					JOptionPane.showMessageDialog(null,"该客户编号不存在，请核对信息","警告",JOptionPane.WARNING_MESSAGE);
+				CustomerServicesHandler handler1 = CommonFactory.getCustomerServices();
+				if (!handler1.isExited(customerId)) {
+					JOptionPane.showMessageDialog(null, "该客户编号不存在，请核对信息", "警告", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				price=goodsPrices*number;  //计算出总价格
-				SalesIn salesIn=new SalesIn(salesInID,customerId,goodsID,payType,number,
-						                  price,salesInTime,operator,comment);
-				SalesInServicesHandler handler=CommonFactory.getSalesInServices();
-				if (handler.addSalesIn(salesIn))
-				{
-					JOptionPane.showMessageDialog(null,"销售单添加成功","消息",JOptionPane.INFORMATION_MESSAGE);
+				price = goodsPrices * number;  //计算出总价格
+				System.out.println(price);
+				SalesIn salesIn = new SalesIn(salesInID, customerId, goodsID, payType, number,
+						price, salesInTime, operator, comment);
+				System.out.println(salesIn.toString());
+
+				SalesInServicesHandler handler = CommonFactory.getSalesInServices();
+				if (handler.addSalesIn(salesIn)) {
+					JOptionPane.showMessageDialog(null, "销售单添加成功", "消息", JOptionPane.INFORMATION_MESSAGE);
 					numberField.setText("");
 					setEnableFalse();
-				}
-				else
-				{
+				} else {
 					JOptionPane.showMessageDialog(null,"销售单添加失败，请按要求输入数据","警告",JOptionPane.WARNING_MESSAGE);	
 				}
 				

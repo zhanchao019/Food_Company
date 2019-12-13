@@ -68,6 +68,7 @@ public class MainFrame extends JFrame
 		menuItem.addActionListener(MainAction.clickProviderInfoManager());
 		menu.add(menuItem);
 
+
 		// Set up the inport menu.
 		menu = new JMenu("进货管理");
 		menuBar.add(menu);
@@ -77,6 +78,7 @@ public class MainFrame extends JFrame
 		menuItem = new JMenuItem("退货单");
 		menuItem.addActionListener(MainAction.outportGoods());
 		menu.add(menuItem);
+
 
 		// Set up the sales menu.
 		menu = new JMenu("销售管理");
@@ -88,7 +90,8 @@ public class MainFrame extends JFrame
 		menuItem.addActionListener(MainAction.salesBack());
 		menu.add(menuItem);
 
-		// Set up the select menu.
+
+        // Set up the select menu.
 		menu = new JMenu("查询管理");
 		menuBar.add(menu);
 		menuItem = new JMenuItem("客户查询");

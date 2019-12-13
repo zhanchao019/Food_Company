@@ -1,32 +1,18 @@
 package com.njue.mis.view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import com.njue.mis.common.CommonFactory;
+import com.njue.mis.common.ValidationManager;
+import com.njue.mis.handler.SalesInServicesHandler;
+import com.njue.mis.model.SalesIn;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-
-import com.njue.mis.common.CommonFactory;
-import com.njue.mis.common.ValidationManager;
-import com.njue.mis.handler.SalesInServicesHandler;
-import com.njue.mis.model.SalesIn;
 
 public class SaleInforSearchFrame extends JInternalFrame
 {
@@ -94,17 +80,16 @@ class SaleInforSearchPanel extends JPanel
 		JButton button = new JButton();
 		button.setText("查询");
 		button.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent e)
-		{
-			String field=comboBox.getSelectedItem().toString();
-			String value=textField.getText();
-			if(checkBox.isSelected())
-			{
-				String beginTime=textField_starttime.getText();
-				String endTime=textField_endtime.getText();
-				if(beginTime==null||beginTime.trim().length()==0)
-				{
-					JOptionPane.showMessageDialog(null,"请输入开始时间","警告",JOptionPane.WARNING_MESSAGE);
+
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("你查个锤锤");
+			String field = comboBox.getSelectedItem().toString();
+			String value = textField.getText();
+			if (checkBox.isSelected()) {
+				String beginTime = textField_starttime.getText();
+				String endTime = textField_endtime.getText();
+				if (beginTime == null || beginTime.trim().length() == 0) {
+					JOptionPane.showMessageDialog(null, "请输入开始时间", "警告", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				if (endTime==null||endTime.trim().length()==0)

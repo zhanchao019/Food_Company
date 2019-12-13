@@ -3,12 +3,12 @@
  */
 package com.njue.mis.dao;
 
-import java.sql.ResultSet;
-import java.util.Vector;
-
 import com.njue.mis.common.Constants;
 import com.njue.mis.common.ErrorManager;
 import com.njue.mis.model.Customer;
+
+import java.sql.ResultSet;
+import java.util.Vector;
 
 public class CustomerDAO extends PersonDAO
 {
@@ -169,10 +169,10 @@ public class CustomerDAO extends PersonDAO
     	boolean result=false;
     	try
 		{
+
 			String sql="select * from tb_customer where id=?";
 			Object[] params=new Object[]{id};
 			result=super.isExited(sql, params);
-			
 		}
 		catch (Exception e)
 		{
