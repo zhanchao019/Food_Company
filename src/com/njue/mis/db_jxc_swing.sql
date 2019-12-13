@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 13/12/2019 13:57:16
+ Date: 13/12/2019 14:38:04
 */
 
 SET NAMES utf8mb4;
@@ -76,7 +76,7 @@ CREATE TABLE `tb_goods`  (
 -- ----------------------------
 -- Records of tb_goods
 -- ----------------------------
-INSERT INTO `tb_goods` VALUES ('1', '牙刷', '中国', '支', '有', '23876374', '374638261', '牙刷', 7, '1', 1);
+INSERT INTO `tb_goods` VALUES ('1', '牙刷', '中国', '支', '有', '23876374', '374638261', '牙刷', 2, '1', 1);
 INSERT INTO `tb_goods` VALUES ('2', '小游戏机', '日本', '个', '有', '31245324', '343123452', '游戏机', 33, '1', 1);
 INSERT INTO `tb_goods` VALUES ('3', '小面包', '广州', '个', '有', '32848672', '324764243', '面包', 25, '1', 1);
 INSERT INTO `tb_goods` VALUES ('4', '牙膏', '中国', '支', '有', '21377128', '231739832', '牙膏', 12, '2', 1);
@@ -310,6 +310,78 @@ END
 delimiter ;
 
 -- ----------------------------
+-- Procedure structure for pr_getAllPortIn
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllPortIn`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllPortIn`()
+BEGIN
+     select * from tb_inport;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllPortOut
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllPortOut`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllPortOut`()
+BEGIN
+     select * from tb_outport;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllProvider
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllProvider`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllProvider`()
+BEGIN
+     select * from tb_provider ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllSalesBack
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllSalesBack`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllSalesBack`()
+BEGIN
+     select * from tb_salesback;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllSalesIn
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllSalesIn`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllSalesIn`()
+BEGIN
+     select * from tb_sales ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllStorageGoods
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllStorageGoods`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllStorageGoods`()
+BEGIN
+     select * from tb_goods,tb_storagecheck where tb_goods.id=tb_storagecheck.id ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Procedure structure for pr_searchCustomer
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `pr_searchCustomer`;
@@ -317,6 +389,104 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchCustomer`(in ky varchar(50),in val varchar(50) )
 BEGIN
 	set @state = CONCAT(' select * from (tb_customer) where tb_customer.',ky," = \'",val,"\' ");
+	PREPARE tmp from @state;
+	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_searchGoods
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchGoods`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchGoods`(in ky varchar(50),in val varchar(50) )
+BEGIN
+	set @state = CONCAT(' select * from (tb_goods) where tb_goods.',ky," = \'",val,"\' ");
+	PREPARE tmp from @state;
+	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_searchPortIn
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchPortIn`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchPortIn`(in ky varchar(50),in val varchar(50) )
+BEGIN
+	set @state = CONCAT(' select * from (tb_inport) where tb_inport.',ky," = \'",val,"\' ");
+	PREPARE tmp from @state;
+	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_searchPortOut
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchPortOut`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchPortOut`(in ky varchar(50),in val varchar(50) )
+BEGIN
+	set @state = CONCAT(' select * from (tb_outport) where tb_outport.',ky," = \'",val,"\' ");
+	PREPARE tmp from @state;
+	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_searchProvider
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchProvider`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchProvider`(in ky varchar(50),in val varchar(50) )
+BEGIN
+	set @state = CONCAT(' select * from (tb_provider) where tb_provider.',ky," = \'",val,"\' ");
+	PREPARE tmp from @state;
+	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_searchSalesBack
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchSalesBack`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchSalesBack`(in ky varchar(50),in val varchar(50) )
+BEGIN
+	set @state = CONCAT(' select * from (tb_salesback) where tb_salesback.',ky," = \'",val,"\' ");
+	PREPARE tmp from @state;
+	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_searchSalesIn
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchSalesIn`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchSalesIn`(in ky varchar(50),in val varchar(50) )
+BEGIN
+	set @state = CONCAT(' select * from (tb_sales) where tb_sales.',ky," = \'",val,"\' ");
+	PREPARE tmp from @state;
+	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_searchThroughTime
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchThroughTime`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchThroughTime`(in ky varchar(50),in val varchar(50) ,t1 datetime,t2 datetime)
+BEGIN
+	set @state = CONCAT(' select * from (tb_inport) where tb_inport.',ky,' = \'',val,'\' and inporttime BETWEEN ',t1,' and ',t2);
 	PREPARE tmp from @state;
 	EXECUTE tmp ;
 END
