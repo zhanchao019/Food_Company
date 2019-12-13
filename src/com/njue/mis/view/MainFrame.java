@@ -90,7 +90,8 @@ public class MainFrame extends JFrame
 		menuItem.addActionListener(MainAction.salesBack());
 		menu.add(menuItem);
 
-		// Set up the select menu.
+
+        // Set up the select menu.
 		menu = new JMenu("查询管理");
 		menuBar.add(menu);
 		menuItem = new JMenuItem("客户查询");

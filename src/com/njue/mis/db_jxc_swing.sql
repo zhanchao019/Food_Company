@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 13/12/2019 01:49:24
+ Date: 13/12/2019 13:57:16
 */
 
 SET NAMES utf8mb4;
@@ -246,6 +246,8 @@ CREATE TABLE `tb_salesback`  (
 -- Records of tb_salesback
 -- ----------------------------
 INSERT INTO `tb_salesback` VALUES ('SB20190227101509', '4', '银行卡', '2019-02-27 10:15:09', 'admin', 7, 21, '76', '5');
+INSERT INTO `tb_salesback` VALUES ('SB20191213135136', '2', '现金', '2019-12-13 13:51:36', 'admin', 1, 12, '2', '4');
+INSERT INTO `tb_salesback` VALUES ('SB20191213135522', '1', '现金', '2019-12-13 13:55:22', 'admin', 2, 14, '', '1');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
@@ -258,7 +260,7 @@ CREATE TABLE `tb_storagecheck`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `goodsid`(`goodsid`) USING BTREE,
   CONSTRAINT `tb_storagecheck_ibfk_1` FOREIGN KEY (`goodsid`) REFERENCES `tb_goods` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_storagecheck
@@ -267,6 +269,7 @@ INSERT INTO `tb_storagecheck` VALUES (1, '3', 11);
 INSERT INTO `tb_storagecheck` VALUES (2, '1', 3);
 INSERT INTO `tb_storagecheck` VALUES (3, '5', 6);
 INSERT INTO `tb_storagecheck` VALUES (4, '2', 5);
+INSERT INTO `tb_storagecheck` VALUES (5, '4', 1);
 
 -- ----------------------------
 -- Procedure structure for pr_changeGoodsNumber
