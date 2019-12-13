@@ -1,22 +1,14 @@
 package com.njue.mis.view;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.common.ValidationManager;
 import com.njue.mis.handler.CustomerServicesHandler;
 import com.njue.mis.model.Customer;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CustomerFrame extends JInternalFrame
 {
@@ -61,6 +53,11 @@ public class CustomerFrame extends JInternalFrame
 		 */
 
 		JTabbedPane tabbedPane = new JTabbedPane();
+
+		//添加新的客户所有信息的选项
+		CustomerInforSearchFrame tmp = new CustomerInforSearchFrame();
+		tabbedPane.addTab("查询所有的客户信息", tmp.get_panel());
+
 
 		/*
 		 * 建立客户添加信息页面
@@ -233,6 +230,7 @@ public class CustomerFrame extends JInternalFrame
 		addPanel.add(addpanel7);
 		addPanel.add(addpanel8);
 		tabbedPane.addTab("客户添加信息", addPanel);
+
 
 		/*
 		 * 建立客户删除信息页面

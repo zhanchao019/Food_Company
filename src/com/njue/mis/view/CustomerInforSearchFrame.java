@@ -1,27 +1,15 @@
 package com.njue.mis.view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.handler.CustomerServicesHandler;
 import com.njue.mis.model.Customer;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
  
 public class CustomerInforSearchFrame extends JInternalFrame
 {
@@ -33,6 +21,10 @@ public class CustomerInforSearchFrame extends JInternalFrame
 		this.setBounds(0,0, screenSize.width * 2 / 3,
 				screenSize.height  *2/ 3);
 		this.setContentPane(new CustomerInforSearchPanel());
+	}
+
+	public CustomerInforSearchPanel get_panel() {
+		return new CustomerInforSearchPanel();
 	}
 }
 
