@@ -20,23 +20,15 @@ new FormModel {
 					"text": "客户信息管理"
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "menuItem1"
-						"text": "添加客户信息"
-					} )
-					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem2"
-						"text": "删除客户信息"
+						"text": "管理客户信息"
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "menu2"
 					"text": "供应商信息管理"
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem4"
-						"text": "添加供应商信息"
-					} )
-					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "menuItem3"
-						"text": "删除供应商信息"
+						"text": "管理供应商信息"
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {

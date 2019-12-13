@@ -19,14 +19,18 @@ public class SaleDeptFrame extends JFrame {
     public static String username;
     private static SaleDeptFrame saleDeptFrame;
     private JDesktopPane desktopPane;
-    private Timer time;
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private Timer time;     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JMenuBar menuBar1;
+
+    public static SaleDeptFrame getSaleDeptFrame() {
+        if (saleDeptFrame == null) {
+            saleDeptFrame = new SaleDeptFrame();
+        }
+        return saleDeptFrame;
+    }
     private JMenu menu1;
     private JMenuItem menuItem1;
-    private JMenuItem menuItem2;
     private JMenu menu2;
-    private JMenuItem menuItem4;
     private JMenuItem menuItem3;
     private JMenu menu3;
     private JMenuItem menuItem5;
@@ -36,6 +40,7 @@ public class SaleDeptFrame extends JFrame {
     private JLabel label1;
     private JScrollPane scrollPane1;
     private JTextPane textPane1;
+
     public SaleDeptFrame() {
         super("食品公司管理系统");
         initComponents();
@@ -62,21 +67,13 @@ public class SaleDeptFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public static SaleDeptFrame getSaleDeptFrame() {
-        if (saleDeptFrame == null) {
-            saleDeptFrame = new SaleDeptFrame();
-        }
-        return saleDeptFrame;
-    }
-
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
         menuItem1 = new JMenuItem();
-        menuItem2 = new JMenuItem();
         menu2 = new JMenu();
-        menuItem4 = new JMenuItem();
         menuItem3 = new JMenuItem();
         menu3 = new JMenu();
         menuItem5 = new JMenuItem();
@@ -95,16 +92,13 @@ public class SaleDeptFrame extends JFrame {
         {
 
             //======== menu1 ========
-            {
+            {//设置用户信息
                 menu1.setText("\u5ba2\u6237\u4fe1\u606f\u7ba1\u7406");
 
                 //---- menuItem1 ----
-                menuItem1.setText("\u6dfb\u52a0\u5ba2\u6237\u4fe1\u606f");
+                menuItem1.setText("\u7ba1\u7406\u5ba2\u6237\u4fe1\u606f");
+                menuItem1.addActionListener(SaleAction.clickCustomerInfoManager());
                 menu1.add(menuItem1);
-
-                //---- menuItem2 ----
-                menuItem2.setText("\u5220\u9664\u5ba2\u6237\u4fe1\u606f");
-                menu1.add(menuItem2);
             }
             menuBar1.add(menu1);
 
@@ -112,12 +106,9 @@ public class SaleDeptFrame extends JFrame {
             {
                 menu2.setText("\u4f9b\u5e94\u5546\u4fe1\u606f\u7ba1\u7406");
 
-                //---- menuItem4 ----
-                menuItem4.setText("\u6dfb\u52a0\u4f9b\u5e94\u5546\u4fe1\u606f");
-                menu2.add(menuItem4);
-
                 //---- menuItem3 ----
-                menuItem3.setText("\u5220\u9664\u4f9b\u5e94\u5546\u4fe1\u606f");
+                menuItem3.setText("\u7ba1\u7406\u4f9b\u5e94\u5546\u4fe1\u606f");
+                menuItem3.addActionListener(SaleAction.clickProviderInfoManager());
                 menu2.add(menuItem3);
             }
             menuBar1.add(menu2);
@@ -161,5 +152,5 @@ public class SaleDeptFrame extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
 }

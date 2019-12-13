@@ -118,7 +118,7 @@ public class SalesFrame extends JInternalFrame
 		JButton salesButton = new JButton("œ˙ €");
 		salesButton.addActionListener(new ActionListener()
 		{
-			
+
 			public void actionPerformed(ActionEvent e)
 			{
 				String salesInID=ID_salestextField.getText();
