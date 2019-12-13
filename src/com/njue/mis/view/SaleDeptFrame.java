@@ -1,11 +1,15 @@
 /*
- * Created by JFormDesigner on Fri Dec 13 19:34:49 CST 2019
+ * Created by JFormDesigner on Fri Dec 13 20:12:50 CST 2019
  */
 
 package com.njue.mis.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author Brainrain
@@ -14,15 +18,10 @@ public class SaleDeptFrame extends JFrame {
     public static String power;
     public static String username;
     private static SaleDeptFrame saleDeptFrame;
+    private JDesktopPane desktopPane;
+    private Timer time;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JMenuBar menuBar1;
-    public static SaleDeptFrame getSaleDeptFrame() {
-        if (saleDeptFrame == null) {
-            saleDeptFrame = new SaleDeptFrame();
-        }
-        return saleDeptFrame;
-    }
-
     private JMenu menu1;
     private JMenuItem menuItem1;
     private JMenuItem menuItem2;
@@ -35,11 +34,39 @@ public class SaleDeptFrame extends JFrame {
     private JMenu menu4;
     private JMenuItem menuItem7;
     private JLabel label1;
-
+    private JScrollPane scrollPane1;
+    private JTextPane textPane1;
     public SaleDeptFrame() {
         super("食品公司管理系统");
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setBounds(screenSize.width / 6, screenSize.height / 6, screenSize.width * 2 / 3,
+                screenSize.height * 2 / 3);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        desktopPane = new JDesktopPane();
+
+        desktopPane.setOpaque(true);
+        label1.setForeground(Color.RED);//可以直接设置文字颜色
+        this.setContentPane(desktopPane);
+        time = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("                    当前登陆人员：  " + power + "   " + username + new SimpleDateFormat("yyyy年MM月dd日 EEEE hh:mm:ss").format(new Date()));
+                label1.setText("                    当前登陆人员：   " + power + "   " + username + new SimpleDateFormat("yyyy年MM月dd日 EEEE hh:mm:ss").format(new Date()));
+            }
+        });
+        time.start();
+
+
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static SaleDeptFrame getSaleDeptFrame() {
+        if (saleDeptFrame == null) {
+            saleDeptFrame = new SaleDeptFrame();
+        }
+        return saleDeptFrame;
     }
 
     private void initComponents() {
@@ -57,6 +84,8 @@ public class SaleDeptFrame extends JFrame {
         menu4 = new JMenu();
         menuItem7 = new JMenuItem();
         label1 = new JLabel();
+        scrollPane1 = new JScrollPane();
+        textPane1 = new JTextPane();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -116,12 +145,18 @@ public class SaleDeptFrame extends JFrame {
                 menu4.add(menuItem7);
             }
             menuBar1.add(menu4);
+
+            //---- label1 ----
+            label1.setText("\u5f53\u524d\u767b\u5f55\uff1a");
+            menuBar1.add(label1);
         }
         setJMenuBar(menuBar1);
 
-        //---- label1 ----
-        label1.setText("\u5f53\u524d\u767b\u5f55\uff1a");
-        contentPane.add(label1, BorderLayout.SOUTH);
+        //======== scrollPane1 ========
+        {
+            scrollPane1.setViewportView(textPane1);
+        }
+        contentPane.add(scrollPane1, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
