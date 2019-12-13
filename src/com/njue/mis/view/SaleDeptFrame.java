@@ -39,6 +39,8 @@ public class SaleDeptFrame extends JFrame {
     private JMenuItem menuItem6;
     private JMenu menu4;
     private JMenuItem menuItem7;
+    private JMenuItem menuItem8;
+    private JMenuItem menuItem9;
     private JLabel label1;
     private JScrollPane scrollPane1;
     private JTextPane textPane1;
@@ -85,6 +87,8 @@ public class SaleDeptFrame extends JFrame {
         label1 = new JLabel();
         scrollPane1 = new JScrollPane();
         textPane1 = new JTextPane();
+        menuItem9 = new JMenuItem();
+        menuItem8 = new JMenuItem();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -122,11 +126,21 @@ public class SaleDeptFrame extends JFrame {
 
                 //---- menuItem5 ----
                 menuItem5.setText("\u751f\u6210\u8ba2\u8d27\u5355");
+                menuItem5.addActionListener(SaleAction.sales());
                 menu3.add(menuItem5);
 
                 //---- menuItem6 ----
                 menuItem6.setText("\u751f\u6210\u9000\u8d27\u5355");
+                menuItem6.addActionListener(SaleAction.salesBack());
                 menu3.add(menuItem6);
+
+                menuItem8.setText("销售订单查询");
+                menuItem8.addActionListener(SaleAction.clickSaleInforSearch());
+                menu3.add(menuItem8);
+
+                menuItem9.setText("销售退货订单查询");
+                menuItem9.addActionListener(SaleAction.clickSaleBackInforSearch());
+                menu3.add(menuItem9);
             }
             menuBar1.add(menu3);
 
