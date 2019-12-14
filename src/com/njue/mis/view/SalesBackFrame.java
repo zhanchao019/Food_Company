@@ -1,34 +1,23 @@
 package com.njue.mis.view;
 
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.AbstractTableModel;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.handler.CustomerServicesHandler;
 import com.njue.mis.handler.GoodsServicesHandler;
 import com.njue.mis.handler.SalesBackServicesHandler;
 import com.njue.mis.model.Goods;
 import com.njue.mis.model.SalesBack;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 
 public class SalesBackFrame extends JInternalFrame
 {
@@ -41,7 +30,9 @@ public class SalesBackFrame extends JInternalFrame
 	JTextField operaterField;
 	JTextField goodsField;
 	JTextField explainField;
+	JTextField stateField;
 	JTable goodsTable;
+
 	private double goodsPrices=0;  //记录商品的单价
 	
 	public SalesBackFrame()
@@ -63,6 +54,7 @@ public class SalesBackFrame extends JInternalFrame
 		JLabel ID_privoderLabel = new JLabel("客户编号:");
 		ID_customerField = new JTextField(10); 
 		JLabel numberLabel = new JLabel("数量:");
+		JLabel stateLabel = new JLabel("订单状态");
 		numberField = new JTextField(10);
 		panel1.add(ID_importlable);
 		panel1.add(ID_importtextField);
@@ -86,6 +78,8 @@ public class SalesBackFrame extends JInternalFrame
 		panel2.add(salesbacktimeField);
 		panel2.add(opreaterLabel);
 		panel2.add(operaterField);
+		panel2.add(stateLabel);
+		panel2.add(stateField);
 		
 		JPanel panel3 = new JPanel();
 		JScrollPane goodScrollPane = new JScrollPane();
@@ -143,6 +137,7 @@ public class SalesBackFrame extends JInternalFrame
 				String operator=operaterField.getText();
 				String goodsID=goodsField.getText();
 				String comment=explainField.getText();
+				String state = stateField.getText();
 				double price=0;
 				if(numberStr==null||numberStr.trim().length()==0)
 				{
@@ -182,7 +177,7 @@ public class SalesBackFrame extends JInternalFrame
 				}
 				price=goodsPrices*number;  //计算出总价格
 				SalesBack salesBack=new SalesBack(salesBackID,customerID,goodsID,payType,number,
-						                  price,inportTime,operator,comment);
+						price, inportTime, operator, comment, state);
 				SalesBackServicesHandler handler=CommonFactory.getSalesBackServices();
 				if (handler.addSalesBack(salesBack))
 				{

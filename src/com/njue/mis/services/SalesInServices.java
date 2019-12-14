@@ -3,11 +3,11 @@
  */
 package com.njue.mis.services;
 
-import java.util.Vector;
-
 import com.njue.mis.dao.SalesInDAO;
 import com.njue.mis.handler.SalesInServicesHandler;
 import com.njue.mis.model.SalesIn;
+
+import java.util.Vector;
 
 public class SalesInServices implements SalesInServicesHandler
 {
@@ -23,8 +23,8 @@ public class SalesInServices implements SalesInServicesHandler
 		boolean result=true;
 		result=salesInDAO.addSalesIn(salesIn);
 		//ÐÞ¸Ä¿â´æÁ¿
-		GoodsServices goodsServices=new GoodsServices();
-		goodsServices.changeGoodsNumber(salesIn.getGoodsId(), -salesIn.getNumber());
+		//GoodsServices goodsServices=new GoodsServices();
+		//goodsServices.changeGoodsNumber(salesIn.getGoodsId(), -salesIn.getNumber());
 		return  result;
 	}
 	

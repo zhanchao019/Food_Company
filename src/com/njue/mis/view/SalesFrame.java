@@ -139,10 +139,15 @@ public class SalesFrame extends JInternalFrame
 				try
 				{
 					number=Integer.valueOf(numberStr);
+
 				}
 				catch (Exception ex)
 				{
-					JOptionPane.showMessageDialog(null,"商品的数量不合法","警告",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "商品的数量输入不合法", "警告", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				if (number <= 0) {
+					JOptionPane.showMessageDialog(null, "商品的数量输入应为正整数", "警告", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				if(paytypeComboBox.getSelectedIndex()==0)
@@ -168,7 +173,7 @@ public class SalesFrame extends JInternalFrame
 				price = goodsPrices * number;  //计算出总价格
 				System.out.println(price);
 				SalesIn salesIn = new SalesIn(salesInID, customerId, goodsID, payType, number,
-						price, salesInTime, operator, comment);
+						price, salesInTime, operator, comment, "现货");
 				System.out.println(salesIn.toString());
 
 				SalesInServicesHandler handler = CommonFactory.getSalesInServices();

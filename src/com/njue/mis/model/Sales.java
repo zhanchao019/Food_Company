@@ -20,14 +20,16 @@ public abstract class Sales
 	private String time;  //时间
 	private String operatePerson; //操作员  
 	private String comment;  //注释
+	private String state;//订单状态
+
 	public Sales()
 	{
 		super();
 	}
 
 	public Sales(String id, String customerId, String goodsId, String payType,
-			int number, double price, String time, String operatePerson,
-			String comment)
+				 int number, double price, String time, String operatePerson,
+				 String comment, String state)
 	{
 		super();
 		this.id = id;
@@ -39,6 +41,7 @@ public abstract class Sales
 		this.time = time;
 		this.operatePerson = operatePerson;
 		this.comment = comment;
+		this.state = state;
 	}
 
 	public String getId()

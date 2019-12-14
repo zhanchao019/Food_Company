@@ -3,12 +3,12 @@
  */
 package com.njue.mis.dao;
 
-import java.sql.ResultSet;
-import java.util.Vector;
-
 import com.njue.mis.common.Constants;
 import com.njue.mis.common.ErrorManager;
 import com.njue.mis.model.SalesBack;
+
+import java.sql.ResultSet;
+import java.util.Vector;
 
 public class SalesBackDAO extends ManagerDAO
 {
@@ -58,7 +58,7 @@ public class SalesBackDAO extends ManagerDAO
 			{
 				SalesBack salesBack=new SalesBack(rs.getString("id"),rs.getString("customerid"),rs.getString("goodsid"),
 									  rs.getString("paytype"),rs.getInt("number"),rs.getDouble("price"),
-									  rs.getString("salesbacktime"),rs.getString("operateperson"),rs.getString("comment"));
+						rs.getString("salesbacktime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"));
 				result.add(salesBack);
 			}
 			manager.closeDB();
@@ -87,7 +87,7 @@ public class SalesBackDAO extends ManagerDAO
 			{
 				SalesBack salesBack=new SalesBack(rs.getString("id"),rs.getString("customerid"),rs.getString("goodsid"),
 									  rs.getString("paytype"),rs.getInt("number"),rs.getDouble("price"),
-									  rs.getString("salesbacktime"),rs.getString("operateperson"),rs.getString("comment"));
+						rs.getString("salesbacktime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("comment"));
 				result.add(salesBack);
 			}
 			manager.closeDB();
@@ -113,7 +113,7 @@ public class SalesBackDAO extends ManagerDAO
 			{
 				SalesBack salesBack=new SalesBack(rs.getString("id"),rs.getString("customerid"),rs.getString("goodsid"),
 											rs.getString("paytype"),rs.getInt("number"),rs.getDouble("price"),
-											rs.getString("salesbacktime"),rs.getString("operateperson"),rs.getString("comment"));
+						rs.getString("salesbacktime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"));
 				result.add(salesBack);
 			}
 		}

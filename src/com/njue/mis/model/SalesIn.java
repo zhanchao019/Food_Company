@@ -14,11 +14,11 @@ public class SalesIn extends Sales
 	}
 
 	public SalesIn(String id, String customerId, String goodsId,
-			String payType, int number, double price, String time,
-			String operatePerson, String comment)
+				   String payType, int number, double price, String time,
+				   String operatePerson, String comment, String state)
 	{
 		super(id, customerId, goodsId, payType, number, price, time, operatePerson,
-				comment);
+				comment, state);
 	}
 
 }
