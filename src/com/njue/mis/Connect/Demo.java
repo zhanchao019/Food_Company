@@ -12,7 +12,7 @@ public class Demo {
 
     public static void main(String[] args) {
         sql = "select id from tb_goods";//SQL语句
-        db1 = new ConnectionBuilder(sql);//创建DBHelper对象
+        db1 = new ConnectionBuilder(sql, 0);//创建DBHelper对象
 
         try {
             ret = db1.pst.executeQuery();//执行语句，得到结果集
@@ -26,6 +26,23 @@ public class Demo {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
+
+        sql = "pr_getAllSalesIn";
+        db1 = new ConnectionBuilder(sql, 1);
+        try {
+            ret = db1.pst.executeQuery();
+            while (ret.next()) {
+                String uid = ret.getString(1);
+
+                System.out.println(uid);
+            }//显示数据
+            ret.close();
+            db1.close();//关闭连接
+
+        } catch (SQLException e) {
+
+        }
+
+    }
 }
