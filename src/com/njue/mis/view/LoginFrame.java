@@ -93,9 +93,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 						ChengpinDeptFrame.getChengpinDeptFrame().setVisible(true);
 						break;
 					case "原料库":
-						RawDeptFrame.username = usernameString;
-						RawDeptFrame.power = operator.getPower(usernameString);
-						RawDeptFrame.getSaleDeptFrame().setVisible(true);
+
 						break;
 					case "生产车间":
 						ProducingDeptFrame.username = usernameString;

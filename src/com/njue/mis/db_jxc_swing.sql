@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 14/12/2019 13:38:56
+ Date: 14/12/2019 17:23:10
 */
 
 SET NAMES utf8mb4;
@@ -226,6 +226,11 @@ INSERT INTO `tb_sales` VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13
 INSERT INTO `tb_sales` VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '现货');
 INSERT INTO `tb_sales` VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定');
 INSERT INTO `tb_sales` VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 123112, 1477340, '', '4', '预定');
+INSERT INTO `tb_sales` VALUES ('SI20191214142541', '1', '现金', '2019-12-14 14:25:41', '', 1, 12, '12', '4', '现货');
+INSERT INTO `tb_sales` VALUES ('SI20191214151453', '1', '现金', '2019-12-14 15:14:53', '', 213, 2556, '', '4', '预定');
+INSERT INTO `tb_sales` VALUES ('SI20191214151639', '1', '现金', '2019-12-14 15:16:39', '', 10000, 20000, '', '1', '预定');
+INSERT INTO `tb_sales` VALUES ('SI20191214163605', '1', '现金', '2019-12-14 16:36:05', '', 100, 200, '', '1', '预定');
+INSERT INTO `tb_sales` VALUES ('SI20191214164208', '1', '银行卡', '2019-12-14 16:42:08', '', 11, 275, '', '3', '现货');
 
 -- ----------------------------
 -- Table structure for tb_salesback
@@ -241,6 +246,7 @@ CREATE TABLE `tb_salesback`  (
   `price` float NOT NULL,
   `comment` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsid` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `customerid`(`customerid`) USING BTREE,
   INDEX `goodsid`(`goodsid`) USING BTREE,
@@ -251,9 +257,13 @@ CREATE TABLE `tb_salesback`  (
 -- ----------------------------
 -- Records of tb_salesback
 -- ----------------------------
-INSERT INTO `tb_salesback` VALUES ('SB20190227101509', '4', '银行卡', '2019-02-27 10:15:09', 'admin', 7, 21, '76', '5');
-INSERT INTO `tb_salesback` VALUES ('SB20191213135136', '2', '现金', '2019-12-13 13:51:36', 'admin', 1, 12, '2', '4');
-INSERT INTO `tb_salesback` VALUES ('SB20191213135522', '1', '现金', '2019-12-13 13:55:22', 'admin', 2, 14, '', '1');
+INSERT INTO `tb_salesback` VALUES ('SB20190227101509', '4', '银行卡', '2019-02-27 10:15:09', 'admin', 7, 21, '76', '5', '');
+INSERT INTO `tb_salesback` VALUES ('SB20191213135136', '2', '现金', '2019-12-13 13:51:36', 'admin', 1, 12, '2', '4', '');
+INSERT INTO `tb_salesback` VALUES ('SB20191213135522', '1', '现金', '2019-12-13 13:55:22', 'admin', 2, 14, '', '1', '');
+INSERT INTO `tb_salesback` VALUES ('SB20191214170638', '1', '现金', '2019-12-14 17:06:38', '', 123, 3075, '', '3', '');
+INSERT INTO `tb_salesback` VALUES ('SB20191214170739', '1', '现金', '2019-12-14 17:07:39', '', 1, 2, '1', '1', '');
+INSERT INTO `tb_salesback` VALUES ('SB20191214171456', '1', '现金', '2019-12-14 17:14:56', '', 1212, 14544, '', '4', '预定');
+INSERT INTO `tb_salesback` VALUES ('SB20191214171617', '1', '现金', '2019-12-14 17:16:17', '', 12313, 307825, '', '3', '预定');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
@@ -505,6 +515,33 @@ delimiter ;
 DROP TRIGGER IF EXISTS `new_order_isxianhuo`;
 delimiter ;;
 CREATE DEFINER = `root`@`localhost` TRIGGER `new_order_isxianhuo` BEFORE INSERT ON `tb_sales` FOR EACH ROW begin
+	
+	DECLARE now int;
+	DECLARE num int;
+ 
+	set now=new.number;
+	set num =
+	(select number 
+	from tb_goods,tb_storagecheck
+	where tb_goods.id=tb_storagecheck.goodsid and tb_goods.id = new.goodsid);
+
+	if now > num
+	then 
+	set NEW.state='预定';
+	else 
+	set NEW.state='现货';
+	end if;
+	
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table tb_salesback
+-- ----------------------------
+DROP TRIGGER IF EXISTS `del_order_isxianhuo`;
+delimiter ;;
+CREATE DEFINER = `root`@`localhost` TRIGGER `del_order_isxianhuo` BEFORE INSERT ON `tb_salesback` FOR EACH ROW begin
 	
 	DECLARE now int;
 	DECLARE num int;
