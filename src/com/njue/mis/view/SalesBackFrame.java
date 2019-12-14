@@ -78,8 +78,6 @@ public class SalesBackFrame extends JInternalFrame
 		panel2.add(salesbacktimeField);
 		panel2.add(opreaterLabel);
 		panel2.add(operaterField);
-		panel2.add(stateLabel);
-		panel2.add(stateField);
 		
 		JPanel panel3 = new JPanel();
 		JScrollPane goodScrollPane = new JScrollPane();
@@ -137,7 +135,7 @@ public class SalesBackFrame extends JInternalFrame
 				String operator=operaterField.getText();
 				String goodsID=goodsField.getText();
 				String comment=explainField.getText();
-				String state = stateField.getText();
+				String state = "ож╩У";
 				double price=0;
 				if(numberStr==null||numberStr.trim().length()==0)
 				{
