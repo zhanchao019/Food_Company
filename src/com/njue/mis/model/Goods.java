@@ -12,7 +12,7 @@ public class Goods
 	private String goodsName;  //商品名称
 	private String producePlace;  //商品产地
 	private String size;  //规格
-	private String _package; //包装
+	private String _package; //原材料
 	private String productCode;  //生产批号
 	private String promitCode;  //批转文号
 	private double price;  //价格

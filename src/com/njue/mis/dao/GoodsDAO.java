@@ -35,7 +35,7 @@ public class GoodsDAO
 					goods.getSize(), goods.get_package(), goods.getProductCode(),
 					goods.getPromitCode(), goods.getDescription(), goods.getPrice(),
 					goods.getProviderId()};
-			String sql = "insert into tb_goods(id,goodsname,produceplace,size,package,productcode,promitcode,description,price,providerid,available) values(?,?,?,?,?,?,?,?,?,?,1)";
+            String sql = "insert into tb_goods(id,goodsname,produceplace,size,rawmaterial,productcode,promitcode,description,price,providerid,available) values(?,?,?,?,?,?,?,?,?,?,1)";
 			result = manage.executeUpdate(sql, params, Constants.PSTM_TYPE);
 			System.out.println("ÃÌº”ÕÍ≥…£ø");
 			manage.closeDB();
@@ -85,7 +85,7 @@ public class GoodsDAO
 			while(rs.next())
 			{
 				Goods goods=new Goods(rs.getString("id"),rs.getString("goodsName"),rs.getString("producePlace"),
-									  rs.getString("size"),rs.getString("package"),rs.getString("productCode"),
+                        rs.getString("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
 									  rs.getString("promitCode"),rs.getString("description"),rs.getDouble("price"),
 									  rs.getString("providerId"));
 				result.add(goods);
@@ -134,7 +134,7 @@ public class GoodsDAO
 			while(rs.next())
 			{
 				Goods goods=new Goods(rs.getString("id"),rs.getString("goodsName"),rs.getString("producePlace"),
-						rs.getString("size"),rs.getString("package"),rs.getString("productCode"),
+                        rs.getString("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
 						rs.getString("promitCode"),rs.getString("description"),rs.getDouble("price"),rs.getString("providerId"));
 				result.add(goods);
 			}
@@ -160,7 +160,7 @@ public class GoodsDAO
 			while(rs.next())
 			{
 				Goods goods=new Goods(rs.getString("id"),rs.getString("goodsName"),rs.getString("producePlace"),
-						rs.getString("size"),rs.getString("package"),rs.getString("productCode"),
+                        rs.getString("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
 						rs.getString("promitCode"),rs.getString("description"),rs.getDouble("price"),rs.getString("providerId"));
 				StorageGoods storageGoods=new StorageGoods(rs.getInt("id"),rs.getInt("number"),goods);
 				result.add(storageGoods);
@@ -268,7 +268,7 @@ public class GoodsDAO
 			if(rs.next())
 			{
 				goods=new Goods(rs.getString("id"),rs.getString("goodsName"),rs.getString("producePlace"),
-						rs.getString("size"),rs.getString("package"),rs.getString("productCode"),
+                        rs.getString("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
 						rs.getString("promitCode"),rs.getString("description"),rs.getDouble("price"),rs.getString("providerId"),rs.getInt("available"));
 			}
 			manage.closeDB();

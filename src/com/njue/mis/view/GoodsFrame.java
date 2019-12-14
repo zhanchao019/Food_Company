@@ -1,23 +1,15 @@
 package com.njue.mis.view;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.common.ValidationManager;
 import com.njue.mis.handler.GoodsServicesHandler;
 import com.njue.mis.handler.ProviderServicesHandler;
 import com.njue.mis.model.Goods;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GoodsFrame extends JInternalFrame
 {
@@ -105,7 +97,7 @@ public class GoodsFrame extends JInternalFrame
 		addpanel4.add(sizeField);
 
 		JPanel addpanel5 = new JPanel();
-		JLabel packageLabel = new JLabel("包装:         ");
+		JLabel packageLabel = new JLabel("原材料:         ");
 		addpanel5.add(packageLabel);
 
 		addpanel5.add(packageField);
@@ -155,6 +147,11 @@ public class GoodsFrame extends JInternalFrame
 				if (priceField.getText().trim().length() == 0)
 				{
 					JOptionPane.showMessageDialog(null,"商品价格不能为空！", "警告",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				if (packageField.getText().trim().length() == 0) {
+					JOptionPane.showMessageDialog(null, "商品原材料不能为空！", "警告",
 							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
