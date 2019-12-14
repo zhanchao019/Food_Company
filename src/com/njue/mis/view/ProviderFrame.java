@@ -1,22 +1,14 @@
 package com.njue.mis.view;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.common.ValidationManager;
 import com.njue.mis.handler.ProviderServicesHandler;
 import com.njue.mis.model.Provider;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ProviderFrame extends JInternalFrame
 {
@@ -409,7 +401,11 @@ public class ProviderFrame extends JInternalFrame
 		deletePanel.add(deletepanel7);
 		deletePanel.add(deletepanel8);
 		tabbedPane.addTab("供应商信息删除", deletePanel);
+		ProviderInforSearchFrame tmp = new ProviderInforSearchFrame();
+		PrivoderInforSearchPanel a = tmp.getPrivoderInforSearchPanel();
 
+
+		tabbedPane.addTab("查询供应商信息", a);
 		return tabbedPane;
 	}
 

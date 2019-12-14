@@ -7,7 +7,7 @@ new FormModel {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "这是财务系统"
+				"text": "我是成品库"
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "North"
 			} )
