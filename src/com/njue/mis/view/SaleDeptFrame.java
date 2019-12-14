@@ -19,8 +19,8 @@ public class SaleDeptFrame extends JFrame {
     public static String username;
     private static SaleDeptFrame saleDeptFrame;
     private JDesktopPane desktopPane;
-    private Timer time;     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JMenuBar menuBar1;
+    private Timer time;
+
 
     public static SaleDeptFrame getSaleDeptFrame() {
         if (saleDeptFrame == null) {
@@ -29,7 +29,8 @@ public class SaleDeptFrame extends JFrame {
         return saleDeptFrame;
     }
 
-
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JMenuBar menuBar1;
     private JMenu menu1;
     private JMenuItem menuItem1;
     private JMenu menu2;
