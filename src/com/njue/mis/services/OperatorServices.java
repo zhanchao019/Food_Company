@@ -3,11 +3,11 @@
  */
 package com.njue.mis.services;
 
-import java.util.Vector;
-
 import com.njue.mis.dao.OperatorDAO;
 import com.njue.mis.handler.OperatorServicesHandler;
 import com.njue.mis.model.Operator;
+
+import java.util.Vector;
 
 public class OperatorServices implements OperatorServicesHandler {
 	OperatorDAO operatorDAO = null;
@@ -54,11 +54,16 @@ public class OperatorServices implements OperatorServicesHandler {
 		return operatorDAO.isExited(username);
 	}
 
-	
+
 	public Vector<Operator> getOperator(String type)
 	{
 		operatorDAO=new OperatorDAO();
 		return operatorDAO.getOperator(type);
+	}
+
+	public Vector<Operator> getOperator(String type, String dept) {
+		operatorDAO = new OperatorDAO();
+		return operatorDAO.getOperator(type, dept);
 	}
 
 	

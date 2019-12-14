@@ -195,6 +195,7 @@ public class OperaterManagerFrame extends JInternalFrame
 
 			public void actionPerformed(ActionEvent e)
 			{
+				String selecteddept = deptbox.getSelectedItem().toString();
 				String loginnameString = text_login_name.getText();
 				String operatorNameString = text_operator_name.getText();
 				String passwordString = String.valueOf(text_password
@@ -233,7 +234,7 @@ public class OperaterManagerFrame extends JInternalFrame
 						else
 							if (addOperator.addOperator(new Operator(
 									loginnameString, passwordString,
-									operatorNameString, powerString)))
+									operatorNameString, powerString, selecteddept)))
 							{
 								JOptionPane.showMessageDialog(null, "恭喜你，添加"
 										+ powerString + "已成功！", "消息",
@@ -322,8 +323,12 @@ public class OperaterManagerFrame extends JInternalFrame
 					jcbname.addItem("请选择用户");
 					OperatorServicesHandler operator = CommonFactory
 							.getOperatorServices();
-					Vector<Operator> operatorsVector = operator
-							.getOperator("操作员");
+					Vector<Operator> operatorsVector;
+					if (dept1.equals("管理员")) {
+						operatorsVector = operator.getOperator("操作员");
+					} else {
+						operatorsVector = operator.getOperator("操作员", dept1);
+					}
 					for (Operator o : operatorsVector)
 					{
 						jcbname.addItem(o.getUserName());

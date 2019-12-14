@@ -3,9 +3,9 @@
  */
 package com.njue.mis.handler;
 
-import java.util.Vector;
-
 import com.njue.mis.model.Operator;
+
+import java.util.Vector;
 
 public interface OperatorServicesHandler {
 	/**
@@ -53,7 +53,7 @@ public interface OperatorServicesHandler {
 	String getPassword(String username);
 	/**
      * 判断操作员是否存在
-     * @param id 查询的操作员昵称
+	 * @param username 查询的操作员昵称
      * @return 查询结果
      */
     boolean isExited(String username);
@@ -68,5 +68,14 @@ public interface OperatorServicesHandler {
      * @param userName 用户名
      * @return  用户信息
      */
-    Operator getOperatorInfo(String userName);
+	Operator getOperatorInfo(String userName);
+
+	/**
+	 * 获取特定职权的用户名
+	 *
+	 * @param type 类型
+	 * @param dept 部门
+	 * @return 结果集合
+	 */
+	Vector<Operator> getOperator(String type, String dept);
 }

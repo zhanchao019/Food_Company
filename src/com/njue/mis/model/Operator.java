@@ -10,18 +10,21 @@ public class Operator
 	private String password;  //密码
 	private String name;  //姓名
 	private String power;  //权限
+	private String dept;//部门
 	public Operator()
 	{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Operator(String userName, String password, String name, String power)
+
+	public Operator(String userName, String password, String name, String power, String dept)
 	{
 		super();
 		this.userName = userName;
 		this.password = password;
 		this.name = name;
 		this.power = power;
+		this.dept = dept;
 	}
 	
 	public String getUserName()
@@ -55,5 +58,13 @@ public class Operator
 	public void setPower(String power)
 	{
 		this.power = power;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
 	}
 }

@@ -3,12 +3,12 @@
  */
 package com.njue.mis.dao;
 
-import java.sql.ResultSet;
-import java.util.Vector;
-
 import com.njue.mis.common.Constants;
 import com.njue.mis.common.ErrorManager;
 import com.njue.mis.model.Operator;
+
+import java.sql.ResultSet;
+import java.util.Vector;
 
 public class OperatorDAO
 {
@@ -54,9 +54,9 @@ public class OperatorDAO
 		boolean result=false;
 		try
 		{
-			String sql="insert into tb_operator(username,password,name,power) values (?,?,?,?)";
+            String sql = "insert into tb_operator(username,password,name,power,dept) values (?,?,?,?,?)";
 			Object[] params=new Object[]{operator.getUserName(),operator.getPassword(),
-					                     operator.getName(),operator.getPower()};
+                    operator.getName(), operator.getPower(), operator.getDept()};
 			result=manage.executeUpdate(sql, params, Constants.PSTM_TYPE);
 			manage.closeDB();
 		}
@@ -160,7 +160,7 @@ public class OperatorDAO
 	}
 	/**
      * 判断操作员是否存在
-     * @param id 查询的操作员昵称
+     * @param username 查询的操作员昵称
      * @return 查询结果
      */
     public boolean isExited(String username)
@@ -181,22 +181,22 @@ public class OperatorDAO
 		}
     	return result;
     }
+
     /**
      * 获取特定职权的用户名
+     *
      * @param type 类型
      * @return 结果集合
      */
-    public Vector<Operator> getOperator(String type)
-    {
-    	Vector<Operator> result=new Vector<Operator>();
-    	try
+    public Vector<Operator> getOperator(String type) {
+        Vector<Operator> result = new Vector<Operator>();
+        try
 		{
 			String sql="select * from tb_operator where power=?";
 			Object[] params=new Object[]{type};
 			ResultSet rs=manage.executeQuery(sql, params, Constants.PSTM_TYPE);
-			while(rs.next())
-			{
-				Operator operator=new Operator(rs.getString("username"),rs.getString("password"),rs.getString("name"),rs.getString("power"));
+			while (rs.next()) {
+                Operator operator = new Operator(rs.getString("username"), rs.getString("password"), rs.getString("name"), rs.getString("power"), rs.getString("dept"));
 				result.add(operator);
 			}
 			manage.closeDB();
@@ -204,9 +204,33 @@ public class OperatorDAO
 		catch (Exception e)
 		{
 			ErrorManager.printError("OperatorDAO.getOperator", e);
-		}
-    	return result;
+        }
+        return result;
     }
+
+    /**
+     * 获取特定职权的用户名
+     *
+     * @param type 类型
+     * @param dept 部门
+     * @return 结果集合
+     */
+    public Vector<Operator> getOperator(String type, String dept) {
+        Vector<Operator> result = new Vector<Operator>();
+        try {
+            String sql = "select * from tb_operator where power=? and dept = ?";
+            Object[] params = new Object[]{type, dept};
+            ResultSet rs = manage.executeQuery(sql, params, Constants.PSTM_TYPE);
+            while (rs.next()) {
+                Operator operator = new Operator(rs.getString("username"), rs.getString("password"), rs.getString("name"), rs.getString("power"), rs.getString("dept"));
+                result.add(operator);
+            }
+            manage.closeDB();
+        } catch (Exception e) {
+            ErrorManager.printError("OperatorDAO.getOperator", e);
+        }
+        return result;
+	}
     /**
      * 获取用户的信息
      * @param userName 用户名
