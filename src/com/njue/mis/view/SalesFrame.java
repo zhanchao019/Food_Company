@@ -178,7 +178,7 @@ public class SalesFrame extends JInternalFrame
 
 				SalesInServicesHandler handler = CommonFactory.getSalesInServices();
 				if (handler.addSalesIn(salesIn)) {
-					JOptionPane.showMessageDialog(null, "销售单添加成功", "消息", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "销售单添加成功\n销售单号" + salesInID + "\n总金额为" + price, "消息", JOptionPane.INFORMATION_MESSAGE);
 					numberField.setText("");
 					setEnableFalse();
 				} else {

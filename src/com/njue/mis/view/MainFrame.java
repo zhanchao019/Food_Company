@@ -2,22 +2,35 @@ package com.njue.mis.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class MainFrame extends JFrame
 {
 	public static String power;
 	public static String username;
-	
+	public static String dept;
 	private JDesktopPane desktopPane;
 	private static MainFrame mainFrame;
-
+	private Timer time;
 	/**
 	 * 创建主窗体
 	 */
 	private MainFrame() {
-
 		super("食品公司管理系统");
+		time = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//System.out.println("                    当前登陆人员： " + power + "   		" + username + new SimpleDateFormat("yyyy年MM月dd日 EEEE hh:mm:ss").format(new Date()));
+
+				setTitle("食品公司管理系统                    当前登陆人员：  " + power + "		   " + username + "		" + new SimpleDateFormat("yyyy年MM月dd日 EEEE hh:mm:ss").format(new Date()));
+			}
+		});
+		time.start();
+
 		System.out.print("show main frame");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(screenSize.width / 6, screenSize.height / 6, screenSize.width * 2 / 3,
@@ -35,6 +48,8 @@ public class MainFrame extends JFrame
 		desktopPane.setBackground(new Color(56, 142, 143));
 		// Make dragging a little faster but perhaps uglier.
 		desktopPane.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
+
+
 	}
 
 	public static MainFrame getMainFrame()
