@@ -116,6 +116,14 @@ public abstract class Sales
 	{
 		this.price = price;
 	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
 	public Object getSalesValue(int columnNumber)
 	{
 		switch (columnNumber)
