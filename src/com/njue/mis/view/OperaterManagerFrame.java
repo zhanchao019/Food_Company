@@ -1,33 +1,24 @@
 package com.njue.mis.view;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
+import com.njue.mis.common.CommonFactory;
+import com.njue.mis.handler.OperatorServicesHandler;
+import com.njue.mis.model.Operator;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Vector;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import com.njue.mis.common.CommonFactory;
-import com.njue.mis.handler.OperatorServicesHandler;
-import com.njue.mis.model.Operator;
-
 public class OperaterManagerFrame extends JInternalFrame
 {
 
+	public String dept1;
+	JComboBox deptbox;
 	JTabbedPane power_operator;
 	JLabel login_name, operator_name, password, repassword, power;
 	JLabel del_operator, del_name, del_power;
@@ -49,7 +40,7 @@ public class OperaterManagerFrame extends JInternalFrame
 	JLabel empty1, empty2, empty3, empty4, empty5, empty6, empty7, empty8,
 			empty9, empty10;
 
-	public OperaterManagerFrame()
+	public OperaterManagerFrame(String dept1)
 	{
 		super("操作员管理", true, true, false, true);
 		power_operator = new JTabbedPane();
@@ -58,7 +49,7 @@ public class OperaterManagerFrame extends JInternalFrame
 				screenSize.width *2/5, screenSize.height *2/5);
 
 		login_name = new JLabel(" 登录名:        ", JLabel.LEFT);
-		operator_name = new JLabel("操作员姓名:", JLabel.LEFT);
+		operator_name = new JLabel("注册人姓名:", JLabel.LEFT);
 		password = new JLabel("输入密码:    ", JLabel.LEFT);
 		repassword = new JLabel("确认密码:    ", JLabel.LEFT);
 		power = new JLabel("权限设置");
@@ -98,18 +89,32 @@ public class OperaterManagerFrame extends JInternalFrame
 		jcbpower.addItem("操作员");
 		jcbpower.addItem("管理员");
 		jcbname = new JComboBox();
+		deptbox = new JComboBox();
+		if (dept1 == "管理员") {
+			deptbox.addItem("管理员");
+			deptbox.addItem("销售部");
+			deptbox.addItem("财务部");
+			deptbox.addItem("成品库");
+			deptbox.addItem("原料库");
+			deptbox.addItem("生产车间");
+			deptbox.addItem("生产计划科");
+		} else {
+			deptbox.addItem(dept1);
+		}
+
+
 
 		add_panel.setLayout(new FlowLayout());
-		empty1.setPreferredSize(new Dimension(600, 1));
-		empty2.setPreferredSize(new Dimension(600, 1));
-		empty3.setPreferredSize(new Dimension(600, 1));
-		empty4.setPreferredSize(new Dimension(600, 1));
-		empty5.setPreferredSize(new Dimension(600, 1));
-		empty6.setPreferredSize(new Dimension(600, 20));
-		empty7.setPreferredSize(new Dimension(600, 20));
-		empty8.setPreferredSize(new Dimension(600, 20));
-		empty9.setPreferredSize(new Dimension(600, 20));
-		empty10.setPreferredSize(new Dimension(600, 30));
+		empty1.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 1));
+		empty2.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 1));
+		empty3.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 1));
+		empty4.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 1));
+		empty5.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 1));
+		empty6.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 20));
+		empty7.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 20));
+		empty8.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 20));
+		empty9.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 20));
+		empty10.setPreferredSize(new Dimension(screenSize.width * 2 / 5, 30));
 		add_panel.add(empty1);
 		add_panel.add(login_name);
 		add_panel.add(text_login_name);
@@ -124,7 +129,13 @@ public class OperaterManagerFrame extends JInternalFrame
 		add_panel.add(repassword);
 		add_panel.add(text_repassword);
 		add_panel.add(empty5);
+		add_panel.add(new JLabel("人物身份"));
+		add_panel.add(empty5);
 		add_panel.add(jcbpower);
+
+		add_panel.add(deptbox);
+		add_panel.add(empty5);
+
 		add_panel.add(empty6);
 		add_panel.add(sure);
 		add_panel.add(cancel);
@@ -151,7 +162,7 @@ public class OperaterManagerFrame extends JInternalFrame
 
 		check.addActionListener(new ActionListener()
 		{
-			
+
 			public void actionPerformed(ActionEvent e)
 			{
 				String loginnameString = text_login_name.getText();
@@ -181,7 +192,7 @@ public class OperaterManagerFrame extends JInternalFrame
 
 		sure.addActionListener(new ActionListener()
 		{
-			
+
 			public void actionPerformed(ActionEvent e)
 			{
 				String loginnameString = text_login_name.getText();
@@ -246,7 +257,7 @@ public class OperaterManagerFrame extends JInternalFrame
 		});
 		cancel.addActionListener(new ActionListener()
 		{
-			
+
 			public void actionPerformed(ActionEvent e)
 			{
 				dispose();
@@ -254,7 +265,7 @@ public class OperaterManagerFrame extends JInternalFrame
 		});
 		del_sure.addActionListener(new ActionListener()
 		{
-			
+
 			public void actionPerformed(ActionEvent e)
 			{
 				OperatorServicesHandler operator = CommonFactory
@@ -291,7 +302,7 @@ public class OperaterManagerFrame extends JInternalFrame
 		});
 		del_cancel.addActionListener(new ActionListener()
 		{
-			
+
 			public void actionPerformed(ActionEvent e)
 			{
 				dispose();
@@ -323,7 +334,7 @@ public class OperaterManagerFrame extends JInternalFrame
 
 		jcbname.addItemListener(new ItemListener()
 		{
-			
+
 			public void itemStateChanged(ItemEvent e)
 			{
 				OperatorServicesHandler operator = CommonFactory
@@ -337,5 +348,9 @@ public class OperaterManagerFrame extends JInternalFrame
 				}
 			}
 		});
+	}
+
+	public void setdept(String tmp) {
+		dept1 = tmp;
 	}
 }

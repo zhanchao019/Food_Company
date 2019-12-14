@@ -121,9 +121,12 @@ public class MainAction {
 		return new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				OperaterManagerFrame operaterManagerFrame = new OperaterManagerFrame();
+				OperaterManagerFrame operaterManagerFrame = new OperaterManagerFrame(MainFrame.dept);
+
 				MainFrame.getMainFrame().getContentPane().add(
 						operaterManagerFrame);
+
+				System.out.println(operaterManagerFrame.dept1);
 				operaterManagerFrame.setVisible(true);
 			}
 		};

@@ -19,10 +19,10 @@ public class LoginFrame extends JFrame implements ActionListener {
 	public LoginFrame() {
 		super("食品公司管理系统");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setBounds(screenSize.width / 3, screenSize.height / 3, 330, 230);
-		this.setResizable(false);
+		this.setBounds(screenSize.width / 6, screenSize.height / 6, 1340,
+				768);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		this.setResizable(false);
 		submit = new JButton("确定");
 		submit.addActionListener(this);
 
