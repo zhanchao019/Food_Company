@@ -3,12 +3,12 @@
  */
 package com.njue.mis.dao;
 
-import java.sql.ResultSet;
-import java.util.Vector;
-
 import com.njue.mis.common.Constants;
 import com.njue.mis.common.ErrorManager;
 import com.njue.mis.model.SalesIn;
+
+import java.sql.ResultSet;
+import java.util.Vector;
 
 public class SalesInDAO extends ManagerDAO
 {
@@ -27,10 +27,10 @@ public class SalesInDAO extends ManagerDAO
 		boolean result=false;
 		try
 		{
-			String sql="insert into tb_sales(id,customerid,paytype,salestime,operateperson,number,price,comment,goodsid) values(?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into tb_sales(id,customerid,paytype,salestime,operateperson,number,price,comment,goodsid,state) values(?,?,?,?,?,?,?,?,?,?)";
 			Object[] params=new Object[]{salesIn.getId(),salesIn.getCustomerId(),salesIn.getPayType(),
 					                   salesIn.getTime(),salesIn.getOperatePerson(),salesIn.getNumber(),
-					                   salesIn.getPrice(),salesIn.getComment(),salesIn.getGoodsId()};
+					salesIn.getPrice(), salesIn.getComment(), salesIn.getGoodsId(), "ож╩У"};
 			result=super.add(sql, params);
 		}
 		catch (Exception e)
@@ -54,7 +54,7 @@ public class SalesInDAO extends ManagerDAO
 			{
 				SalesIn salesIn=new SalesIn(rs.getString("id"),rs.getString("customerid"),rs.getString("goodsid"),
 											rs.getString("paytype"),rs.getInt("number"),rs.getDouble("price"),
-											rs.getString("salestime"),rs.getString("operateperson"),rs.getString("comment"));
+						rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"));
 				result.add(salesIn);
 			}
 			manager.closeDB();
@@ -83,7 +83,7 @@ public class SalesInDAO extends ManagerDAO
 			{
 				SalesIn salesIn=new SalesIn(rs.getString("id"),rs.getString("customerid"),rs.getString("goodsid"),
 									  rs.getString("paytype"),rs.getInt("number"),rs.getDouble("price"),
-									  rs.getString("salestime"),rs.getString("operateperson"),rs.getString("comment"));
+						rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"));
 				result.add(salesIn);
 			}
 			manager.closeDB();
@@ -112,7 +112,7 @@ public class SalesInDAO extends ManagerDAO
 			{
 				SalesIn salesIn=new SalesIn(rs.getString("id"),rs.getString("customerid"),rs.getString("goodsid"),
 									  rs.getString("paytype"),rs.getInt("number"),rs.getDouble("price"),
-									  rs.getString("salestime"),rs.getString("operateperson"),rs.getString("comment"));
+						rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"));
 				result.add(salesIn);
 			}
 			manager.closeDB();

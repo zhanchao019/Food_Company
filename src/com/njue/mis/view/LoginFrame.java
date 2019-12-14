@@ -82,6 +82,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 						CounterDeptFrame.username = usernameString;
 						CounterDeptFrame.power = operator.getPower(usernameString);
 						CounterDeptFrame.getCounterDeptFrame().setVisible(true);
+
+
 						break;
 					case "成品库":
 						System.out.print("成品");
