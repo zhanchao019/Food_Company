@@ -138,6 +138,7 @@ public class GoodsDAO
 						rs.getString("promitCode"),rs.getString("description"),rs.getDouble("price"),rs.getString("providerId"));
 				result.add(goods);
 			}
+
 			manage.closeDB();
 		}
 		catch (Exception e)

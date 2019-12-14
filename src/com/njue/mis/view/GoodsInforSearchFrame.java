@@ -1,27 +1,15 @@
 package com.njue.mis.view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.handler.GoodsServicesHandler;
 import com.njue.mis.model.Goods;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class GoodsInforSearchFrame extends JInternalFrame
 {
@@ -150,7 +138,7 @@ class GoodsInforSearchPanel extends JPanel
 		
 		private String[] columnNames =
 		{
-				"商品编号", "商品名称", "产地", "规格", "包装",
+				"商品编号", "商品名称", "产地", "规格", "原料",
 				"生产批号", "批准文号", "描述","价格", "供应商编号"
 		};
 		
