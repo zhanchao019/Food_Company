@@ -1,32 +1,18 @@
 package com.njue.mis.view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import com.njue.mis.common.CommonFactory;
+import com.njue.mis.common.ValidationManager;
+import com.njue.mis.handler.SalesBackServicesHandler;
+import com.njue.mis.model.SalesBack;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-
-import com.njue.mis.common.CommonFactory;
-import com.njue.mis.common.ValidationManager;
-import com.njue.mis.handler.SalesBackServicesHandler;
-import com.njue.mis.model.SalesBack;
 
 public class SaleBackInforSearchFrame extends JInternalFrame
 {
@@ -240,7 +226,7 @@ class SaleBackInforSearchPanel extends JPanel
 		private String[] columnNames =
 		{
 				"退货票号", "商品编号", "商品名称", "单价", "数量",
-				"金额", "客户编号","客户名称", "退货时间","操作员"
+				"金额", "客户编号", "客户名称", "退货时间", "操作员", "订单状态", "支付状态"
 		};
 
 		public int getColumnCount()
