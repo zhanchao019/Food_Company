@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 15/12/2019 13:31:37
+ Date: 15/12/2019 16:04:15
 */
 
 SET NAMES utf8mb4;
@@ -42,6 +42,7 @@ CREATE TABLE `tb_customer`  (
 -- ----------------------------
 INSERT INTO `tb_customer` VALUES ('001', '猿来入此', '201600', '上海 浦东新区', '13555555555', '猿来入此站长', '18888888888', '上海银行', '1888888888888888', 'llqqxf@163.com', '021-5656565', 1);
 INSERT INTO `tb_customer` VALUES ('1', '张三', '734100', '北京', '1535283645', '小三', '16283548102', '中国银行', '74937264912', '11111@qq.com', '23641162', 0);
+INSERT INTO `tb_customer` VALUES ('100', '展', '252000', '啊倒萨', '13561468250', '啊啊', '8088211', '123', '123', 'q@qq.com', '21', 1);
 INSERT INTO `tb_customer` VALUES ('2', '李四', '384612', '上海', '18465739371', '小李', '18345429870', '建设银行', '82736459283', '22222@qq.com', '28374622', 2);
 INSERT INTO `tb_customer` VALUES ('252000', '展超', '252000', '山东大学威海', '15166585337', '312313', '13213', '中国人民银行', '123231', '123133@mail.com', '13213', 1);
 INSERT INTO `tb_customer` VALUES ('3', '王五', '793648', '天津', '18593648262', '小屋', '12874645263', '工商银行', '6480273645', '33333@qq.com', '36451272', 3);
@@ -77,6 +78,7 @@ CREATE TABLE `tb_goods`  (
 -- Records of tb_goods
 -- ----------------------------
 INSERT INTO `tb_goods` VALUES ('1', '牙刷', '中国', '支', '小牙刷', '23876374', '374638261', '牙刷', 2, '1', 1);
+INSERT INTO `tb_goods` VALUES ('13', '123', '1', '1', 'ada', '1', '1', 'qe', 1, '1', 1);
 INSERT INTO `tb_goods` VALUES ('2', '小游戏机', '日本', '个', '电路板', '31245324', '343123452', '游戏机', 33, '1', 1);
 INSERT INTO `tb_goods` VALUES ('3', '小面包', '广州', '个', '面粉', '32848672', '324764243', '面包', 25, '1', 1);
 INSERT INTO `tb_goods` VALUES ('4', '牙膏', '中国', '支', '牙膏', '21377128', '231739832', '牙膏', 12, '2', 1);
@@ -244,6 +246,7 @@ INSERT INTO `tb_rawmaterial` VALUES ('钱', '5');
 INSERT INTO `tb_rawmaterial` VALUES ('杠精', '6');
 INSERT INTO `tb_rawmaterial` VALUES ('小牙刷', '1');
 INSERT INTO `tb_rawmaterial` VALUES ('键盘侠', '7');
+INSERT INTO `tb_rawmaterial` VALUES ('ada', '13');
 
 -- ----------------------------
 -- Table structure for tb_sales
@@ -260,7 +263,7 @@ CREATE TABLE `tb_sales`  (
   `comment` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsid` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '现货',
-  `paid` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '否',
+  `paid` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'false',
   PRIMARY KEY (`id`, `operateperson`, `state`) USING BTREE,
   INDEX `customerid`(`customerid`) USING BTREE,
   INDEX `goodsid`(`goodsid`) USING BTREE,
@@ -271,17 +274,17 @@ CREATE TABLE `tb_sales`  (
 -- ----------------------------
 -- Records of tb_sales
 -- ----------------------------
-INSERT INTO `tb_sales` VALUES ('SI20191211101310', '001', '现金', '2019-12-11 10:13:10', 'admin', 1, 3, '人人', '5', '现货', '是');
-INSERT INTO `tb_sales` VALUES ('SI20191213011706', '1', '支票', '2019-12-13 01:17:06', 'admin', 1, 3, 'nill', '5', '现货', '是');
-INSERT INTO `tb_sales` VALUES ('SI20191213012059', '1', '现金', '2019-12-13 01:20:59', 'admin', 1, 7, '12313', '1', '现货', '是');
-INSERT INTO `tb_sales` VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01:23:22', 'admin', 1, 3, 'all', '5', '现货', '是');
-INSERT INTO `tb_sales` VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12:09:01', '', 3, 6, '应该时2*3', '1', '现货', '是');
-INSERT INTO `tb_sales` VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13:10:22', 'admin', 123131, 1477580, '', '4', '预定', '是');
-INSERT INTO `tb_sales` VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '现货', '是');
-INSERT INTO `tb_sales` VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定', '是');
-INSERT INTO `tb_sales` VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 123112, 1477340, '', '4', '预定', '否');
-INSERT INTO `tb_sales` VALUES ('SI20191214202114', '3', '现金', '2019-12-14 20:21:14', '', 11, 132, '无', '4', '预定', '否');
-INSERT INTO `tb_sales` VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货', '否');
+INSERT INTO `tb_sales` VALUES ('SI20191211101310', '001', '现金', '2019-12-11 10:13:10', 'admin', 1, 3, '人人', '5', '现货', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191213011706', '1', '支票', '2019-12-13 01:17:06', 'admin', 1, 3, 'nill', '5', '现货', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191213012059', '1', '现金', '2019-12-13 01:20:59', 'admin', 1, 7, '12313', '1', '现货', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01:23:22', 'admin', 1, 3, 'all', '5', '现货', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12:09:01', '', 3, 6, '应该时2*3', '1', '现货', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13:10:22', 'admin', 123131, 1477580, '', '4', '预定', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '现货', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 123112, 1477340, '', '4', '预定', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191214202114', '3', '现金', '2019-12-14 20:21:14', '', 11, 132, '无', '4', '预定', 'false');
+INSERT INTO `tb_sales` VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货', 'false');
 
 -- ----------------------------
 -- Table structure for tb_salesback
@@ -298,6 +301,7 @@ CREATE TABLE `tb_salesback`  (
   `comment` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsid` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `state` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `paid` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'false',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `customerid`(`customerid`) USING BTREE,
   INDEX `goodsid`(`goodsid`) USING BTREE,
@@ -308,10 +312,11 @@ CREATE TABLE `tb_salesback`  (
 -- ----------------------------
 -- Records of tb_salesback
 -- ----------------------------
-INSERT INTO `tb_salesback` VALUES ('SB20190227101509', '4', '银行卡', '2019-02-27 10:15:09', 'admin', 7, 21, '76', '5', '现货');
-INSERT INTO `tb_salesback` VALUES ('SB20191213135136', '2', '现金', '2019-12-13 13:51:36', 'admin', 1, 12, '2', '4', '现货');
-INSERT INTO `tb_salesback` VALUES ('SB20191213135522', '1', '现金', '2019-12-13 13:55:22', 'admin', 2, 14, '', '1', '现货');
-INSERT INTO `tb_salesback` VALUES ('SB20191214202245', '3', '现金', '2019-12-14 20:22:45', '', 20, 500, '', '3', NULL);
+INSERT INTO `tb_salesback` VALUES ('SB20190227101509', '4', '银行卡', '2019-02-27 10:15:09', 'admin', 7, 21, '76', '5', '现货', 'false');
+INSERT INTO `tb_salesback` VALUES ('SB20191213135136', '2', '现金', '2019-12-13 13:51:36', 'admin', 1, 12, '2', '4', '现货', 'false');
+INSERT INTO `tb_salesback` VALUES ('SB20191213135522', '1', '现金', '2019-12-13 13:55:22', 'admin', 2, 14, '', '1', '现货', 'false');
+INSERT INTO `tb_salesback` VALUES ('SB20191214202245', '3', '现金', '2019-12-14 20:22:45', '', 20, 500, '', '3', '预定', 'true');
+INSERT INTO `tb_salesback` VALUES ('SB20191215155052', '1', '现金', '2019-12-15 15:50:52', 'admin', 1, 3, '1', '5', '预定', 'true');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
@@ -427,6 +432,21 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllStorageGoods`()
 BEGIN
      select * from tb_goods,tb_storagecheck where tb_goods.id=tb_storagecheck.id ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_pay
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_pay`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_pay`(in orderid char(20))
+BEGIN
+  #Routine body goes here...
+	update tb_sales
+	set paid = 'false'
+	where tb_sales.id=orderid;
 END
 ;;
 delimiter ;
