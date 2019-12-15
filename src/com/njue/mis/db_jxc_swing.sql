@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 15/12/2019 17:28:04
+ Date: 15/12/2019 17:35:12
 */
 
 SET NAMES utf8mb4;
@@ -345,7 +345,8 @@ DROP TABLE IF EXISTS `tb_schedule`;
 CREATE TABLE `tb_schedule`  (
   `scheduleid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sum` int(1) NULL DEFAULT NULL
+  `sum` int(1) NULL DEFAULT NULL,
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -646,6 +647,8 @@ CREATE DEFINER = `root`@`localhost` TRIGGER `deal` AFTER UPDATE ON `tb_sales` FO
 		tmp1 INT;
 	DECLARE
 		tmp2 INT;
+	DECLARE STR VARCHAR(255);
+		
 	
 	SET goodsid = new.goodsid;
 	
@@ -666,9 +669,10 @@ CREATE DEFINER = `root`@`localhost` TRIGGER `deal` AFTER UPDATE ON `tb_sales` FO
 		new.paid = 'true' THEN
 		IF
 			state = '预定' THEN
-				INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum` )
+			SET STR = '预定新订单库存补足';
+				INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
 			VALUES
-				( 'SH' + orderid, goodsid, aim );
+				( 'SH' + orderid, goodsid, aim ,STR);
 			ELSE UPDATE tb_storagecheck 
 			SET tb_storagecheck.number = tmp1 - num 
 			WHERE
@@ -676,8 +680,9 @@ CREATE DEFINER = `root`@`localhost` TRIGGER `deal` AFTER UPDATE ON `tb_sales` FO
 				
 			if tb_storagecheck.number<minnum
 			then 
+			SET STR = '成品出库导致库存低于阈值';
 				set aim=tmp2-tb_storagecheck.number;
-				INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum` )
+				INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
 			VALUES
 				( 'SH' + orderid, goodsid, aim );
 				
