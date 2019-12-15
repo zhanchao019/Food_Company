@@ -47,6 +47,19 @@ public class MainAction {
 		};
 	}
 
+	//CounterDeptFrame
+
+	public static ActionListener clickCounterInfoSearch() {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CounterDeptFrame counterDeptFrame = new CounterDeptFrame();
+				MainFrame.getMainFrame().getContentPane().add(
+						counterDeptFrame);
+				counterDeptFrame.setVisible(true);
+			}
+		};
+	}
+
 	public static ActionListener clickGoodsInforserch() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,10 +121,10 @@ public class MainAction {
 		return new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				SaleInforSearchFrame saleInforSearchFrame = new SaleInforSearchFrame();
+				SaleInforSearchFrame counterDeptFrame = new SaleInforSearchFrame();
 				MainFrame.getMainFrame().getContentPane().add(
-						saleInforSearchFrame);
-				saleInforSearchFrame.setVisible(true);
+						counterDeptFrame);
+				counterDeptFrame.setVisible(true);
 			}
 		};
 	}

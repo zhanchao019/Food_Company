@@ -57,10 +57,10 @@ public class SaleAction {
         return new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                SaleInforSearchFrame saleInforSearchFrame = new SaleInforSearchFrame();
+                CounterDeptFrame counterDeptFrame = new CounterDeptFrame();
                 SaleDeptFrame.getSaleDeptFrame().getContentPane().add(
-                        saleInforSearchFrame);
-                saleInforSearchFrame.setVisible(true);
+                        counterDeptFrame);
+                counterDeptFrame.setVisible(true);
             }
         };
     }

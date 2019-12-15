@@ -105,6 +105,14 @@ public class MainFrame extends JFrame
 		menuItem.addActionListener(MainAction.salesBack());
 		menu.add(menuItem);
 
+		// Set up the counter menu.
+		menu = new JMenu("财务管理");
+		menuBar.add(menu);
+		menuItem = new JMenuItem("销售单缴费");
+		menuItem.addActionListener(MainAction.clickCounterInfoSearch());
+		menu.add(menuItem);
+
+
 
         // Set up the select menu.
 		menu = new JMenu("查询管理");
