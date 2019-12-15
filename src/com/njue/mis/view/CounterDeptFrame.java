@@ -6,6 +6,8 @@ import com.njue.mis.handler.SalesInServicesHandler;
 import com.njue.mis.model.SalesIn;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -34,13 +36,14 @@ class CounterDeptFramePanel extends JPanel {
     JTextField textField_starttime;
     JTextField textField_endtime;
 
+    float sum = 0;
     public CounterDeptFramePanel() {
         super(new BorderLayout());
+        tableModel = new MyTableModel();
+        table = new JTable(tableModel);
         JPanel pane = search();
         this.add(pane, BorderLayout.NORTH);
 
-        tableModel = new MyTableModel();
-        table = new JTable(tableModel);
 
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
@@ -52,13 +55,31 @@ class CounterDeptFramePanel extends JPanel {
     }
 
     public JPanel search() {
+
         JPanel panel = new JPanel();
+        JLabel tit = new JLabel();
         panel.setLayout(new GridLayout(2, 1));
         JPanel panel2 = new JPanel(new FlowLayout());
         JPanel panel3 = new JPanel(new FlowLayout());
-
+        JLabel orderid = new JLabel("请在查询结果中选择相应的订单");
+        JButton pay = new JButton();
         JLabel lable = new JLabel("请选择查询条件：");
         panel2.add(lable);
+
+        //获取点击的信息
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                ListSelectionModel model = (ListSelectionModel) e.getSource();
+                int index = model.getMaxSelectionIndex();
+                System.out.println(table.getValueAt(index, 0).toString());
+                orderid.setText(table.getValueAt(index, 0).toString());
+                sum = Float.parseFloat(table.getValueAt(index, 0).toString());
+
+                tit.setText("你选择的订单是");
+                //   goodsField.setText(goodsTable.getValueAt(index, 0).toString());
+                // goodsPrices=Double.valueOf(goodsTable.getValueAt(index, 8).toString());
+            }
+        });
 
         comboBox = new JComboBox();
         comboBox.addItem("销售单号");
@@ -126,11 +147,9 @@ class CounterDeptFramePanel extends JPanel {
 
         checkBox = new JCheckBox("按指定日期查询");
 
-        checkBox.addItemListener(new ItemListener()
-        {
+        checkBox.addItemListener(new ItemListener() {
 
-            public void itemStateChanged(ItemEvent e)
-            {
+            public void itemStateChanged(ItemEvent e) {
                 if (!checkBox.isSelected()) {
                     textField_starttime.setText("");
                     textField_endtime.setText("");
@@ -160,8 +179,7 @@ class CounterDeptFramePanel extends JPanel {
         JButton button1 = new JButton();
         button1.setText("显示全部信息");
         button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 SalesInServicesHandler handler = CommonFactory.getSalesInServices();
                 Vector<SalesIn> salesInVector = handler.getAllSalesIn();
                 if (salesInVector.size() == 0) {
@@ -172,7 +190,22 @@ class CounterDeptFramePanel extends JPanel {
         });
         panel2.add(button1);
 
+        panel3 = new JPanel();//选择支付页面
+        pay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tit.getText() == "") {
+                    JOptionPane.showMessageDialog(null, "请选择一个销售记录", "警告", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+
+        panel3.add(tit);
+        panel3.add(orderid);
+
         panel.add(panel2);
+
         panel.add(panel3);
 
         return panel;
