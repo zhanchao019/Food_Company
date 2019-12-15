@@ -11,11 +11,13 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
+
  Date: 15/12/2019 16:04:15
-*/
+
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
 
 -- ----------------------------
 -- Table structure for tb_customer
