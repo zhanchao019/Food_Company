@@ -18,4 +18,5 @@ public interface Constants
 	String PORTOUT_SERVICES_CLASS="com.njue.mis.services.PortOutServices";
 	String SALESIN_SERVICES_CLASS="com.njue.mis.services.SalesInServices";
 	String SALESBACK_SERVICES_CLASS="com.njue.mis.services.SalesBackServices";
+    String SCHEDULE_SERVICES_CLASS = "com.njue.mis.services.ScheduleServices";
 }

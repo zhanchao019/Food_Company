@@ -26,7 +26,7 @@ public class SalesInDAO extends ManagerDAO {
         try {
             String sql = "update (tb_sales)" +
                     "set paid = 'true'" +
-                    "where id=?";
+                    "where id= ?";
             Object[] params = new Object[]{
                     orderid};
             return super.add(sql, params);

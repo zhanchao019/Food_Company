@@ -1,9 +1,6 @@
 package com.njue.mis.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class SaleAction {
+public class SaleAction {/*
     public static ActionListener clickCustomerInfoManager() {
 
         return new ActionListener() {
@@ -79,5 +76,5 @@ public class SaleAction {
         };
     }
 
-
+*/
 }

@@ -3,29 +3,31 @@
  */
 package com.njue.mis.common;
 
-import com.njue.mis.handler.CustomerServicesHandler;
-import com.njue.mis.handler.GoodsServicesHandler;
-import com.njue.mis.handler.OperatorServicesHandler;
-import com.njue.mis.handler.PortInServicesHandle;
-import com.njue.mis.handler.PortOutServicesHandle;
-import com.njue.mis.handler.ProviderServicesHandler;
-import com.njue.mis.handler.SalesBackServicesHandler;
-import com.njue.mis.handler.SalesInServicesHandler;
+import com.njue.mis.handler.*;
 
 public class CommonFactory
 {
 	/**
+	 * 获取ScheduleService类的对象
+	 * @return ScheduleService类的对象
+	 */
+	public static ScheduleServicesHandler getScheduleServices() {
+		try {
+			return (ScheduleServicesHandler) Class.forName(Constants.SCHEDULE_SERVICES_CLASS).newInstance();
+		} catch (Exception e) {
+			ErrorManager.printError("CommontFactory.getScheduleServices", e);
+		}
+		return null;
+	}
+
+	/**
 	 * 获取GoodsService类的对象
 	 * @return GoodsService类的对象
 	 */
-	public static GoodsServicesHandler getGoodsServices()
-	{
-		try
-		{
+	public static GoodsServicesHandler getGoodsServices() {
+		try {
 			return (GoodsServicesHandler)Class.forName(Constants.GOODS_SERVICES_CLASS).newInstance();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			ErrorManager.printError("CommontFactory.getGoodsServices", e);
 		}
 		return null;

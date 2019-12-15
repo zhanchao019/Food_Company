@@ -133,7 +133,9 @@ public abstract class Sales
 	public void setState(String state) {
 		this.state = state;
 	}
-	public Object getSalesValue(int columnNumber)
+
+
+    public Object getSalesValue(int columnNumber)
 	{
 		switch (columnNumber)
 		{

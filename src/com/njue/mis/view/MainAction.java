@@ -47,6 +47,17 @@ public class MainAction {
 		};
 	}
 
+    public static ActionListener clickScheduleInfoSearch() {
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ScheduleDeptFrame scheduleDeptFrame = new ScheduleDeptFrame();
+                MainFrame.getMainFrame().getContentPane().add(
+                        scheduleDeptFrame);
+                scheduleDeptFrame.setVisible(true);
+            }
+        };
+    }
+
 	//CounterDeptFrame
 
 	public static ActionListener clickCounterInfoSearch() {

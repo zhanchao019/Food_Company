@@ -117,7 +117,7 @@ public class MainFrame extends JFrame
 		menu = new JMenu("生产计划管理");
 		menuBar.add(menu);
 		menuItem = new JMenuItem("生产计划");
-		menuItem.addActionListener(MainAction.clickCounterInfoSearch());
+		menuItem.addActionListener(MainAction.clickScheduleInfoSearch());
 		menu.add(menuItem);
 
 
