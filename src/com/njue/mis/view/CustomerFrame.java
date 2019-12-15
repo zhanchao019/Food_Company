@@ -163,7 +163,7 @@ public class CustomerFrame extends JInternalFrame
 				{
 					if (!ValidationManager.validatePhone(customer_teleField.getText().trim()))
 					{
-						JOptionPane.showMessageDialog(null, "电话号码不合法！","警告",JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "电话联系方式不合法，请填入有效的联系方式", "警告", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
 				}
