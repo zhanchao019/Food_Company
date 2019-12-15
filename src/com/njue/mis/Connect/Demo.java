@@ -27,16 +27,12 @@ public class Demo {
             e.printStackTrace();
         }
 
-
-        sql = "pr_getAllSalesIn";
-        db1 = new ConnectionBuilder(sql, 1);
+        System.out.println("???");
+        sql = "pr_pay(SI20191214132234)";
+        db1 = new ConnectionBuilder(sql);
         try {
             ret = db1.pst.executeQuery();
-            while (ret.next()) {
-                String uid = ret.getString(1);
 
-                System.out.println(uid);
-            }//显示数据
             ret.close();
             db1.close();//关闭连接
 

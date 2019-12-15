@@ -16,7 +16,11 @@ public class SalesInServices implements SalesInServicesHandler
 	{
 		super();
 	}
-	
+
+	public boolean pay(String orderid) {
+		salesInDAO = new SalesInDAO();
+		return salesInDAO.pay(orderid);
+	}
 	public boolean addSalesIn(SalesIn salesIn)
 	{
 		salesInDAO=new SalesInDAO();

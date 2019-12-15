@@ -37,6 +37,7 @@ class CounterDeptFramePanel extends JPanel {
     JTextField textField_endtime;
 
     float sum = 0;
+    String paystate = "";
     public CounterDeptFramePanel() {
         super(new BorderLayout());
         tableModel = new MyTableModel();
@@ -74,7 +75,8 @@ class CounterDeptFramePanel extends JPanel {
                 System.out.println(table.getValueAt(index, 0).toString());
                 orderid.setText(table.getValueAt(index, 0).toString());
                 sum = Float.parseFloat(table.getValueAt(index, 5).toString());
-
+                paystate = table.getValueAt(index, 11).toString();//get pay state
+                System.out.println(paystate);
                 tit.setText("你选择的订单是");
                 //   goodsField.setText(goodsTable.getValueAt(index, 0).toString());
                 // goodsPrices=Double.valueOf(goodsTable.getValueAt(index, 8).toString());
@@ -196,13 +198,24 @@ class CounterDeptFramePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (tit.getText() == "") {
                     JOptionPane.showMessageDialog(null, "请选择一个销售记录", "警告", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    System.out.println(paystate + "|");
+                    if (paystate != "true") {
+
+                        SalesInServicesHandler handler = CommonFactory.getSalesInServices();
+                        handler.pay(orderid.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "此订单已经缴费", "警告", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         });
 
+        pay.setText("支付");
 
         panel3.add(tit);
         panel3.add(orderid);
+        panel3.add(pay);
 
         panel.add(panel2);
 

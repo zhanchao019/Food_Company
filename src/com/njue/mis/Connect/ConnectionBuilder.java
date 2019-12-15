@@ -23,10 +23,25 @@ public class ConnectionBuilder {
             } else if (type == 1) {
                 pst = conn.prepareCall("{call " + sql + "()}");//执行存储过程
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public ConnectionBuilder(String sql) {
+        try {
+            Class.forName(name);//指定连接类型
+            conn = DriverManager.getConnection(url, user, password);//获取连接
+
+            pst = conn.prepareCall("{ call " + sql + " }");//执行存储过程
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void close() {
         try {

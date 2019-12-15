@@ -3,12 +3,19 @@
  */
 package com.njue.mis.handler;
 
-import java.util.Vector;
-
 import com.njue.mis.model.SalesIn;
+
+import java.util.Vector;
 
 public interface SalesInServicesHandler
 {
+	/**
+	 * 向数据库中添加新的销售记录
+	 * @param orderid 封装好的SalesIn对象
+	 * @return 执行结果
+	 */
+	boolean pay(String orderid);
+
 	/**
 	 * 向数据库中添加新的销售记录
 	 * @param salesIn 封装好的SalesIn对象

@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 15/12/2019 11:29:49
+ Date: 15/12/2019 13:31:37
 */
 
 SET NAMES utf8mb4;
@@ -260,6 +260,7 @@ CREATE TABLE `tb_sales`  (
   `comment` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsid` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '现货',
+  `paid` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '否',
   PRIMARY KEY (`id`, `operateperson`, `state`) USING BTREE,
   INDEX `customerid`(`customerid`) USING BTREE,
   INDEX `goodsid`(`goodsid`) USING BTREE,
@@ -270,17 +271,17 @@ CREATE TABLE `tb_sales`  (
 -- ----------------------------
 -- Records of tb_sales
 -- ----------------------------
-INSERT INTO `tb_sales` VALUES ('SI20191211101310', '001', '现金', '2019-12-11 10:13:10', 'admin', 1, 3, '人人', '5', '现货');
-INSERT INTO `tb_sales` VALUES ('SI20191213011706', '1', '支票', '2019-12-13 01:17:06', 'admin', 1, 3, 'nill', '5', '现货');
-INSERT INTO `tb_sales` VALUES ('SI20191213012059', '1', '现金', '2019-12-13 01:20:59', 'admin', 1, 7, '12313', '1', '现货');
-INSERT INTO `tb_sales` VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01:23:22', 'admin', 1, 3, 'all', '5', '现货');
-INSERT INTO `tb_sales` VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12:09:01', '', 3, 6, '应该时2*3', '1', '现货');
-INSERT INTO `tb_sales` VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13:10:22', 'admin', 123131, 1477580, '', '4', '预定');
-INSERT INTO `tb_sales` VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '现货');
-INSERT INTO `tb_sales` VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定');
-INSERT INTO `tb_sales` VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 123112, 1477340, '', '4', '预定');
-INSERT INTO `tb_sales` VALUES ('SI20191214202114', '3', '现金', '2019-12-14 20:21:14', '', 11, 132, '无', '4', '预定');
-INSERT INTO `tb_sales` VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货');
+INSERT INTO `tb_sales` VALUES ('SI20191211101310', '001', '现金', '2019-12-11 10:13:10', 'admin', 1, 3, '人人', '5', '现货', '是');
+INSERT INTO `tb_sales` VALUES ('SI20191213011706', '1', '支票', '2019-12-13 01:17:06', 'admin', 1, 3, 'nill', '5', '现货', '是');
+INSERT INTO `tb_sales` VALUES ('SI20191213012059', '1', '现金', '2019-12-13 01:20:59', 'admin', 1, 7, '12313', '1', '现货', '是');
+INSERT INTO `tb_sales` VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01:23:22', 'admin', 1, 3, 'all', '5', '现货', '是');
+INSERT INTO `tb_sales` VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12:09:01', '', 3, 6, '应该时2*3', '1', '现货', '是');
+INSERT INTO `tb_sales` VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13:10:22', 'admin', 123131, 1477580, '', '4', '预定', '是');
+INSERT INTO `tb_sales` VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '现货', '是');
+INSERT INTO `tb_sales` VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定', '是');
+INSERT INTO `tb_sales` VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 123112, 1477340, '', '4', '预定', '否');
+INSERT INTO `tb_sales` VALUES ('SI20191214202114', '3', '现金', '2019-12-14 20:21:14', '', 11, 132, '无', '4', '预定', '否');
+INSERT INTO `tb_sales` VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货', '否');
 
 -- ----------------------------
 -- Table structure for tb_salesback
