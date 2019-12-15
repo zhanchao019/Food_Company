@@ -11,11 +11,13 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 15/12/2019 15:45:57
-*/
+
+ Date: 15/12/2019 16:04:15
+
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
 
 -- ----------------------------
 -- Table structure for tb_customer
@@ -301,6 +303,7 @@ CREATE TABLE `tb_salesback`  (
   `comment` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsid` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `state` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `paid` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'false',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `customerid`(`customerid`) USING BTREE,
   INDEX `goodsid`(`goodsid`) USING BTREE,
@@ -311,10 +314,11 @@ CREATE TABLE `tb_salesback`  (
 -- ----------------------------
 -- Records of tb_salesback
 -- ----------------------------
-INSERT INTO `tb_salesback` VALUES ('SB20190227101509', '4', '银行卡', '2019-02-27 10:15:09', 'admin', 7, 21, '76', '5', '现货');
-INSERT INTO `tb_salesback` VALUES ('SB20191213135136', '2', '现金', '2019-12-13 13:51:36', 'admin', 1, 12, '2', '4', '现货');
-INSERT INTO `tb_salesback` VALUES ('SB20191213135522', '1', '现金', '2019-12-13 13:55:22', 'admin', 2, 14, '', '1', '现货');
-INSERT INTO `tb_salesback` VALUES ('SB20191214202245', '3', '现金', '2019-12-14 20:22:45', '', 20, 500, '', '3', NULL);
+INSERT INTO `tb_salesback` VALUES ('SB20190227101509', '4', '银行卡', '2019-02-27 10:15:09', 'admin', 7, 21, '76', '5', '现货', 'false');
+INSERT INTO `tb_salesback` VALUES ('SB20191213135136', '2', '现金', '2019-12-13 13:51:36', 'admin', 1, 12, '2', '4', '现货', 'false');
+INSERT INTO `tb_salesback` VALUES ('SB20191213135522', '1', '现金', '2019-12-13 13:55:22', 'admin', 2, 14, '', '1', '现货', 'false');
+INSERT INTO `tb_salesback` VALUES ('SB20191214202245', '3', '现金', '2019-12-14 20:22:45', '', 20, 500, '', '3', '预定', 'true');
+INSERT INTO `tb_salesback` VALUES ('SB20191215155052', '1', '现金', '2019-12-15 15:50:52', 'admin', 1, 3, '1', '5', '预定', 'true');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
