@@ -129,11 +129,11 @@ public class LoginFrame extends JFrame implements ActionListener {
 		JLabel label;
 		JLabel departmentLabel;
 		name = new JLabel("用户名:  ", JLabel.RIGHT);
-		name.setForeground(new Color(0, 128, 255));
+		name.setForeground(new Color(255, 255, 255));
 		passwordLabel = new JLabel("密码:  ", JLabel.RIGHT);
 		departmentLabel = new JLabel("部门:  ", JLabel.RIGHT);
-		departmentLabel.setForeground(new Color(0, 128, 255));
-		passwordLabel.setForeground(new Color(0, 128, 255));
+		departmentLabel.setForeground(new Color(255, 255, 255));
+		passwordLabel.setForeground(new Color(255, 255, 255));
 		username = new JTextField();
 		username.setColumns(10);
 		password = new JPasswordField();

@@ -11,13 +11,11 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
-
- Date: 15/12/2019 16:04:15
-
+ Date: 15/12/2019 17:35:12
+*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
 
 -- ----------------------------
 -- Table structure for tb_customer
@@ -105,6 +103,26 @@ INSERT INTO `tb_goods_copy1` VALUES ('2', '小游戏机');
 INSERT INTO `tb_goods_copy1` VALUES ('3', '小面包');
 INSERT INTO `tb_goods_copy1` VALUES ('4', '牙膏');
 INSERT INTO `tb_goods_copy1` VALUES ('5', '可贺');
+
+-- ----------------------------
+-- Table structure for tb_goodsschedule
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_goodsschedule`;
+CREATE TABLE `tb_goodsschedule`  (
+  `goodsid` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `minval` int(1) NULL DEFAULT NULL,
+  `aimval` int(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`goodsid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_goodsschedule
+-- ----------------------------
+INSERT INTO `tb_goodsschedule` VALUES ('1', 10, 30);
+INSERT INTO `tb_goodsschedule` VALUES ('2', 10, 30);
+INSERT INTO `tb_goodsschedule` VALUES ('3', 10, 30);
+INSERT INTO `tb_goodsschedule` VALUES ('4', 10, 30);
+INSERT INTO `tb_goodsschedule` VALUES ('5', 10, 30);
 
 -- ----------------------------
 -- Table structure for tb_inport
@@ -319,6 +337,17 @@ INSERT INTO `tb_salesback` VALUES ('SB20191213135136', '2', '现金', '2019-12-1
 INSERT INTO `tb_salesback` VALUES ('SB20191213135522', '1', '现金', '2019-12-13 13:55:22', 'admin', 2, 14, '', '1', '现货', 'false');
 INSERT INTO `tb_salesback` VALUES ('SB20191214202245', '3', '现金', '2019-12-14 20:22:45', '', 20, 500, '', '3', '预定', 'true');
 INSERT INTO `tb_salesback` VALUES ('SB20191215155052', '1', '现金', '2019-12-15 15:50:52', 'admin', 1, 3, '1', '5', '预定', 'true');
+
+-- ----------------------------
+-- Table structure for tb_schedule
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_schedule`;
+CREATE TABLE `tb_schedule`  (
+  `scheduleid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `goodsid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `sum` int(1) NULL DEFAULT NULL,
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
@@ -592,6 +621,76 @@ then
 else 
 	set new.state='现货';
 end if;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table tb_sales
+-- ----------------------------
+DROP TRIGGER IF EXISTS `deal`;
+delimiter ;;
+CREATE DEFINER = `root`@`localhost` TRIGGER `deal` AFTER UPDATE ON `tb_sales` FOR EACH ROW BEGIN
+	DECLARE
+		num INT;
+	DECLARE
+		minnum INT;
+	DECLARE
+		aim INT;
+	DECLARE
+		STATE VARCHAR ( 50 );
+	DECLARE
+		orderid VARCHAR ( 50 );
+	DECLARE
+		goodsid VARCHAR ( 50 );
+	DECLARE
+		tmp1 INT;
+	DECLARE
+		tmp2 INT;
+	DECLARE STR VARCHAR(255);
+		
+	
+	SET goodsid = new.goodsid;
+	
+	SET orderid = new.id;
+	
+	SET tmp1 = ( SELECT ( number ) FROM ( tb_storagecheck ) WHERE new.goodsid = goodsid );
+	
+	SET tmp2 = ( SELECT ( aimval ) FROM tb_goodsschedule WHERE new.goodsid = goodsid );
+	
+	SET STATE = NEW.state;
+	
+	SET num = new.number;
+	
+	SET minnum = ( SELECT ( minval ) FROM tb_goodsschedule WHERE new.goodsid = goodsid );
+	
+	SET aim = tmp2 + num - tmp1;
+	IF
+		new.paid = 'true' THEN
+		IF
+			state = '预定' THEN
+			SET STR = '预定新订单库存补足';
+				INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
+			VALUES
+				( 'SH' + orderid, goodsid, aim ,STR);
+			ELSE UPDATE tb_storagecheck 
+			SET tb_storagecheck.number = tmp1 - num 
+			WHERE
+				tb_storagecheck.goodsid = new.goodsid;
+				
+			if tb_storagecheck.number<minnum
+			then 
+			SET STR = '成品出库导致库存低于阈值';
+				set aim=tmp2-tb_storagecheck.number;
+				INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
+			VALUES
+				( 'SH' + orderid, goodsid, aim );
+				
+			end if;
+		END IF;
+		
+	END IF;
+
 END
 ;;
 delimiter ;
