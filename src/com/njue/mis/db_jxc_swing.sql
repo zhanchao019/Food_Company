@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 15/12/2019 19:23:02
+ Date: 15/12/2019 21:51:44
 */
 
 SET NAMES utf8mb4;
@@ -346,8 +346,15 @@ CREATE TABLE `tb_schedule`  (
   `scheduleid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sum` int(1) NULL DEFAULT NULL,
-  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'false'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_schedule
+-- ----------------------------
+INSERT INTO `tb_schedule` VALUES ('1', '1', 1, '???', 'true');
+INSERT INTO `tb_schedule` VALUES ('SI20191214202114', '4', 30, '预定新订单库存补足', 'false');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
@@ -451,6 +458,18 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllSalesIn`()
 BEGIN
      select * from tb_sales ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllSchedule
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllSchedule`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllSchedule`()
+BEGIN
+     select * from tb_schedule;
 END
 ;;
 delimiter ;
@@ -581,6 +600,20 @@ END
 delimiter ;
 
 -- ----------------------------
+-- Procedure structure for pr_searchSchedule
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchSchedule`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchSchedule`(in ky varchar(50),in val varchar(50) )
+BEGIN
+	set @state = CONCAT(' select * from (tb_sales) where tb_schedule.',ky," = \'",val,"\' ");
+	PREPARE tmp from @state;
+	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Procedure structure for pr_searchThroughTime
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `pr_searchThroughTime`;
@@ -654,15 +687,15 @@ CREATE DEFINER = `root`@`localhost` TRIGGER `deal` AFTER UPDATE ON `tb_sales` FO
 	
 	SET orderid = new.id;
 	
-	SET tmp1 = ( SELECT ( number ) FROM ( tb_storagecheck ) WHERE new.goodsid = goodsid );
+	SET tmp1 = (SELECT ( number ) FROM ( tb_storagecheck )  WHERE (new.goodsid = goodsid) LIMIT 1 );
 	
-	SET tmp2 = ( SELECT ( aimval ) FROM tb_goodsschedule WHERE new.goodsid = goodsid );
+	SET tmp2 = ( SELECT ( aimval ) FROM tb_goodsschedule WHERE (new.goodsid = goodsid) LIMIT 1);
 	
 	SET STATE = NEW.state;
 	
 	SET num = new.number;
 	
-	SET minnum = ( SELECT ( minval ) FROM tb_goodsschedule WHERE new.goodsid = goodsid );
+	SET minnum = ( SELECT ( minval ) FROM tb_goodsschedule WHERE (new.goodsid = goodsid) LIMIT 1);
 	
 	SET aim = tmp2 + num - tmp1;
 	IF
@@ -670,19 +703,22 @@ CREATE DEFINER = `root`@`localhost` TRIGGER `deal` AFTER UPDATE ON `tb_sales` FO
 		IF
 			state = '预定' THEN
 			SET STR = '预定新订单库存补足';
-				INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
+			INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
 			VALUES
-				( 'SH' + orderid, goodsid, aim ,STR);
-			ELSE UPDATE tb_storagecheck 
+				(orderid, goodsid, aim ,STR);
+			ELSE 
+			UPDATE tb_storagecheck 
 			SET tb_storagecheck.number = tmp1 - num 
 			WHERE
-				tb_storagecheck.goodsid = new.goodsid;
+				(tb_storagecheck.goodsid = new.goodsid)
+			lIMIT 1;
+			
 				
 			if tb_storagecheck.number<minnum
 			then 
 			SET STR = '成品出库导致库存低于阈值';
-				set aim=tmp2-tb_storagecheck.number;
-				INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
+			set aim=tmp2-tb_storagecheck.number;
+			INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
 			VALUES
 				( 'SH' + orderid, goodsid, aim );
 				
