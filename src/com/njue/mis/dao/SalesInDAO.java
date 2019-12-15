@@ -54,7 +54,7 @@ public class SalesInDAO extends ManagerDAO
 			{
 				SalesIn salesIn=new SalesIn(rs.getString("id"),rs.getString("customerid"),rs.getString("goodsid"),
 											rs.getString("paytype"),rs.getInt("number"),rs.getDouble("price"),
-						rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"));
+						rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"), rs.getString("paid"));
 				result.add(salesIn);
 			}
 			manager.closeDB();
@@ -83,7 +83,7 @@ public class SalesInDAO extends ManagerDAO
 			{
 				SalesIn salesIn=new SalesIn(rs.getString("id"),rs.getString("customerid"),rs.getString("goodsid"),
 									  rs.getString("paytype"),rs.getInt("number"),rs.getDouble("price"),
-						rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"));
+						rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"), rs.getString("paid"));
 				result.add(salesIn);
 			}
 			manager.closeDB();
@@ -112,7 +112,7 @@ public class SalesInDAO extends ManagerDAO
 			{
 				SalesIn salesIn=new SalesIn(rs.getString("id"),rs.getString("customerid"),rs.getString("goodsid"),
 									  rs.getString("paytype"),rs.getInt("number"),rs.getDouble("price"),
-						rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"));
+						rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"), rs.getString("paid"));
 				result.add(salesIn);
 			}
 			manager.closeDB();

@@ -173,7 +173,7 @@ public class SalesFrame extends JInternalFrame
 				price = goodsPrices * number;  //计算出总价格
 				System.out.println(price);
 				SalesIn salesIn = new SalesIn(salesInID, customerId, goodsID, payType, number,
-						price, salesInTime, operator, comment, "现货");
+						price, salesInTime, operator, comment, "现货", "否");
 				System.out.println(salesIn.toString());
 
 				SalesInServicesHandler handler = CommonFactory.getSalesInServices();

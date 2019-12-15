@@ -15,10 +15,10 @@ public class SalesIn extends Sales
 
 	public SalesIn(String id, String customerId, String goodsId,
 				   String payType, int number, double price, String time,
-				   String operatePerson, String comment, String state)
+				   String operatePerson, String comment, String state, String paid)
 	{
 		super(id, customerId, goodsId, payType, number, price, time, operatePerson,
-				comment, state);
+				comment, state, paid);
 	}
 
 }

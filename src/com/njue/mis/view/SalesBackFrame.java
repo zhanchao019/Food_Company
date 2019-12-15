@@ -175,7 +175,7 @@ public class SalesBackFrame extends JInternalFrame
 				}
 				price=goodsPrices*number;  //计算出总价格
 				SalesBack salesBack=new SalesBack(salesBackID,customerID,goodsID,payType,number,
-						price, inportTime, operator, comment, state);
+                        price, inportTime, operator, comment, state, "否");
 				SalesBackServicesHandler handler=CommonFactory.getSalesBackServices();
 				if (handler.addSalesBack(salesBack))
 				{

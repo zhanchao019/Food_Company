@@ -73,7 +73,7 @@ class CounterDeptFramePanel extends JPanel {
                 int index = model.getMaxSelectionIndex();
                 System.out.println(table.getValueAt(index, 0).toString());
                 orderid.setText(table.getValueAt(index, 0).toString());
-                sum = Float.parseFloat(table.getValueAt(index, 0).toString());
+                sum = Float.parseFloat(table.getValueAt(index, 5).toString());
 
                 tit.setText("你选择的订单是");
                 //   goodsField.setText(goodsTable.getValueAt(index, 0).toString());
@@ -229,7 +229,7 @@ class CounterDeptFramePanel extends JPanel {
         private String[] columnNames =
                 {
                         "销售单号", "商品编号", "商品名称", "单价", "数量",
-                        "金额", "客户编号", "客户名称", "销售时间", "操作员", "订单状态"
+                        "金额", "客户编号", "客户名称", "销售时间", "操作员", "订单状态", "支付状态"
                 };
 
         public int getColumnCount() {

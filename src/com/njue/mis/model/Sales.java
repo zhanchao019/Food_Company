@@ -21,15 +21,15 @@ public abstract class Sales
 	private String operatePerson; //²Ù×÷Ô±  
 	private String comment;  //×¢ÊÍ
 	private String state;//¶©µ¥×´Ì¬
-
+    private String paid;//Ö§¸¶×´Ì¬
 	public Sales()
 	{
 		super();
 	}
 
 	public Sales(String id, String customerId, String goodsId, String payType,
-				 int number, double price, String time, String operatePerson,
-				 String comment, String state)
+                 int number, double price, String time, String operatePerson,
+                 String comment, String state, String paid)
 	{
 		super();
 		this.id = id;
@@ -42,6 +42,7 @@ public abstract class Sales
 		this.operatePerson = operatePerson;
 		this.comment = comment;
 		this.state = state;
+        this.paid = paid;
 	}
 
 	public String getId()
@@ -117,6 +118,14 @@ public abstract class Sales
 		this.price = price;
 	}
 
+    public String getPaid() {
+        return paid;
+    }
+
+    public void setPaid(double paid) {
+        this.price = price;
+    }
+
 	public String getState() {
 		return state;
 	}
@@ -163,6 +172,8 @@ public abstract class Sales
 				return ValidationManager.changeNull(getOperatePerson());
 			case 10:
 				return ValidationManager.changeNull(getState());
+            case 11:
+                return ValidationManager.changeNull(getPaid());
 		default:
 			return "";
 		}
