@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 15/12/2019 01:15:32
+ Date: 15/12/2019 11:29:49
 */
 
 SET NAMES utf8mb4;
@@ -61,7 +61,7 @@ CREATE TABLE `tb_goods`  (
   `goodsname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `produceplace` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `size` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `package` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `rawmaterial` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `productcode` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `promitcode` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `description` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -76,11 +76,13 @@ CREATE TABLE `tb_goods`  (
 -- ----------------------------
 -- Records of tb_goods
 -- ----------------------------
-INSERT INTO `tb_goods` VALUES ('1', '牙刷', '中国', '支', '有', '23876374', '374638261', '牙刷', 2, '1', 1);
-INSERT INTO `tb_goods` VALUES ('2', '小游戏机', '日本', '个', '有', '31245324', '343123452', '游戏机', 33, '1', 1);
-INSERT INTO `tb_goods` VALUES ('3', '小面包', '广州', '个', '有', '32848672', '324764243', '面包', 25, '1', 1);
-INSERT INTO `tb_goods` VALUES ('4', '牙膏', '中国', '支', '有', '21377128', '231739832', '牙膏', 12, '2', 1);
-INSERT INTO `tb_goods` VALUES ('5', '可贺', '上海市', '瓶', '有', '21321342', '213232147', '可乐', 3, '3', 1);
+INSERT INTO `tb_goods` VALUES ('1', '牙刷', '中国', '支', '小牙刷', '23876374', '374638261', '牙刷', 2, '1', 1);
+INSERT INTO `tb_goods` VALUES ('2', '小游戏机', '日本', '个', '电路板', '31245324', '343123452', '游戏机', 33, '1', 1);
+INSERT INTO `tb_goods` VALUES ('3', '小面包', '广州', '个', '面粉', '32848672', '324764243', '面包', 25, '1', 1);
+INSERT INTO `tb_goods` VALUES ('4', '牙膏', '中国', '支', '牙膏', '21377128', '231739832', '牙膏', 12, '2', 1);
+INSERT INTO `tb_goods` VALUES ('5', '可贺', '上海市', '瓶', '钱', '21321342', '213232147', '可乐', 3, '3', 1);
+INSERT INTO `tb_goods` VALUES ('6', '锤子', '茂名', '把', '杠精', '1', '1', '数据库再错我上去就是一锤子', 1, '1', 1);
+INSERT INTO `tb_goods` VALUES ('7', '鼠标', '山东', '1', '键盘侠', '1', '1', '看看触发器', 1, '1', 1);
 
 -- ----------------------------
 -- Table structure for tb_goods_copy1
@@ -129,6 +131,18 @@ INSERT INTO `tb_inport` VALUES ('PI20190226141011', '1', '现金', '2019-02-26 1
 INSERT INTO `tb_inport` VALUES ('PI20190226170100', '1', '银行卡', '2019-02-26 17:01:00', 'admin', 2, 46, '运营', '3');
 INSERT INTO `tb_inport` VALUES ('PI20190227133230', '1', '现金', '2019-02-27 13:32:30', 'admin', 5, 165, 'haha', '2');
 INSERT INTO `tb_inport` VALUES ('PI20190227133317', '1', '银行卡', '2019-02-27 13:33:17', 'admin', 5, 35, '4', '1');
+
+-- ----------------------------
+-- Table structure for tb_log
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_log`;
+CREATE TABLE `tb_log`  (
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `time` datetime(0) NULL DEFAULT NULL,
+  `power` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `dept` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_operator
@@ -210,6 +224,26 @@ INSERT INTO `tb_provider` VALUES ('1', '嘉业有限公司', '456345', '吉林�
 INSERT INTO `tb_provider` VALUES ('2', '好吃点食品公司', '328374', '广东省', '32176216', '合欢', '137817231', '光大银行', '1238681633', '23134@qq.com', '1', 1);
 INSERT INTO `tb_provider` VALUES ('3', '沃达有限公司', '231344', '上海市', '21343321', '沃达', '123242422', '工商银行', '3213231242', '32423@qq.com', '1', 1);
 INSERT INTO `tb_provider` VALUES ('发多少', '东方大厦', '201556', '发多少', '13545456556', '发多少', '发', '发多少', 'llq@123.com', ' 打撒', '发多少', 0);
+
+-- ----------------------------
+-- Table structure for tb_rawmaterial
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_rawmaterial`;
+CREATE TABLE `tb_rawmaterial`  (
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `goodsid` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_rawmaterial
+-- ----------------------------
+INSERT INTO `tb_rawmaterial` VALUES ('电路板', '2');
+INSERT INTO `tb_rawmaterial` VALUES ('面粉', '3');
+INSERT INTO `tb_rawmaterial` VALUES ('牙膏', '4');
+INSERT INTO `tb_rawmaterial` VALUES ('钱', '5');
+INSERT INTO `tb_rawmaterial` VALUES ('杠精', '6');
+INSERT INTO `tb_rawmaterial` VALUES ('小牙刷', '1');
+INSERT INTO `tb_rawmaterial` VALUES ('键盘侠', '7');
 
 -- ----------------------------
 -- Table structure for tb_sales
@@ -299,20 +333,6 @@ INSERT INTO `tb_storagecheck` VALUES (2, '1', 3);
 INSERT INTO `tb_storagecheck` VALUES (3, '5', 6);
 INSERT INTO `tb_storagecheck` VALUES (4, '2', 5);
 INSERT INTO `tb_storagecheck` VALUES (5, '4', 1);
-
--- ----------------------------
--- Procedure structure for pr_changeGoodsNumber
--- ----------------------------
-DROP PROCEDURE IF EXISTS `pr_changeGoodsNumber`;
-delimiter ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_changeGoodsNumber`(in ky char(10),in num int)
-BEGIN
-	set @state = CONCAT(' UPDATE (tb_storagecheck) set  number=number+ '+ num +'  where tb_storagecheck.goodsid=\''+ky+ '\' and number+' + num+'>=0');
-	PREPARE tmp from @state;
-	EXECUTE tmp ;
-END
-;;
-delimiter ;
 
 -- ----------------------------
 -- Procedure structure for pr_getAllCustomer
@@ -518,6 +538,37 @@ BEGIN
 	set @state = CONCAT(' select * from (tb_inport) where tb_inport.',ky,' = \'',val,'\' and inporttime BETWEEN ',t1,' and ',t2);
 	PREPARE tmp from @state;
 	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table tb_goods
+-- ----------------------------
+DROP TRIGGER IF EXISTS `addraw`;
+delimiter ;;
+CREATE DEFINER = `root`@`localhost` TRIGGER `addraw` BEFORE INSERT ON `tb_goods` FOR EACH ROW BEGIN
+	insert into tb_rawmaterial(`goodsid`,`name`) values(new.id,new.rawmaterial);
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table tb_sales
+-- ----------------------------
+DROP TRIGGER IF EXISTS `dinghuo`;
+delimiter ;;
+CREATE DEFINER = `root`@`localhost` TRIGGER `dinghuo` BEFORE INSERT ON `tb_sales` FOR EACH ROW BEGIN
+declare num int;
+declare num1 int;
+set num=new.number;
+set num1=(select (number)FROM tb_storagecheck where tb_storagecheck.goodsid=new.goodsid);
+if num > num1
+then 
+	set new.state='预定';
+else 
+	set new.state='现货';
+end if;
 END
 ;;
 delimiter ;
