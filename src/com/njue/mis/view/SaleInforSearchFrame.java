@@ -223,7 +223,7 @@ class SaleInforSearchPanel extends JPanel
 		private String[] columnNames =
 		{
 				"销售单号", "商品编号", "商品名称", "单价", "数量",
-				"金额", "客户编号","客户名称", "销售时间","操作员"
+				"金额", "客户编号", "客户名称", "销售时间", "操作员", "订单状态"
 		};
 		
 		public int getColumnCount()

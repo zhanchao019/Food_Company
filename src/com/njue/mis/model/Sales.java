@@ -159,8 +159,10 @@ public abstract class Sales
 			}
 		case 8:		
 			return ValidationManager.changeNull(getTime());
-		case 9:
-			return ValidationManager.changeNull(getOperatePerson());
+			case 9:
+				return ValidationManager.changeNull(getOperatePerson());
+			case 10:
+				return ValidationManager.changeNull(getState());
 		default:
 			return "";
 		}
