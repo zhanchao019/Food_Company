@@ -14,6 +14,15 @@ public interface ScheduleServicesHandler {
     boolean opt(String scheduleid);
 
     /**
+     * 向数据库中执行插入，即将确认的生产计划加入到生产车间
+     *
+     * @param goodsid
+     * @param scheduleid 封装好的Sch
+     * @param number     总数
+     * @return 执行结果
+     */
+    boolean opt(String goodsid, String scheduleid, int number);
+    /**
      * 向数据库中添加新的生产计划
      *
      * @param schedule 封装好的Schedule对象

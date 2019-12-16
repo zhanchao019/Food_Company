@@ -18,6 +18,11 @@ public class ScheduleServices implements ScheduleServicesHandler {
         return scheduleDAO.opt(orderid);
     }
 
+    public boolean opt(String goodsid, String orderid, int num) {
+        scheduleDAO = new ScheduleDAO();
+        return scheduleDAO.opt(goodsid, orderid, num);
+    }
+
     public boolean addSchedule(Schedule schedule) {
         scheduleDAO = new ScheduleDAO();
         boolean result = true;

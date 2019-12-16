@@ -113,12 +113,20 @@ public class MainFrame extends JFrame
 		menuItem.addActionListener(MainAction.clickCounterInfoSearch());
 		menu.add(menuItem);
 
-		// Set up the production dept menu.
+        // Set up the production schedule dept menu.
 		menu = new JMenu("生产计划管理");
 		menuBar.add(menu);
 		menuItem = new JMenuItem("生产计划");
 		menuItem.addActionListener(MainAction.clickScheduleInfoSearch());
 		menu.add(menuItem);
+
+        //set up the producing dept menu
+        menu = new JMenu("生产车间管理");
+        menuBar.add(menu);
+        menuItem = new JMenuItem("生产车间");
+        menuItem.addActionListener(MainAction.clickProducingInfoManager());
+
+
 
 
         // Set up the select menu.

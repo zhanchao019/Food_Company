@@ -36,7 +36,7 @@ class ScheduleDeptFramePanel extends JPanel {
     JTextField textField_starttime;
     JTextField textField_endtime;
     JButton del = new JButton("删除生产计划");
-    float sum = 0;
+    int sum = 0;
     String paystate = "";
 
     public ScheduleDeptFramePanel() {
@@ -67,6 +67,7 @@ class ScheduleDeptFramePanel extends JPanel {
         JButton pay = new JButton();
         JLabel lable = new JLabel("请选择查询条件：");
         panel2.add(lable);
+        JLabel goods_id = new JLabel("");
 
         //获取点击的信息
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -76,6 +77,7 @@ class ScheduleDeptFramePanel extends JPanel {
                 // System.out.println(table.getValueAt(index, 0).toString());
                 orderid.setText(table.getValueAt(index, 0).toString());
                 sum = Integer.parseInt(table.getValueAt(index, 2).toString());
+                goods_id.setText(table.getValueAt(index, 1).toString());
                 paystate = table.getValueAt(index, 4).toString();//get pay state
                 System.out.println(paystate);
                 tit.setText("你选择的生产计划是");
@@ -149,7 +151,9 @@ class ScheduleDeptFramePanel extends JPanel {
 
                         ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
                         handler.opt(orderid.getText());
+
                         JOptionPane.showMessageDialog(null, "生产计划" + orderid.getText() + "已经进入生产部门执行", "警告", JOptionPane.WARNING_MESSAGE);
+                        handler.opt(goods_id.getText(), orderid.getText(), sum);
                         //handler.getAllSchedule();handler.getAllSchedule();//刷新
                     } else {
 
@@ -158,6 +162,8 @@ class ScheduleDeptFramePanel extends JPanel {
                 }
             }
         });
+
+
         JButton refresh = new JButton("刷新页面");
         refresh.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

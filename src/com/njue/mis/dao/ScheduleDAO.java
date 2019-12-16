@@ -37,6 +37,29 @@ public class ScheduleDAO extends ManagerDAO {
     }
 
     /**
+     * 向数据库中执行
+     *
+     * @param goodsid
+     * @param scheduleid 封装好的Sch
+     * @param number     总数
+     * @return 执行结果
+     */
+    public boolean opt(String goodsid, String scheduleid, int number) {
+        try {
+            String sql = "insert into tb_producing(goodsid,scheduleid,sum,finished,unfinished)" +
+                    "values(?,?,?,?,?) ";
+            Object[] params = new Object[]{goodsid,
+                    scheduleid, number, 0, number};
+            return super.add(sql, params);
+
+
+        } catch (Exception e) {
+            ErrorManager.printError("ScheduleDAO.opt", e);
+            return false;
+        }
+
+    }
+    /**
      * 向数据库中添加新的销售记录
      *
      * @param schedule 封装好的Schedule对象

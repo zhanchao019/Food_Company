@@ -5,6 +5,17 @@ import java.awt.event.ActionListener;
 
 
 public class MainAction {
+
+	public static ActionListener clickProducingInfoManager() {
+
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProducingDeptFrame producingDeptFrame = new ProducingDeptFrame();
+				MainFrame.getMainFrame().getContentPane().add(producingDeptFrame);
+				producingDeptFrame.setVisible(true);
+			}
+		};
+	}
 	public static ActionListener clickCustomerInfoManager() {
 
 		return new ActionListener() {
