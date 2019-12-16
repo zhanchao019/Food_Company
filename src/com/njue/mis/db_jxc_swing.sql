@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 16/12/2019 23:23:40
+ Date: 17/12/2019 00:22:36
 */
 
 SET NAMES utf8mb4;
@@ -218,6 +218,69 @@ CREATE TABLE `tb_outport`  (
 -- ----------------------------
 INSERT INTO `tb_outport` VALUES ('3', '1', '3', '2016-12-25 23:00:29', '3', 3, 3, '3', '1');
 INSERT INTO `tb_outport` VALUES ('PO20190227094232', '1', '现金', '2019-02-27 09:42:32', 'admin', 1, 23, 'ds速度', '3');
+
+-- ----------------------------
+-- Table structure for tb_producing
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_producing`;
+CREATE TABLE `tb_producing`
+(
+  `goodsid`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `scheduleid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `sum`        int(32)                                                 NULL DEFAULT NULL,
+  `finished`   int(32)                                                 NULL DEFAULT NULL,
+  `unfinished` int(32)                                                 NULL DEFAULT NULL
+) ENGINE = InnoDB
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci
+  ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_producingdetail
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_producingdetail`;
+CREATE TABLE `tb_producingdetail`
+(
+  `scheduleid`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `goodsid`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `pici`            varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `producinglineid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `num`             int(32)                                                 NULL DEFAULT NULL,
+  `producedate`     datetime(0)                                             NULL DEFAULT NULL,
+  `state`           varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci
+  ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_producingline
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_producingline`;
+CREATE TABLE `tb_producingline`
+(
+  `producinglineid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`producinglineid`) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci
+  ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_producingline
+-- ----------------------------
+INSERT INTO `tb_producingline`
+VALUES ('1');
+INSERT INTO `tb_producingline`
+VALUES ('2');
+INSERT INTO `tb_producingline`
+VALUES ('3');
+INSERT INTO `tb_producingline`
+VALUES ('4');
+INSERT INTO `tb_producingline`
+VALUES ('5');
+INSERT INTO `tb_producingline`
+VALUES ('6');
 
 -- ----------------------------
 -- Table structure for tb_provider
