@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 15/12/2019 21:51:44
+ Date: 16/12/2019 15:25:33
 */
 
 SET NAMES utf8mb4;
@@ -278,8 +278,8 @@ CREATE TABLE `tb_sales`  (
   `paytype` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `salestime` datetime(0) NOT NULL,
   `operateperson` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `number` int(11) NOT NULL,
-  `price` float NOT NULL,
+  `number` int(32) NOT NULL,
+  `price` float(1, 0) NOT NULL,
   `comment` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsid` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '现货',
@@ -301,10 +301,10 @@ INSERT INTO `tb_sales` VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01
 INSERT INTO `tb_sales` VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12:09:01', '', 3, 6, '应该时2*3', '1', '现货', 'true');
 INSERT INTO `tb_sales` VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13:10:22', 'admin', 123131, 1477580, '', '4', '预定', 'true');
 INSERT INTO `tb_sales` VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '现货', 'true');
-INSERT INTO `tb_sales` VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定', 'true');
-INSERT INTO `tb_sales` VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 123112, 1477340, '', '4', '预定', 'true');
+INSERT INTO `tb_sales` VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定', 'false');
+INSERT INTO `tb_sales` VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 10, 1477340, '', '4', '预定', 'false');
 INSERT INTO `tb_sales` VALUES ('SI20191214202114', '3', '现金', '2019-12-14 20:21:14', '', 11, 132, '无', '4', '预定', 'false');
-INSERT INTO `tb_sales` VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货', 'false');
+INSERT INTO `tb_sales` VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货', 'true');
 
 -- ----------------------------
 -- Table structure for tb_salesback
@@ -345,7 +345,7 @@ DROP TABLE IF EXISTS `tb_schedule`;
 CREATE TABLE `tb_schedule`  (
   `scheduleid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sum` int(1) NULL DEFAULT NULL,
+  `sum` int(32) NULL DEFAULT NULL,
   `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'false'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -353,8 +353,8 @@ CREATE TABLE `tb_schedule`  (
 -- ----------------------------
 -- Records of tb_schedule
 -- ----------------------------
-INSERT INTO `tb_schedule` VALUES ('1', '1', 1, '???', 'true');
-INSERT INTO `tb_schedule` VALUES ('SI20191214202114', '4', 30, '预定新订单库存补足', 'false');
+INSERT INTO `tb_schedule` VALUES ('SI20191214132101', '5', 2023, '预定新订单库存补足', 'false');
+INSERT INTO `tb_schedule` VALUES ('SI20191214215854', '3', 29, '成品出库导致库存低于阈值', 'false');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
@@ -372,7 +372,7 @@ CREATE TABLE `tb_storagecheck`  (
 -- ----------------------------
 -- Records of tb_storagecheck
 -- ----------------------------
-INSERT INTO `tb_storagecheck` VALUES (1, '3', 11);
+INSERT INTO `tb_storagecheck` VALUES (1, '3', 1);
 INSERT INTO `tb_storagecheck` VALUES (2, '1', 3);
 INSERT INTO `tb_storagecheck` VALUES (3, '5', 6);
 INSERT INTO `tb_storagecheck` VALUES (4, '2', 5);
@@ -644,16 +644,23 @@ delimiter ;
 DROP TRIGGER IF EXISTS `dinghuo`;
 delimiter ;;
 CREATE DEFINER = `root`@`localhost` TRIGGER `dinghuo` BEFORE INSERT ON `tb_sales` FOR EACH ROW BEGIN
-declare num int;
-declare num1 int;
-set num=new.number;
-set num1=(select (number)FROM tb_storagecheck where tb_storagecheck.goodsid=new.goodsid);
-if num > num1
-then 
-	set new.state='预定';
-else 
-	set new.state='现货';
-end if;
+DECLARE
+	num INT;
+DECLARE
+	num1 INT;
+
+SET num = new.number;
+
+SET num1 = ( SELECT ( number ) FROM tb_storagecheck WHERE tb_storagecheck.goodsid = new.goodsid );
+IF
+	num > num1 THEN
+		
+		SET new.state = '预定';
+	ELSE 
+		SET new.state = '现货';
+	
+END IF;
+
 END
 ;;
 delimiter ;
@@ -687,45 +694,46 @@ CREATE DEFINER = `root`@`localhost` TRIGGER `deal` AFTER UPDATE ON `tb_sales` FO
 	
 	SET orderid = new.id;
 	
-	SET tmp1 = (SELECT ( number ) FROM ( tb_storagecheck )  WHERE (new.goodsid = goodsid) LIMIT 1 );
+	SET tmp1 = (SELECT ( number ) FROM ( tb_storagecheck )  WHERE (tb_storagecheck.goodsid = goodsid) LIMIT 1 );
 	
-	SET tmp2 = ( SELECT ( aimval ) FROM tb_goodsschedule WHERE (new.goodsid = goodsid) LIMIT 1);
+	SET tmp2 = ( SELECT ( aimval ) FROM tb_goodsschedule WHERE (tb_goodsschedule.goodsid = goodsid) LIMIT 1);
 	
 	SET STATE = NEW.state;
 	
 	SET num = new.number;
 	
-	SET minnum = ( SELECT ( minval ) FROM tb_goodsschedule WHERE (new.goodsid = goodsid) LIMIT 1);
+	SET minnum = ( SELECT ( minval ) FROM tb_goodsschedule WHERE (tb_goodsschedule.goodsid= goodsid) LIMIT 1);
 	
 	SET aim = tmp2 + num - tmp1;
-	IF
-		new.paid = 'true' THEN
-		IF
-			state = '预定' THEN
+	IF new.paid = 'true' THEN
+		
+		IF state = '预定' THEN
 			SET STR = '预定新订单库存补足';
 			INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
 			VALUES
-				(orderid, goodsid, aim ,STR);
-			ELSE 
-			UPDATE tb_storagecheck 
-			SET tb_storagecheck.number = tmp1 - num 
-			WHERE
-				(tb_storagecheck.goodsid = new.goodsid)
-			lIMIT 1;
-			
-				
-			if tb_storagecheck.number<minnum
-			then 
-			SET STR = '成品出库导致库存低于阈值';
-			set aim=tmp2-tb_storagecheck.number;
-			INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
-			VALUES
-				( 'SH' + orderid, goodsid, aim );
-				
-			end if;
+				(orderid, goodsid, aim ,STR) ;
 		END IF;
 		
-	END IF;
+		
+		SET tmp1 = (select (number) from tb_storagecheck WHERE tb_storagecheck.goodsid=goodsid);
+		set tmp1 = tmp1-num;
+			if tmp1<minnum
+			then 
+			SET STR = '成品出库导致库存低于阈值';
+			set aim=tmp2-tmp1;
+			INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
+			VALUES
+				( orderid, goodsid, aim ,STR);
+			
+			update tb_storagecheck
+			set number = tmp1
+			where tb_storagecheck.goodsid=goodsid;
+			end if;
+			
+	
+		END IF;
+		
+	
 
 END
 ;;

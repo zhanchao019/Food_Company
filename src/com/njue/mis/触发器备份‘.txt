@@ -25,24 +25,6 @@ END IF;
 END -- 商品自动添加原料
 CREATE TRIGGER addraw BEFORE INSERT ON tb_goods FOR EACH ROW
 BEGIN
-		INSERT INTO tb_rawmaterial ( `goodsid`, `name` )
-	VALUES
-		( new.id, new.rawmaterial );
-	
-END ALTER TABLE tb_sales ALTER COLUMN paid 
-SET DEFAULT "false";
-ALTER TABLE tb_salesback ALTER COLUMN paid 
-SET DEFAULT "false";
-DECLARE
-	num INT;
-DECLARE
-	aim,
-	tmp1,
-	tmp2 INT;
-	
-drop TRIGGER deal;	
-CREATE TRIGGER deal AFTER UPDATE ON tb_sales FOR EACH ROW
-BEGIN
 	DECLARE
 		num INT;
 	DECLARE
@@ -60,55 +42,53 @@ BEGIN
 	DECLARE
 		tmp2 INT;
 	DECLARE STR VARCHAR(255);
-		
-	
+
+
 	SET goodsid = new.goodsid;
-	
+
 	SET orderid = new.id;
-	
-	SET tmp1 = (SELECT ( number ) FROM ( tb_storagecheck )  WHERE (new.goodsid = goodsid) LIMIT 1 );
-	
-	SET tmp2 = ( SELECT ( aimval ) FROM tb_goodsschedule WHERE (new.goodsid = goodsid) LIMIT 1);
-	
+
+	SET tmp1 = (SELECT ( number ) FROM ( tb_storagecheck )  WHERE (tb_storagecheck.goodsid = goodsid) LIMIT 1 );
+
+	SET tmp2 = ( SELECT ( aimval ) FROM tb_goodsschedule WHERE (tb_goodsschedule.goodsid = goodsid) LIMIT 1);
+
 	SET STATE = NEW.state;
-	
+
 	SET num = new.number;
-	
-	SET minnum = ( SELECT ( minval ) FROM tb_goodsschedule WHERE (new.goodsid = goodsid) LIMIT 1);
-	
+
+	SET minnum = ( SELECT ( minval ) FROM tb_goodsschedule WHERE (tb_goodsschedule.goodsid= goodsid) LIMIT 1);
+
 	SET aim = tmp2 + num - tmp1;
-	IF
-		new.paid = 'true' THEN
-		IF
-			state = '预定' THEN
+	IF new.paid = 'true' THEN
+
+		IF state = '预定' THEN
 			SET STR = '预定新订单库存补足';
 			INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
 			VALUES
-				(orderid, goodsid, aim ,STR);
-			ELSE 
-			UPDATE tb_storagecheck 
-			SET tb_storagecheck.number = tmp1 - num 
-			WHERE
-				(tb_storagecheck.goodsid = new.goodsid)
-			lIMIT 1;
-			
-				
-			if tb_storagecheck.number<minnum
-			then 
+				(orderid, goodsid, aim ,STR) ;
+		END IF;
+
+
+		SET tmp1 = (select (number) from tb_storagecheck WHERE tb_storagecheck.goodsid=goodsid);
+		set tmp1 = tmp1-num;
+			if tmp1<minnum
+			then
 			SET STR = '成品出库导致库存低于阈值';
-			set aim=tmp2-tb_storagecheck.number;
+			set aim=tmp2-tmp1;
 			INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
 			VALUES
-				( 'SH' + orderid, goodsid, aim );
-				
+				( orderid, goodsid, aim ,STR);
+
+			update tb_storagecheck
+			set number = tmp1
+			where tb_storagecheck.goodsid=goodsid;
 			end if;
+
+
 		END IF;
-		
-	END IF;
+
+
 
 END
-
-
---schedule
- ALTER TABLE tb_schedule ALTER COLUMN s 
+--s chedule ALTER TABLE tb_schedule ALTER COLUMN s
 SET DEFAULT "false";
