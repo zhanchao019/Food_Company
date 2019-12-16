@@ -4,10 +4,10 @@
 
 package com.njue.mis.dao;
 
-import java.sql.ResultSet;
-
 import com.njue.mis.common.Constants;
 import com.njue.mis.common.ErrorManager;
+
+import java.sql.ResultSet;
 
 public abstract class ManagerDAO
 {
@@ -18,6 +18,7 @@ public abstract class ManagerDAO
 		manager=SqlManager.createInstance();
 		manager.connectDB();
 	}
+
 	/**
 	 *  向数据库中添加记录
 	 * @param sql sql语句

@@ -32,7 +32,7 @@ class ScheduleDeptFramePanel extends JPanel {
     JCheckBox checkBox;
     JTextField textField_starttime;
     JTextField textField_endtime;
-
+    JButton del = new JButton("删除生产计划");
     float sum = 0;
     String paystate = "";
 
@@ -123,6 +123,7 @@ class ScheduleDeptFramePanel extends JPanel {
         });
         panel2.add(button1);
 
+
         panel3 = new JPanel();//选择支付页面
         pay.addActionListener(new ActionListener() {
             @Override
@@ -141,8 +142,84 @@ class ScheduleDeptFramePanel extends JPanel {
                 }
             }
         });
+        del.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tit.getText() == "") {
+                    JOptionPane.showMessageDialog(null, "请选择一个生产计划", "警告", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    //System.out.println(paystate + "|");
+                    if (paystate != "true") {
 
-        pay.setText("执行");
+                        ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
+                        handler.delSchedule(orderid.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "此计划已经进入生产部门执行,无法进行取消", "警告", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            }
+        });
+        del.setText("取消生产计划");
+        panel3.add(del);
+   /*     //添加手动添加生产计划的设置
+        JPanel panel4 = new JPanel();
+        JTextField scheduleid = new JTextField();
+        scheduleid.setColumns(13);
+        JTextField goodsid = new JTextField();
+        goodsid.setColumns(13);
+        JTextField number = new JTextField();
+        number.setColumns(13);
+        JTextField comment = new JTextField();
+        comment.setColumns(13);
+        JLabel tmplabel = new JLabel();
+        JButton confirm = new JButton();
+        confirm.setText("确认添加");
+        tmplabel.setText("生产计划编号");
+        panel4.add(tmplabel);
+        panel4.add(scheduleid);
+        scheduleid.setText("SI"+new RandomBuilder(10).getRandomString());
+        tmplabel = new JLabel("产品id");
+        panel4.add(tmplabel);
+        panel4.add(goodsid);
+
+        tmplabel = new JLabel("产品生产数量");
+        panel4.add(tmplabel);
+        panel4.add(number);
+
+        tmplabel = new JLabel("备注");
+        panel4.add(tmplabel);
+        panel4.add(comment);
+
+        confirm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (scheduleid.getText() == "") {
+                    JOptionPane.showMessageDialog(null, "请输入生产编号", "警告", JOptionPane.WARNING_MESSAGE);
+                } else if (goodsid.getText() == "") {
+                    JOptionPane.showMessageDialog(null, "请生成生产产品", "警告", JOptionPane.WARNING_MESSAGE);
+                } else if (number.getText() == "") {
+                    JOptionPane.showMessageDialog(null, "请选择生产数量", "警告", JOptionPane.WARNING_MESSAGE);
+                } else if ((Integer.parseInt(number.getText())) <= 0) {
+                    JOptionPane.showMessageDialog(null, "请输入正确的生产数量", "警告", JOptionPane.WARNING_MESSAGE);
+                } else {
+
+                    ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
+                    boolean flag = handler.isExited(scheduleid.getText());
+                    if(flag==false){
+                        Schedule tmp = new Schedule(scheduleid.getText(),goodsid.getText(),(Integer.parseInt(number.getText())),comment.getText(),"false");
+                        handler.addSchedule(tmp);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "生产计划编号已存在，请重新输入", "警告", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            }
+
+        });confirm.setText("执行");
+        panel4.add(confirm);
+*/
+
+
 
         panel3.add(tit);
         panel3.add(orderid);
@@ -151,7 +228,7 @@ class ScheduleDeptFramePanel extends JPanel {
         panel.add(panel2);
 
         panel.add(panel3);
-
+        //panel.add(panel4);
         return panel;
     }
 

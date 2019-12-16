@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 16/12/2019 15:25:33
+ Date: 16/12/2019 16:34:19
 */
 
 SET NAMES utf8mb4;
@@ -302,9 +302,12 @@ INSERT INTO `tb_sales` VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12
 INSERT INTO `tb_sales` VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13:10:22', 'admin', 123131, 1477580, '', '4', '预定', 'true');
 INSERT INTO `tb_sales` VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '现货', 'true');
 INSERT INTO `tb_sales` VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定', 'false');
-INSERT INTO `tb_sales` VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 10, 1477340, '', '4', '预定', 'false');
-INSERT INTO `tb_sales` VALUES ('SI20191214202114', '3', '现金', '2019-12-14 20:21:14', '', 11, 132, '无', '4', '预定', 'false');
-INSERT INTO `tb_sales` VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货', 'true');
+INSERT INTO `tb_sales`
+VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 10, 1477340, '', '4', '预定', 'true');
+INSERT INTO `tb_sales`
+VALUES ('SI20191214202114', '3', '现金', '2019-12-14 20:21:14', '', 11, 132, '无', '4', '预定', 'true');
+INSERT INTO `tb_sales`
+VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货', 'false');
 
 -- ----------------------------
 -- Table structure for tb_salesback
@@ -353,8 +356,8 @@ CREATE TABLE `tb_schedule`  (
 -- ----------------------------
 -- Records of tb_schedule
 -- ----------------------------
-INSERT INTO `tb_schedule` VALUES ('SI20191214132101', '5', 2023, '预定新订单库存补足', 'false');
-INSERT INTO `tb_schedule` VALUES ('SI20191214215854', '3', 29, '成品出库导致库存低于阈值', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214132234', '4', 30, '预定新订单库存补足', 'false');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
@@ -376,7 +379,8 @@ INSERT INTO `tb_storagecheck` VALUES (1, '3', 1);
 INSERT INTO `tb_storagecheck` VALUES (2, '1', 3);
 INSERT INTO `tb_storagecheck` VALUES (3, '5', 6);
 INSERT INTO `tb_storagecheck` VALUES (4, '2', 5);
-INSERT INTO `tb_storagecheck` VALUES (5, '4', 1);
+INSERT INTO `tb_storagecheck`
+VALUES (5, '4', 10);
 
 -- ----------------------------
 -- Procedure structure for pr_getAllCustomer
@@ -712,9 +716,8 @@ CREATE DEFINER = `root`@`localhost` TRIGGER `deal` AFTER UPDATE ON `tb_sales` FO
 			INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
 			VALUES
 				(orderid, goodsid, aim ,STR) ;
-		END IF;
-		
-		
+
+    else
 		SET tmp1 = (select (number) from tb_storagecheck WHERE tb_storagecheck.goodsid=goodsid);
 		set tmp1 = tmp1-num;
 			if tmp1<minnum
@@ -729,8 +732,8 @@ CREATE DEFINER = `root`@`localhost` TRIGGER `deal` AFTER UPDATE ON `tb_sales` FO
 			set number = tmp1
 			where tb_storagecheck.goodsid=goodsid;
 			end if;
-			
-	
+
+    END IF;
 		END IF;
 		
 	

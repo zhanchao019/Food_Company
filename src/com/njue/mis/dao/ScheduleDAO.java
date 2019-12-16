@@ -1,5 +1,6 @@
 package com.njue.mis.dao;
 
+import com.njue.mis.Connect.ConnectionBuilder;
 import com.njue.mis.common.Constants;
 import com.njue.mis.common.ErrorManager;
 import com.njue.mis.model.Schedule;
@@ -109,10 +110,11 @@ public class ScheduleDAO extends ManagerDAO {
     public boolean delSchedule(String scheduleid) {
         boolean result = false;
         try {
-            String sql = "delete from tb_schedule where schedule = ?";
-            //       String sql = "insert into tb_schedule(scheduleid,goodsid,sum,comment,state) values(?,?,?,?,?)";
-            Object[] params = new Object[]{scheduleid};
-            result = super.add(sql, params);
+            String sql = "delete from tb_schedule where scheduleid ='" + scheduleid + "'";
+            ConnectionBuilder cb = new ConnectionBuilder(sql, 0);
+            cb.pst.execute();
+
+
         } catch (Exception e) {
             ErrorManager.printError("ScheduleDAO.delSchedule", e);
             return false;
@@ -127,7 +129,24 @@ public class ScheduleDAO extends ManagerDAO {
      * @param id
      * @return
      */
+    /**
+     * 判断记录是否存在
+     *
+     * @param id 记录编号
+     * @return 查询结果
+     */
     public boolean isExited(String id) {
-        return super.isExited("tb_schedule", id);
+        boolean result = false;
+        try {
+            String sql = "select * from tb_schedule where scheduleid=?";
+            Object[] params = new Object[]{id};
+            ResultSet rs = manager.executeQuery(sql, params, Constants.PSTM_TYPE);
+            if (rs.next())
+                result = true;
+            manager.closeDB();
+        } catch (Exception e) {
+            ErrorManager.printError("ScheduleDAO.isExited", e);
+        }
+        return result;
     }
 }
