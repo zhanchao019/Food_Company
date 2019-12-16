@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 16/12/2019 16:34:19
+ Date: 17/12/2019 01:56:59
 */
 
 SET NAMES utf8mb4;
@@ -220,6 +220,75 @@ INSERT INTO `tb_outport` VALUES ('3', '1', '3', '2016-12-25 23:00:29', '3', 3, 3
 INSERT INTO `tb_outport` VALUES ('PO20190227094232', '1', '现金', '2019-02-27 09:42:32', 'admin', 1, 23, 'ds速度', '3');
 
 -- ----------------------------
+-- Table structure for tb_producing
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_producing`;
+CREATE TABLE `tb_producing`
+(
+  `goodsid`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `scheduleid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `sum`        int(32)                                                 NULL DEFAULT NULL,
+  `finished`   int(32)                                                 NULL DEFAULT NULL,
+  `unfinished` int(32)                                                 NULL DEFAULT NULL
+) ENGINE = InnoDB
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci
+  ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_producing
+-- ----------------------------
+INSERT INTO `tb_producing`
+VALUES ('1', 'SI20191213012059', 28, 0, 28);
+
+-- ----------------------------
+-- Table structure for tb_producingdetail
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_producingdetail`;
+CREATE TABLE `tb_producingdetail`
+(
+  `scheduleid`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `goodsid`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `pici`            varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `producinglineid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `num`             int(32)                                                 NULL DEFAULT NULL,
+  `producedate`     datetime(0)                                             NULL DEFAULT NULL,
+  `state`           varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci
+  ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_producingline
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_producingline`;
+CREATE TABLE `tb_producingline`
+(
+  `producinglineid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`producinglineid`) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci
+  ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_producingline
+-- ----------------------------
+INSERT INTO `tb_producingline`
+VALUES ('1');
+INSERT INTO `tb_producingline`
+VALUES ('2');
+INSERT INTO `tb_producingline`
+VALUES ('3');
+INSERT INTO `tb_producingline`
+VALUES ('4');
+INSERT INTO `tb_producingline`
+VALUES ('5');
+INSERT INTO `tb_producingline`
+VALUES ('6');
+
+-- ----------------------------
 -- Table structure for tb_provider
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_provider`;
@@ -301,13 +370,14 @@ INSERT INTO `tb_sales` VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01
 INSERT INTO `tb_sales` VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12:09:01', '', 3, 6, '应该时2*3', '1', '现货', 'true');
 INSERT INTO `tb_sales` VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13:10:22', 'admin', 123131, 1477580, '', '4', '预定', 'true');
 INSERT INTO `tb_sales` VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '现货', 'true');
-INSERT INTO `tb_sales` VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定', 'false');
+INSERT INTO `tb_sales`
+VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定', 'true');
 INSERT INTO `tb_sales`
 VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 10, 1477340, '', '4', '预定', 'true');
 INSERT INTO `tb_sales`
 VALUES ('SI20191214202114', '3', '现金', '2019-12-14 20:21:14', '', 11, 132, '无', '4', '预定', 'true');
 INSERT INTO `tb_sales`
-VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货', 'false');
+VALUES ('SI20191214215854', '1', '银行卡', '2019-12-14 21:58:54', 'sale', 123, 3075, '12312', '3', '现货', 'true');
 
 -- ----------------------------
 -- Table structure for tb_salesback
@@ -357,7 +427,17 @@ CREATE TABLE `tb_schedule`  (
 -- Records of tb_schedule
 -- ----------------------------
 INSERT INTO `tb_schedule`
-VALUES ('SI20191214132234', '4', 30, '预定新订单库存补足', 'false');
+VALUES ('SI20191214132101', '5', 2023, '预定新订单库存补足', 'true');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214132101', '5', 2023, '预定新订单库存补足', 'true');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214215854', '3', 152, '成品出库导致库存低于阈值', 'true');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191213012059', '1', 28, '成品出库导致库存低于阈值', 'true');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191213012059', '1', 29, '成品出库导致库存低于阈值', 'true');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191213012322', '5', 25, '成品出库导致库存低于阈值', 'false');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
@@ -375,9 +455,12 @@ CREATE TABLE `tb_storagecheck`  (
 -- ----------------------------
 -- Records of tb_storagecheck
 -- ----------------------------
-INSERT INTO `tb_storagecheck` VALUES (1, '3', 1);
-INSERT INTO `tb_storagecheck` VALUES (2, '1', 3);
-INSERT INTO `tb_storagecheck` VALUES (3, '5', 6);
+INSERT INTO `tb_storagecheck`
+VALUES (1, '3', -122);
+INSERT INTO `tb_storagecheck`
+VALUES (2, '1', 1);
+INSERT INTO `tb_storagecheck`
+VALUES (3, '5', 5);
 INSERT INTO `tb_storagecheck` VALUES (4, '2', 5);
 INSERT INTO `tb_storagecheck`
 VALUES (5, '4', 10);
@@ -610,7 +693,7 @@ DROP PROCEDURE IF EXISTS `pr_searchSchedule`;
 delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_searchSchedule`(in ky varchar(50),in val varchar(50) )
 BEGIN
-	set @state = CONCAT(' select * from (tb_sales) where tb_schedule.',ky," = \'",val,"\' ");
+  set @state = CONCAT(' select * from (tb_schedule) where tb_schedule.', ky, " = \'", val, "\' ");
 	PREPARE tmp from @state;
 	EXECUTE tmp ;
 END

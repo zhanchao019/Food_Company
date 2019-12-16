@@ -44,7 +44,6 @@ public class Producing {
         switch (columnNumber) {
             case 0:
                 return getScheduleid();
-
             case 1:
                 return getGoodsid();
             case 2: {

@@ -125,6 +125,7 @@ public class MainFrame extends JFrame
         menuBar.add(menu);
         menuItem = new JMenuItem("生产车间");
         menuItem.addActionListener(MainAction.clickProducingInfoManager());
+		menu.add(menuItem);
 
 
 

@@ -1,33 +1,26 @@
 package com.njue.mis.view;
 
-import com.njue.mis.common.CommonFactory;
-import com.njue.mis.common.RandomBuilder;
-import com.njue.mis.handler.ScheduleServicesHandler;
-import com.njue.mis.model.Schedule;
+import com.njue.mis.model.Producing;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class ProducingDeptFrame extends JInternalFrame {
-
     public ProducingDeptFrame() {
-        super("生产计划", true, true, true, true);
+        super("生产车间", true, true, true, true);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setBounds(0, 0, screenSize.width * 2 / 3,
                 screenSize.height * 2 / 3);
-        this.setContentPane(new ScheduleDeptFramePanel());
+        this.setContentPane(new ProducingDeptFramePanel());
     }
 }
 
 
 class ProducingDeptFramePanel extends JPanel {
-    public boolean flag = false;
     JTable table;
     MyTableModel tableModel;
     JComboBox comboBox;
@@ -35,10 +28,11 @@ class ProducingDeptFramePanel extends JPanel {
     JCheckBox checkBox;
     JTextField textField_starttime;
     JTextField textField_endtime;
-    JButton del = new JButton("删除生产计划");
+    JLabel goods_id = new JLabel("");
+    boolean flag = false;
+
     float sum = 0;
     String paystate = "";
-
     public ProducingDeptFramePanel() {
         super(new BorderLayout());
         tableModel = new MyTableModel();
@@ -63,7 +57,7 @@ class ProducingDeptFramePanel extends JPanel {
         panel.setLayout(new GridLayout(2, 1));
         JPanel panel2 = new JPanel(new FlowLayout());
         JPanel panel3 = new JPanel(new FlowLayout());
-        JLabel orderid = new JLabel("请在查询结果中选择相应的生产计划");
+        JLabel orderid = new JLabel("请在查询结果中选择相应的订单");
         JButton pay = new JButton();
         JLabel lable = new JLabel("请选择查询条件：");
         panel2.add(lable);
@@ -74,195 +68,87 @@ class ProducingDeptFramePanel extends JPanel {
                 ListSelectionModel model = (ListSelectionModel) e.getSource();
                 int index = model.getMaxSelectionIndex();
                 // System.out.println(table.getValueAt(index, 0).toString());
-                orderid.setText(table.getValueAt(index, 0).toString());
-                sum = Integer.parseInt(table.getValueAt(index, 2).toString());
-                paystate = table.getValueAt(index, 4).toString();//get pay state
-                System.out.println(paystate);
+                orderid.setText(table.getValueAt(index, 1).toString());
+                sum = Integer.parseInt(table.getValueAt(index, 4).toString());
+                goods_id.setText(table.getValueAt(index, 0).toString());
+
+
                 tit.setText("你选择的生产计划是");
                 //   goodsField.setText(goodsTable.getValueAt(index, 0).toString());
                 // goodsPrices=Double.valueOf(goodsTable.getValueAt(index, 8).toString());
             }
         });
 
-        comboBox = new JComboBox();
-        comboBox.addItem("生产计划编号");
-        comboBox.addItem("产品编号");
-        comboBox.setSelectedIndex(0);
-        panel2.add(comboBox);
 
-        textField = new JTextField();
-        textField.setColumns(13);
-        textField.setText("");
-        panel2.add(textField);
 
-        JButton button = new JButton();
-        button.setText("查询");
-        pay.setText("执行生产计划");
-        button.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("你查个锤锤");
-                String field = comboBox.getSelectedItem().toString();
-                String value = textField.getText();
-                if (value == null || value.length() == 0) {
-                    JOptionPane.showMessageDialog(null, "请输入搜索的值", "警告", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
-                    Vector<Schedule> schedulesVector = handler.searchSchedule(getValue(field), value);
-                    if (schedulesVector.size() == 0) {
-                        JOptionPane.showMessageDialog(null, "没有满足你条件的生产计划", "警告", JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        tableModel.updateData(schedulesVector);
-                    }
-                }
-            }
-        });
-        panel2.add(button);
 
 
         JButton button1 = new JButton();
         button1.setText("显示全部信息");
-        button1.addActionListener(new ActionListener() {
+      /*  button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
-                Vector<Schedule> scheduleVector = handler.getAllSchedule();
                 flag = true;
-                if (scheduleVector.size() == 0) {
-                    JOptionPane.showMessageDialog(null, "当前没有任何生产计划", "警告", JOptionPane.WARNING_MESSAGE);
+                SalesInServicesHandler handler = CommonFactory.getSalesInServices();
+                Vector<SalesIn> salesInVector = handler.getAllSalesIn();
+                if (salesInVector.size() == 0) {
+                    JOptionPane.showMessageDialog(null, "当前没有任何销售记录", "警告", JOptionPane.WARNING_MESSAGE);
                 }
-
-                tableModel.updateData(scheduleVector);
+                tableModel.updateData(salesInVector);
             }
-        });
-        panel2.add(button1);
+        });*/
 
-
-        panel3 = new JPanel();//选择支付页面
-        pay.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (tit.getText() == "") {
-                    JOptionPane.showMessageDialog(null, "请选择一个生产计划", "警告", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    //System.out.println(paystate + "|");
-                    if (paystate != "true") {
-
-                        ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
-                        handler.opt(orderid.getText());
-                        JOptionPane.showMessageDialog(null, "生产计划" + orderid.getText() + "已经进入生产部门执行", "警告", JOptionPane.WARNING_MESSAGE);
-                        //handler.getAllSchedule();handler.getAllSchedule();//刷新
-                    } else {
-
-                        JOptionPane.showMessageDialog(null, "此计划已经进入生产部门执行", "警告", JOptionPane.WARNING_MESSAGE);
-                    }
-                }
-            }
-        });
         JButton refresh = new JButton("刷新页面");
-        refresh.addActionListener(new ActionListener() {
+    /*    refresh.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                if (flag == false) ;
-                else {
-                    ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
-                    Vector<Schedule> scheduleVector = handler.getAllSchedule();
-                    if (scheduleVector.size() == 0) {
-                        JOptionPane.showMessageDialog(null, "当前没有任何生产计划", "警告", JOptionPane.WARNING_MESSAGE);
+                if (flag == true) {
+                    SalesInServicesHandler handler = CommonFactory.getSalesInServices();
+                    Vector<SalesIn> salesInVector = handler.getAllSalesIn();
+                    if (salesInVector.size() == 0) {
+                        JOptionPane.showMessageDialog(null, "当前没有任何销售记录", "警告", JOptionPane.WARNING_MESSAGE);
                     }
-                    tableModel.updateData(scheduleVector);
+                    tableModel.updateData(salesInVector);
                 }
             }
-        });
+        });*/
 
+        JButton producingstate = new JButton("流水线状态");
+
+
+        panel2.add(button1);
         panel2.add(refresh);
-        del.addActionListener(new ActionListener() {
+        panel2.add(producingstate);
+        panel3 = new JPanel();//选择支付页面
+   /*     pay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (tit.getText() == "") {
-                    JOptionPane.showMessageDialog(null, "请选择一个生产计划", "警告", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "请选择一个销售记录", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    //System.out.println(paystate + "|");
+                    System.out.println(paystate + "|");
                     if (paystate != "true") {
 
-                        ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
-                        handler.delSchedule(orderid.getText());
+                        SalesInServicesHandler handler = CommonFactory.getSalesInServices();
+                        handler.pay(orderid.getText());
+                        JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "以成功缴费", "警告", JOptionPane.WARNING_MESSAGE);
+
                     } else {
-                        JOptionPane.showMessageDialog(null, "此计划已经进入生产部门执行,无法进行取消", "警告", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "此订单已经缴费", "警告", JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }
         });
-        del.setText("取消生产计划");
+*/
+        pay.setText("生产");
 
-        //添加手动添加生产计划的设置
-        //JPanel panel4 = new JPanel();
-        JTextField scheduleid = new JTextField();
-        scheduleid.setColumns(13);
-        JTextField goodsid = new JTextField();
-        goodsid.setColumns(13);
-        JTextField number = new JTextField();
-        number.setColumns(13);
-        JTextField comment = new JTextField();
-        comment.setColumns(13);
-        JLabel tmplabel = new JLabel();
-        JButton confirm = new JButton();
-        confirm.setText("确认添加");
-        tmplabel.setText("生产计划编号");
-        panel3.add(tmplabel);
-        panel3.add(scheduleid);
-        scheduleid.setText("SI" + new RandomBuilder(10).getRandomString());
-        tmplabel = new JLabel("产品id");
-        panel3.add(tmplabel);
-        panel3.add(goodsid);
-
-        tmplabel = new JLabel("产品生产数量");
-        panel3.add(tmplabel);
-        panel3.add(number);
-
-        tmplabel = new JLabel("备注");
-        panel3.add(tmplabel);
-        panel3.add(comment);
-
-        confirm.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    if (scheduleid.getText() == "") {
-                        JOptionPane.showMessageDialog(null, "请输入生产编号", "警告", JOptionPane.WARNING_MESSAGE);
-                    } else if (goodsid.getText() == "") {
-                        JOptionPane.showMessageDialog(null, "请生成生产产品", "警告", JOptionPane.WARNING_MESSAGE);
-                    } else if (number.getText() == "") {
-                        JOptionPane.showMessageDialog(null, "请选择生产数量", "警告", JOptionPane.WARNING_MESSAGE);
-                    } else if ((Integer.parseInt(number.getText())) <= 0) {
-                        JOptionPane.showMessageDialog(null, "请输入正确的生产数量", "警告", JOptionPane.WARNING_MESSAGE);
-                    } else {
-
-                        ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
-                        boolean flag = handler.isExited(scheduleid.getText());
-                        if (flag == false) {
-                            Schedule tmp = new Schedule(scheduleid.getText(), goodsid.getText(), (Integer.parseInt(number.getText())), comment.getText(), "false");
-                            handler.addSchedule(tmp);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "生产计划编号已存在，请重新输入", "警告", JOptionPane.WARNING_MESSAGE);
-                        }
-                    }
-                } catch (Exception f) {
-                    JOptionPane.showMessageDialog(null, "输入信息不正确，请重新输入", "警告", JOptionPane.WARNING_MESSAGE);
-                }
-            }
-
-        });//confirm.setText("");
-        panel3.add(confirm);
-
-
-        panel2.add(tit);
-        panel2.add(orderid);
-        panel2.add(pay);
-        panel2.add(del);
+        panel3.add(tit);
+        panel3.add(orderid);
+        panel3.add(pay);
 
         panel.add(panel2);
 
         panel.add(panel3);
-        //panel.add(panel4);
+
         return panel;
     }
 
@@ -271,21 +157,21 @@ class ProducingDeptFramePanel extends JPanel {
             return "scheduleid";
         } else if (field.equals("产品编号")) {
             return "goodsid";
-        } else if (field.equals("数量")) {
+        } else if (field.equals("产品总数")) {
             return "sum";
-        } else if (field.equals("生产计划状态")) {
-            return "state";
-        } else if (field.equals("生产计划状态")) {
-            return "comment";
-        } else return "";
+        } else if (field.equals("产品未完成数")) {
+            return "unfinished";
+        } else {
+            return "";
+        }
     }
 
     class MyTableModel extends AbstractTableModel {
-        Vector<Schedule> scheduleVector = new Vector<Schedule>();
+        Vector<Producing> producingVector = new Vector<Producing>();
 
         private String[] columnNames =
                 {
-                        "生产计划编号", "产品编号", "数量", "备注", "生产计划状态"
+                        "生产计划编号", "产品编号", "产品总数", "产品已完成数", "产品未完成数"
                 };
 
         public int getColumnCount() {
@@ -293,7 +179,7 @@ class ProducingDeptFramePanel extends JPanel {
         }
 
         public int getRowCount() {
-            return scheduleVector.size();
+            return producingVector.size();
         }
 
         public String getColumnName(int col) {
@@ -301,8 +187,8 @@ class ProducingDeptFramePanel extends JPanel {
         }
 
         public Object getValueAt(int row, int col) {
-            Schedule schedule = scheduleVector.get(row);
-            return schedule.getScheduleValue(col);
+            Producing producing = producingVector.get(row);
+            return producing.getProducingValue(col);
         }
 
         @SuppressWarnings("unchecked")
@@ -315,12 +201,12 @@ class ProducingDeptFramePanel extends JPanel {
         }
 
         //更新数据
-        public void updateData(Vector<Schedule> scheduleVector) {
-            this.scheduleVector = scheduleVector;
-            if (scheduleVector.size() == 0) {
-                scheduleVector = new Vector<Schedule>();
+        public void updateData(Vector<Producing> producingsVector) {
+            this.producingVector = producingsVector;
+            if (producingVector.size() == 0) {
+                producingVector = new Vector<Producing>();
             } else {
-                fireTableRowsInserted(0, scheduleVector.size() - 1);
+                fireTableRowsInserted(0, producingVector.size() - 1);
             }
         }
 
