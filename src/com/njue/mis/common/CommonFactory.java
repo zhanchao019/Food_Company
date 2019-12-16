@@ -11,6 +11,20 @@ public class CommonFactory
 	 * 获取ScheduleService类的对象
 	 * @return ScheduleService类的对象
 	 */
+	public static ProducingServicesHandeler getProducingServices() {
+		try {
+			return (ProducingServicesHandeler) Class.forName(Constants.PRODUCING_SERVICES_CLASS).newInstance();
+		} catch (Exception e) {
+			ErrorManager.printError("CommontFactory.getProducingServices", e);
+		}
+		return null;
+	}
+
+	/**
+	 * 获取ScheduleService类的对象
+	 *
+	 * @return ScheduleService类的对象
+	 */
 	public static ScheduleServicesHandler getScheduleServices() {
 		try {
 			return (ScheduleServicesHandler) Class.forName(Constants.SCHEDULE_SERVICES_CLASS).newInstance();

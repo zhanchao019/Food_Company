@@ -1,5 +1,7 @@
 package com.njue.mis.view;
 
+import com.njue.mis.common.CommonFactory;
+import com.njue.mis.handler.ProducingServicesHandeler;
 import com.njue.mis.model.Producing;
 
 import javax.swing.*;
@@ -7,6 +9,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class ProducingDeptFrame extends JInternalFrame {
@@ -85,17 +89,17 @@ class ProducingDeptFramePanel extends JPanel {
 
         JButton button1 = new JButton();
         button1.setText("显示全部信息");
-      /*  button1.addActionListener(new ActionListener() {
+        button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 flag = true;
-                SalesInServicesHandler handler = CommonFactory.getSalesInServices();
-                Vector<SalesIn> salesInVector = handler.getAllSalesIn();
-                if (salesInVector.size() == 0) {
-                    JOptionPane.showMessageDialog(null, "当前没有任何销售记录", "警告", JOptionPane.WARNING_MESSAGE);
+                ProducingServicesHandeler handler = CommonFactory.getProducingServices();
+                Vector<Producing> producingsInVector = handler.getAllSchedule();
+                if (producingsInVector.size() == 0) {
+                    JOptionPane.showMessageDialog(null, "当前没有任何生产计划", "警告", JOptionPane.WARNING_MESSAGE);
                 }
-                tableModel.updateData(salesInVector);
+                tableModel.updateData(producingsInVector);
             }
-        });*/
+        });
 
         JButton refresh = new JButton("刷新页面");
     /*    refresh.addActionListener(new ActionListener() {
@@ -119,7 +123,8 @@ class ProducingDeptFramePanel extends JPanel {
         panel2.add(refresh);
         panel2.add(producingstate);
         panel3 = new JPanel();//选择支付页面
-   /*     pay.addActionListener(new ActionListener() {
+
+       /* pay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (tit.getText() == "") {
@@ -209,6 +214,7 @@ class ProducingDeptFramePanel extends JPanel {
                 fireTableRowsInserted(0, producingVector.size() - 1);
             }
         }
+
 
     }
 }

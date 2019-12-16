@@ -5,6 +5,27 @@ public class Producing {
     int sum, finished, unfinished;
     String pici;
     String producinglineid;
+
+    public Producing(String scheduleid, String goodsid, int sum, int finished, int unfinished, String pici, String producinglineid, String productiondate, String state) {
+        this.scheduleid = scheduleid;
+        this.goodsid = goodsid;
+        this.sum = sum;
+        this.finished = finished;
+        this.unfinished = unfinished;
+        this.pici = pici;
+        this.producinglineid = producinglineid;
+        this.productiondate = productiondate;
+        this.state = state;
+    }
+
+    public Producing(String scheduleid, String goodsid, int sum, int finished, int unfinished) {
+        this.scheduleid = scheduleid;
+        this.goodsid = goodsid;
+        this.sum = sum;
+        this.finished = finished;
+        this.unfinished = unfinished;
+    }
+
     String productiondate;
     String state;
 
