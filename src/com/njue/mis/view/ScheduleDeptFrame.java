@@ -86,12 +86,13 @@ class ScheduleDeptFramePanel extends JPanel {
 
         comboBox = new JComboBox();
         comboBox.addItem("生产计划编号");
-        comboBox.addItem("产品名称");
+        comboBox.addItem("产品编号");
         comboBox.setSelectedIndex(0);
         panel2.add(comboBox);
 
         textField = new JTextField();
         textField.setColumns(13);
+        textField.setText("");
         panel2.add(textField);
 
         JButton button = new JButton();
@@ -103,10 +104,16 @@ class ScheduleDeptFramePanel extends JPanel {
                 System.out.println("你查个锤锤");
                 String field = comboBox.getSelectedItem().toString();
                 String value = textField.getText();
-                if (checkBox.isSelected()) {
-
+                if (value == null || value.length() == 0) {
+                    JOptionPane.showMessageDialog(null, "请输入搜索的值", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
-
+                    ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
+                    Vector<Schedule> schedulesVector = handler.searchSchedule(getValue(field), value);
+                    if (schedulesVector.size() == 0) {
+                        JOptionPane.showMessageDialog(null, "没有满足你条件的生产计划", "警告", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        tableModel.updateData(schedulesVector);
+                    }
                 }
             }
         });
@@ -218,25 +225,28 @@ class ScheduleDeptFramePanel extends JPanel {
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (scheduleid.getText() == "") {
-                    JOptionPane.showMessageDialog(null, "请输入生产编号", "警告", JOptionPane.WARNING_MESSAGE);
-                } else if (goodsid.getText() == "") {
-                    JOptionPane.showMessageDialog(null, "请生成生产产品", "警告", JOptionPane.WARNING_MESSAGE);
-                } else if (number.getText() == "") {
-                    JOptionPane.showMessageDialog(null, "请选择生产数量", "警告", JOptionPane.WARNING_MESSAGE);
-                } else if ((Integer.parseInt(number.getText())) <= 0) {
-                    JOptionPane.showMessageDialog(null, "请输入正确的生产数量", "警告", JOptionPane.WARNING_MESSAGE);
-                } else {
+                try {
+                    if (scheduleid.getText() == "") {
+                        JOptionPane.showMessageDialog(null, "请输入生产编号", "警告", JOptionPane.WARNING_MESSAGE);
+                    } else if (goodsid.getText() == "") {
+                        JOptionPane.showMessageDialog(null, "请生成生产产品", "警告", JOptionPane.WARNING_MESSAGE);
+                    } else if (number.getText() == "") {
+                        JOptionPane.showMessageDialog(null, "请选择生产数量", "警告", JOptionPane.WARNING_MESSAGE);
+                    } else if ((Integer.parseInt(number.getText())) <= 0) {
+                        JOptionPane.showMessageDialog(null, "请输入正确的生产数量", "警告", JOptionPane.WARNING_MESSAGE);
+                    } else {
 
-                    ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
-                    boolean flag = handler.isExited(scheduleid.getText());
-                    if(flag==false){
-                        Schedule tmp = new Schedule(scheduleid.getText(),goodsid.getText(),(Integer.parseInt(number.getText())),comment.getText(),"false");
-                        handler.addSchedule(tmp);
+                        ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
+                        boolean flag = handler.isExited(scheduleid.getText());
+                        if(flag==false){
+                            Schedule tmp = new Schedule(scheduleid.getText(),goodsid.getText(),(Integer.parseInt(number.getText())),comment.getText(),"false");
+                            handler.addSchedule(tmp);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "生产计划编号已存在，请重新输入", "警告", JOptionPane.WARNING_MESSAGE);
+                        }
                     }
-                    else {
-                        JOptionPane.showMessageDialog(null, "生产计划编号已存在，请重新输入", "警告", JOptionPane.WARNING_MESSAGE);
-                    }
+                } catch (Exception f) {
+                    JOptionPane.showMessageDialog(null, "输入信息不正确，请重新输入", "警告", JOptionPane.WARNING_MESSAGE);
                 }
             }
 
@@ -265,9 +275,9 @@ class ScheduleDeptFramePanel extends JPanel {
             return "sum";
         } else if (field.equals("生产计划状态")) {
             return "state";
-        } else {
+        } else if (field.equals("生产计划状态")) {
             return "comment";
-        }
+        } else return "";
     }
 
     class MyTableModel extends AbstractTableModel {
