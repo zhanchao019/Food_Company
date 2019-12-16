@@ -35,6 +35,7 @@ class CounterDeptFramePanel extends JPanel {
     JCheckBox checkBox;
     JTextField textField_starttime;
     JTextField textField_endtime;
+    boolean flag = false;
 
     float sum = 0;
     String paystate = "";
@@ -182,6 +183,7 @@ class CounterDeptFramePanel extends JPanel {
         button1.setText("显示全部信息");
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                flag = true;
                 SalesInServicesHandler handler = CommonFactory.getSalesInServices();
                 Vector<SalesIn> salesInVector = handler.getAllSalesIn();
                 if (salesInVector.size() == 0) {
@@ -190,8 +192,23 @@ class CounterDeptFramePanel extends JPanel {
                 tableModel.updateData(salesInVector);
             }
         });
-        panel2.add(button1);
 
+        JButton refresh = new JButton("刷新页面");
+        refresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (flag == true) {
+                    SalesInServicesHandler handler = CommonFactory.getSalesInServices();
+                    Vector<SalesIn> salesInVector = handler.getAllSalesIn();
+                    if (salesInVector.size() == 0) {
+                        JOptionPane.showMessageDialog(null, "当前没有任何销售记录", "警告", JOptionPane.WARNING_MESSAGE);
+                    }
+                    tableModel.updateData(salesInVector);
+                }
+            }
+        });
+        panel2.add(button1);
+        panel2.add(refresh);
         panel3 = new JPanel();//选择支付页面
         pay.addActionListener(new ActionListener() {
             @Override
@@ -204,6 +221,8 @@ class CounterDeptFramePanel extends JPanel {
 
                         SalesInServicesHandler handler = CommonFactory.getSalesInServices();
                         handler.pay(orderid.getText());
+                        JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "成功缴费", "警告", JOptionPane.WARNING_MESSAGE);
+
                     } else {
                         JOptionPane.showMessageDialog(null, "此订单已经缴费", "警告", JOptionPane.WARNING_MESSAGE);
                     }
