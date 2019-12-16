@@ -66,9 +66,8 @@ BEGIN
 			INSERT INTO tb_schedule ( `scheduleid`, `goodsid`, `sum`,`comment` )
 			VALUES
 				(orderid, goodsid, aim ,STR) ;
-		END IF;
 
-
+		else
 		SET tmp1 = (select (number) from tb_storagecheck WHERE tb_storagecheck.goodsid=goodsid);
 		set tmp1 = tmp1-num;
 			if tmp1<minnum
@@ -84,7 +83,7 @@ BEGIN
 			where tb_storagecheck.goodsid=goodsid;
 			end if;
 
-
+		END IF;
 		END IF;
 
 
