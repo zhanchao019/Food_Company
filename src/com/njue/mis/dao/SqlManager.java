@@ -53,7 +53,7 @@ public class SqlManager
 				{ // 设置mysql数据库的驱动程序和连接字符
 					jdbcDrive = "com.mysql.jdbc.Driver";
 					strcon = "jdbc:mysql://" + DBhost + ":" + DBprot + "/"
-							+ DBname;
+							+ DBname + "useUnicode=true&characterEncoding=utf8";
 				}
 				else
 					if (databese_type.toLowerCase().equals("oracle"))

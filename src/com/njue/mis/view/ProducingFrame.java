@@ -90,7 +90,7 @@ class ProducingFramePanel extends JPanel {
         panel.add(title);
         JPanel panel2 = new JPanel(new FlowLayout());
         JPanel panel3 = new JPanel(new FlowLayout());
-        JLabel orderid = new JLabel("请在查询结果中选择相应的订单");
+        JLabel orderid = new JLabel("请在查询结果中选择相应的流水线");
         JButton pay = new JButton();
         JLabel lable = new JLabel("");
 
@@ -159,7 +159,7 @@ class ProducingFramePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 // System.out.println(textField.getText().length());
-                if (orderid.getText() == "") {
+                if (orderid.getText() == "请在查询结果中选择相应的流水线") {
                     JOptionPane.showMessageDialog(null, "请选择一个流水线", "警告", JOptionPane.WARNING_MESSAGE);
                 } else if (textField.getText().length() == 0) {
                     JOptionPane.showMessageDialog(null, "请输入生产数量", "警告", JOptionPane.WARNING_MESSAGE);

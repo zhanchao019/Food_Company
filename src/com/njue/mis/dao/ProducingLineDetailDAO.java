@@ -61,18 +61,33 @@ public class ProducingLineDetailDAO extends ManagerDAO {
      * @param pici 批次号
      * @return 执行结果
      */
-    public boolean finish(String pici) {
+    public boolean finish(String pici, String producinglineid) {
         try {
+
+            System.out.println(pici + " " + producinglineid);
 
             boolean tmp;
             String sql = "{call pr_updateProducingLineDetail(?)}";
             Object[] params = new Object[]{
                     pici};
             manager.executeQuery(sql, params, Constants.CALL_TYPE);
+
+
+            String tm = "{call pr_decreaseProducingCount(?)}";
+            Object[] tt = new Object[]{producinglineid};
+            manager.executeQuery(tm, tt, Constants.CALL_TYPE);
+
+            sql = "{call pr_updateProducingScheduleCount(?)}";
+            tt = new Object[]{pici};
+
+            manager.executeQuery(sql, tt, Constants.CALL_TYPE);
+
             sql = "update (tb_producingdetail)" +
                     "set state = 'true'" +
                     "where pici= ?";
             return super.add(sql, params);
+
+
 
         } catch (Exception e) {
             ErrorManager.printError("ProducingLineDetailDAO.finish", e);

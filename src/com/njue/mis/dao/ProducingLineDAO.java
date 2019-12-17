@@ -34,6 +34,9 @@ public class ProducingLineDAO extends ManagerDAO {
         try {
             String sql = "insert into tb_producingdetail(scheduleid,goodsid,pici,producinglineid,num,state) values(?,?,?,?,?,?)";
             Object[] params = new Object[]{scheduleid, goodsid, pici, producinglineid, number, "false"};
+            String tmp = "{call pr_increaseProducingCount(?)}";
+            Object[] tt = new Object[]{producinglineid};
+            manager.executeQuery(tmp, tt, Constants.CALL_TYPE);
             result = super.add(sql, params);
         } catch (Exception e) {
             ErrorManager.printError("ProducingLineDAO.addProducingDetail", e);

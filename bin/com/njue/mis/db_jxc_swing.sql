@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 17/12/2019 20:50:41
+ Date: 17/12/2019 22:39:25
 */
 
 SET NAMES utf8mb4;
@@ -263,7 +263,7 @@ CREATE TABLE `tb_producingdetail`
 -- Records of tb_producingdetail
 -- ----------------------------
 INSERT INTO `tb_producingdetail`
-VALUES ('SI20191213012059', '1', 'CGokEWSCJE', '1', 1, NULL, 'false');
+VALUES ('SI20191213012059', '1', 'CGokEWSCJE', '1', 1, NULL, 'true');
 
 -- ----------------------------
 -- Table structure for tb_producingline
@@ -534,6 +534,19 @@ END
 delimiter ;
 
 -- ----------------------------
+-- Procedure structure for pr_getAllProducingLineDetail
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllProducingLineDetail`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_getAllProducingLineDetail`()
+BEGIN
+  select * from tb_producingdetail;
+END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Procedure structure for pr_getAllProvider
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `pr_getAllProvider`;
@@ -673,6 +686,21 @@ BEGIN
 	set @state = CONCAT(' select * from (tb_outport) where tb_outport.',ky," = \'",val,"\' ");
 	PREPARE tmp from @state;
 	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_searchProducingLineDetail
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_searchProducingLineDetail`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_searchProducingLineDetail`(in ky varchar(50), in val varchar(50))
+BEGIN
+  set @state = CONCAT(' select * from (tb_producingdetail) where tb_producingdetail.', ky, " = \'", val, "\' ");
+  PREPARE tmp from @state;
+  EXECUTE tmp;
 END
 ;;
 delimiter ;

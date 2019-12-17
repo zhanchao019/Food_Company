@@ -50,7 +50,7 @@ public interface ProducingServicesHandeler {
      * @param pici 批次号
      * @return 执行结果
      */
-    boolean finish(String pici);
+    boolean finish(String pici, String producinglineid);
 
 
 }

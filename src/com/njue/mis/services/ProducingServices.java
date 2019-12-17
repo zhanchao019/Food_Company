@@ -77,8 +77,8 @@ public class ProducingServices implements ProducingServicesHandeler {
      * @param pici 批次号
      * @return 执行结果
      */
-    public boolean finish(String pici) {
+    public boolean finish(String pici, String producinglineid) {
         producingLineDetailDAO = new ProducingLineDetailDAO();
-        return producingLineDetailDAO.finish(pici);
+        return producingLineDetailDAO.finish(pici, producinglineid);
     }
 }

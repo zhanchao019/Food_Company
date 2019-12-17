@@ -36,7 +36,7 @@ class ProducingLineFramePanel extends JPanel {
     int sum = 0;
     String state = "";
     String pici = "";
-
+    String line = "";
     public ProducingLineFramePanel() {
         super(new BorderLayout());
         tableModel = new MyTableModel();
@@ -77,6 +77,7 @@ class ProducingLineFramePanel extends JPanel {
                 sum = Integer.parseInt(table.getValueAt(index, 4).toString());
                 state = table.getValueAt(index, 5).toString();//get pay state
                 pici = table.getValueAt(index, 2).toString();
+                line = table.getValueAt(index, 3).toString();
                 state.trim();
                 System.out.println(state);
                 tit.setText("你选择的订单是");
@@ -167,7 +168,7 @@ class ProducingLineFramePanel extends JPanel {
                     if (state.length() != 4) {
 
                         ProducingServicesHandeler handler = CommonFactory.getProducingServices();
-                        handler.finish(pici.trim());
+                        handler.finish(pici.trim(), line);
                         JOptionPane.showMessageDialog(null, "生产任务" + scheduleid.getText() + "已经成功完成", "警告", JOptionPane.WARNING_MESSAGE);
 
                     } else {
