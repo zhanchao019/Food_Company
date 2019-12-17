@@ -63,12 +63,15 @@ public class ProducingLineDetailDAO extends ManagerDAO {
      */
     public boolean finish(String pici) {
         try {
+
             boolean tmp;
-            String sql = "update (tb_producingdetail)" +
-                    "set state = 'true'" +
-                    "where pici= ?";
+            String sql = "{call pr_updateProducingLineDetail(?)}";
             Object[] params = new Object[]{
                     pici};
+            manager.executeQuery(sql, params, Constants.CALL_TYPE);
+            sql = "update (tb_producingdetail)" +
+                    "set state = 'true'" +
+                    "where pici= ?";
             return super.add(sql, params);
 
         } catch (Exception e) {

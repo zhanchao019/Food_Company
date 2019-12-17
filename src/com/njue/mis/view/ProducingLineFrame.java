@@ -162,8 +162,9 @@ class ProducingLineFramePanel extends JPanel {
                 if (scheduleid.getText() == "") {
                     JOptionPane.showMessageDialog(null, "请选择一条生产线信息", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    System.out.println(state + "|");
-                    if (state != "true") {
+                    System.out.println(state.length() + "|");
+                    state = state.trim();
+                    if (state.length() != 4) {
 
                         ProducingServicesHandeler handler = CommonFactory.getProducingServices();
                         handler.finish(pici.trim());
