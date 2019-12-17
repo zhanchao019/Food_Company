@@ -1,8 +1,8 @@
 package com.njue.mis.view;
 
 import com.njue.mis.common.CommonFactory;
-import com.njue.mis.handler.SalesInServicesHandler;
-import com.njue.mis.model.SalesIn;
+import com.njue.mis.handler.ProducingServicesHandeler;
+import com.njue.mis.model.ProducingLineDetail;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -33,13 +33,15 @@ class ProducingLineFramePanel extends JPanel {
 
     boolean flag = false;
 
-    float sum = 0;
-    String paystate = "";
+    int sum = 0;
+    String state = "";
+    String pici = "";
 
     public ProducingLineFramePanel() {
         super(new BorderLayout());
         tableModel = new MyTableModel();
         table = new JTable(tableModel);
+
         JPanel pane = search();
         this.add(pane, BorderLayout.NORTH);
 
@@ -60,7 +62,7 @@ class ProducingLineFramePanel extends JPanel {
         panel.setLayout(new GridLayout(2, 1));
         JPanel panel2 = new JPanel(new FlowLayout());
         JPanel panel3 = new JPanel(new FlowLayout());
-        JLabel orderid = new JLabel("请在查询结果中选择相应的订单");
+        JLabel scheduleid = new JLabel("请在查询结果中选择相应的订单");
         JButton pay = new JButton();
         JLabel lable = new JLabel("请选择查询条件：");
         panel2.add(lable);
@@ -70,12 +72,13 @@ class ProducingLineFramePanel extends JPanel {
             public void valueChanged(ListSelectionEvent e) {
                 ListSelectionModel model = (ListSelectionModel) e.getSource();
                 int index = model.getMaxSelectionIndex();
-                System.out.println(table.getValueAt(index, 0).toString());
-                orderid.setText(table.getValueAt(index, 0).toString());
-                sum = Float.parseFloat(table.getValueAt(index, 5).toString());
-                paystate = table.getValueAt(index, 11).toString();//get pay state
-                paystate.trim();
-                System.out.println(paystate);
+                //     System.out.println(table.getValueAt(index, 0).toString());
+                scheduleid.setText(table.getValueAt(index, 0).toString());
+                sum = Integer.parseInt(table.getValueAt(index, 4).toString());
+                state = table.getValueAt(index, 5).toString();//get pay state
+                pici = table.getValueAt(index, 2).toString();
+                state.trim();
+                System.out.println(state);
                 tit.setText("你选择的订单是");
                 //   goodsField.setText(goodsTable.getValueAt(index, 0).toString());
                 // goodsPrices=Double.valueOf(goodsTable.getValueAt(index, 8).toString());
@@ -106,12 +109,12 @@ class ProducingLineFramePanel extends JPanel {
                 if (value == null || value.length() == 0) {
                     JOptionPane.showMessageDialog(null, "请输入搜索的值", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    SalesInServicesHandler handler = CommonFactory.getSalesInServices();
-                    Vector<SalesIn> salesInVector = handler.searchSalesIn(getValue(field), value);
-                    if (salesInVector.size() == 0) {
-                        JOptionPane.showMessageDialog(null, "没有满足你条件的销售单", "警告", JOptionPane.WARNING_MESSAGE);
+                    ProducingServicesHandeler handler = CommonFactory.getProducingServices();
+                    Vector<ProducingLineDetail> producingLineDetailVector = handler.searchProducingLineDetail(getValue(field), value);
+                    if (producingLineDetailVector.size() == 0) {
+                        JOptionPane.showMessageDialog(null, "没有满足你条件的流水线记录", "警告", JOptionPane.WARNING_MESSAGE);
                     } else {
-                        tableModel.updateData(salesInVector);
+                        tableModel.updateData(producingLineDetailVector);
                     }
 
                 }
@@ -125,12 +128,12 @@ class ProducingLineFramePanel extends JPanel {
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 flag = true;
-                SalesInServicesHandler handler = CommonFactory.getSalesInServices();
-                Vector<SalesIn> salesInVector = handler.getAllSalesIn();
-                if (salesInVector.size() == 0) {
-                    JOptionPane.showMessageDialog(null, "当前没有任何销售记录", "警告", JOptionPane.WARNING_MESSAGE);
+                ProducingServicesHandeler handler = CommonFactory.getProducingServices();
+                Vector<ProducingLineDetail> producingLineDetailVector = handler.getAllProducingLineDetail();
+                if (producingLineDetailVector.size() == 0) {
+                    JOptionPane.showMessageDialog(null, "当前没有任何流水线记录", "警告", JOptionPane.WARNING_MESSAGE);
                 }
-                tableModel.updateData(salesInVector);
+                tableModel.updateData(producingLineDetailVector);
             }
         });
 
@@ -139,42 +142,44 @@ class ProducingLineFramePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (flag == true) {
-                    SalesInServicesHandler handler = CommonFactory.getSalesInServices();
-                    Vector<SalesIn> salesInVector = handler.getAllSalesIn();
-                    if (salesInVector.size() == 0) {
-                        JOptionPane.showMessageDialog(null, "当前没有任何销售记录", "警告", JOptionPane.WARNING_MESSAGE);
+                    ProducingServicesHandeler handler = CommonFactory.getProducingServices();
+                    Vector<ProducingLineDetail> producingLineDetailVector = handler.getAllProducingLineDetail();
+                    if (producingLineDetailVector.size() == 0) {
+                        JOptionPane.showMessageDialog(null, "当前没有任何流水线记录", "警告", JOptionPane.WARNING_MESSAGE);
                     }
-                    tableModel.updateData(salesInVector);
+                    tableModel.updateData(producingLineDetailVector);
                 }
             }
         });
+
+
         panel2.add(button1);
         panel2.add(refresh);
         panel3 = new JPanel();//选择支付页面
         pay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tit.getText() == "") {
-                    JOptionPane.showMessageDialog(null, "请选择一个销售记录", "警告", JOptionPane.WARNING_MESSAGE);
+                if (scheduleid.getText() == "") {
+                    JOptionPane.showMessageDialog(null, "请选择一条生产线信息", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    System.out.println(paystate + "|");
-                    if (paystate != "true") {
+                    System.out.println(state + "|");
+                    if (state != "true") {
 
-                        SalesInServicesHandler handler = CommonFactory.getSalesInServices();
-                        handler.pay(orderid.getText());
-                        JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "以成功缴费", "警告", JOptionPane.WARNING_MESSAGE);
+                        ProducingServicesHandeler handler = CommonFactory.getProducingServices();
+                        handler.finish(pici.trim());
+                        JOptionPane.showMessageDialog(null, "生产任务" + scheduleid.getText() + "已经成功完成", "警告", JOptionPane.WARNING_MESSAGE);
 
                     } else {
-                        JOptionPane.showMessageDialog(null, "此订单已经缴费", "警告", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "此生产任务已经完成", "警告", JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }
         });
 
-        pay.setText("支付");
+        pay.setText("完成此批次");
 
         panel3.add(tit);
-        panel3.add(orderid);
+        panel3.add(scheduleid);
         panel3.add(pay);
 
         panel.add(panel2);
@@ -185,24 +190,29 @@ class ProducingLineFramePanel extends JPanel {
     }
 
     private String getValue(String field) {
-        if (field.equals("销售单号")) {
-            return "id";
-        } else if (field.equals("操作员")) {
-            return "operateperson";
-        } else if (field.equals("客户编号")) {
-            return "customerid";
-        } else {
+        if (field.equals("生产计划编号")) {
+            return "scheduleid";
+        } else if (field.equals("商品编号")) {
             return "goodsid";
+        } else if (field.equals("批次编号")) {
+            return "pici";
+        } else if (field.equals("流水线编号")) {
+            return "producinglineid";
+        } else if (field.equals("数量")) {
+            return "num";
+        } else if (field.equals("完成状态")) {
+            return "state";
+        } else {
+            return "";
         }
     }
 
     class MyTableModel extends AbstractTableModel {
-        Vector<SalesIn> salesInVector = new Vector<SalesIn>();
+        Vector<ProducingLineDetail> producingLineDetailVector = new Vector<ProducingLineDetail>();
 
         private String[] columnNames =
                 {
-                        "销售单号", "商品编号", "商品名称", "单价", "数量",
-                        "金额", "客户编号", "客户名称", "销售时间", "操作员", "订单状态", "支付状态"
+                        "生产计划编号", "产品编号", "批次编号", "流水线编号", "数量", "完成状态"
                 };
 
         public int getColumnCount() {
@@ -210,7 +220,7 @@ class ProducingLineFramePanel extends JPanel {
         }
 
         public int getRowCount() {
-            return salesInVector.size();
+            return producingLineDetailVector.size();
         }
 
         public String getColumnName(int col) {
@@ -218,8 +228,8 @@ class ProducingLineFramePanel extends JPanel {
         }
 
         public Object getValueAt(int row, int col) {
-            SalesIn salesIn = salesInVector.get(row);
-            return salesIn.getSalesValue(col);
+            ProducingLineDetail producingLineDetail = producingLineDetailVector.get(row);
+            return producingLineDetail.getProducingLineDetailValue(col);
         }
 
         @SuppressWarnings("unchecked")
@@ -232,12 +242,12 @@ class ProducingLineFramePanel extends JPanel {
         }
 
         //更新数据
-        public void updateData(Vector<SalesIn> salesInVector) {
-            this.salesInVector = salesInVector;
-            if (salesInVector.size() == 0) {
-                salesInVector = new Vector<SalesIn>();
+        public void updateData(Vector<ProducingLineDetail> producingLineDetailVector) {
+            this.producingLineDetailVector = producingLineDetailVector;
+            if (producingLineDetailVector.size() == 0) {
+                producingLineDetailVector = new Vector<ProducingLineDetail>();
             } else {
-                fireTableRowsInserted(0, salesInVector.size() - 1);
+                fireTableRowsInserted(0, producingLineDetailVector.size() - 1);
             }
         }
 

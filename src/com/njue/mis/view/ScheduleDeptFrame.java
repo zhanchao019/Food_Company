@@ -146,7 +146,7 @@ class ScheduleDeptFramePanel extends JPanel {
                 if (tit.getText() == "") {
                     JOptionPane.showMessageDialog(null, "请选择一个生产计划", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    //System.out.println(paystate + "|");
+                    //System.out.println(state + "|");
                     if (paystate != "true") {
 
                         ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
@@ -186,7 +186,7 @@ class ScheduleDeptFramePanel extends JPanel {
                 if (tit.getText() == "") {
                     JOptionPane.showMessageDialog(null, "请选择一个生产计划", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    //System.out.println(paystate + "|");
+                    //System.out.println(state + "|");
                     if (paystate != "true") {
 
                         ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
