@@ -102,10 +102,10 @@ public class MainFrame extends JFrame
 		menuItem = new JMenuItem("销售单");
 		menuItem.addActionListener(MainAction.sales());
 		menu.add(menuItem);
-		menuItem = new JMenuItem("退货单");
+		/*menuItem = new JMenuItem("退货单");
 		menuItem.addActionListener(MainAction.salesBack());
 		menu.add(menuItem);
-
+*/
 		// Set up the counter menu.
 		menu = new JMenu("财务管理");
 		menuBar.add(menu);

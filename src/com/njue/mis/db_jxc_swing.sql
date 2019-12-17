@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 17/12/2019 22:39:25
+ Date: 18/12/2019 02:22:51
 */
 
 SET NAMES utf8mb4;
@@ -239,7 +239,7 @@ CREATE TABLE `tb_producing`
 -- Records of tb_producing
 -- ----------------------------
 INSERT INTO `tb_producing`
-VALUES ('SI20191213012059', '1', 28, 0, 28);
+VALUES ('SI20191213012059', '1', 28, 10, 18);
 
 -- ----------------------------
 -- Table structure for tb_producingdetail
@@ -263,7 +263,9 @@ CREATE TABLE `tb_producingdetail`
 -- Records of tb_producingdetail
 -- ----------------------------
 INSERT INTO `tb_producingdetail`
-VALUES ('SI20191213012059', '1', 'CGokEWSCJE', '1', 1, NULL, 'true');
+VALUES ('SI20191213012059', '1', 'K3drgc8OOn', '2', 2, '2019-12-18 00:00:00', 'true');
+INSERT INTO `tb_producingdetail`
+VALUES ('SI20191213012059', '1', 'XmMxDG0PXq', '4', 10, '2019-12-18 00:00:00', 'true');
 
 -- ----------------------------
 -- Table structure for tb_producingline
@@ -473,6 +475,22 @@ INSERT INTO `tb_storagecheck`
 VALUES (5, '4', 10);
 
 -- ----------------------------
+-- Procedure structure for pr_decreaseProducingCount
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_decreaseProducingCount`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_decreaseProducingCount`(in tmp char(20))
+BEGIN
+  #Routine body goes here...
+  update tb_producingline
+  set number=number - 1
+  where tb_producingline.producinglineid = tmp;
+END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Procedure structure for pr_getAllCustomer
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `pr_getAllCustomer`;
@@ -615,6 +633,22 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllStorageGoods`()
 BEGIN
      select * from tb_goods,tb_storagecheck where tb_goods.id=tb_storagecheck.id ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_increaseProducingCount
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_increaseProducingCount`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_increaseProducingCount`(in tmp char(20))
+BEGIN
+  #Routine body goes here...
+  update tb_producingline
+  set number=number + 1
+  where tb_producingline.producinglineid = tmp;
 END
 ;;
 delimiter ;
@@ -771,6 +805,52 @@ BEGIN
 	set @state = CONCAT(' select * from (tb_inport) where tb_inport.',ky,' = \'',val,'\' and inporttime BETWEEN ',t1,' and ',t2);
 	PREPARE tmp from @state;
 	EXECUTE tmp ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_updateProducingLineDetail
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_updateProducingLineDetail`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_updateProducingLineDetail`(in pici char(20))
+BEGIN
+  #Routine body goes here...
+  update tb_producingdetail
+  set producedate=CURDATE()
+  where tb_producingdetail.pici = pici;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_updateProducingScheduleCount
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_updateProducingScheduleCount`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_updateProducingScheduleCount`(in pici VARCHAR(55))
+BEGIN
+
+
+  set @scheduleid = (SELECT (scheduleid) from tb_producingdetail where (tb_producingdetail.pici = pici));
+  set @num = (SELECT num from tb_producingdetail where tb_producingdetail.pici = pici);
+  set @finishednum = (select finished from tb_producing where tb_producing.scheduleid = scheduleid);
+  set @unfinishednum = (select unfinished from tb_producing where tb_producing.scheduleid = scheduleid);
+
+
+  update tb_producing
+  set tb_producing.unfinished=@unfinishednum - @num
+  where tb_producing.scheduleid = @scheduleid;
+
+
+  update tb_producing
+  set tb_producing.finished=@finishednum + @num
+  where tb_producing.scheduleid = @scheduleid;
+
+  COMMIT;
 END
 ;;
 delimiter ;

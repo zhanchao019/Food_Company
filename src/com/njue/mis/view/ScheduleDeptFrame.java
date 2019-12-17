@@ -187,7 +187,7 @@ class ScheduleDeptFramePanel extends JPanel {
                     JOptionPane.showMessageDialog(null, "请选择一个生产计划", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
                     //System.out.println(state + "|");
-                    if (paystate != "true") {
+                    if (paystate.length() == 4) {
 
                         ScheduleServicesHandler handler = CommonFactory.getScheduleServices();
                         handler.delSchedule(orderid.getText());

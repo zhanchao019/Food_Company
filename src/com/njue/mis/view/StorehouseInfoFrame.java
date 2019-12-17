@@ -1,27 +1,16 @@
 package com.njue.mis.view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
+import com.njue.mis.common.CommonFactory;
+import com.njue.mis.handler.GoodsServicesHandler;
+import com.njue.mis.model.StorageGoods;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-
-import com.njue.mis.common.CommonFactory;
-import com.njue.mis.handler.GoodsServicesHandler;
-import com.njue.mis.model.StorageGoods;
 
 public class StorehouseInfoFrame extends JInternalFrame
 {
@@ -113,7 +102,7 @@ class StorehouseInfoPanel extends JPanel
 
 		private String[] columnNames =
 		{
-				"商品编号", "商品全称", "供应商名称", "产地","数量","单价", "规格", "包装",
+				"商品编号", "商品全称", "供应商名称", "产地", "数量", "单价", "规格", "原料",
 		};
 		 
 		public int getColumnCount()
