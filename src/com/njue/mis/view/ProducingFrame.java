@@ -13,33 +13,41 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class ProducingDeptFrame extends JInternalFrame {
-    public ProducingDeptFrame() {
+public class ProducingFrame extends JInternalFrame {
+    public String scheduleid, goodsid;
+    public int sum, unfinished;
+
+    public ProducingFrame(String scheduleid, String goodsid, int sum, int unfinished) {
+
         super("生产车间", true, true, true, true);
+        this.scheduleid = scheduleid;
+        this.goodsid = goodsid;
+        this.sum = sum;
+        this.unfinished = unfinished;
+
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setBounds(0, 0, screenSize.width * 2 / 3,
-                screenSize.height * 2 / 3);
-        this.setContentPane(new ProducingDeptFramePanel());
+        this.setBounds(0, 0, screenSize.width * 2 / 6,
+                screenSize.height * 2 / 6);
+        this.setContentPane(new ProducingFramePanel());
     }
 }
 
 
-class ProducingDeptFramePanel extends JPanel {
+class ProducingFramePanel extends JPanel {
     JTable table;
     MyTableModel tableModel;
     JComboBox comboBox;
     JTextField textField;
     JCheckBox checkBox;
-    JTextField textField_starttime;
-    JTextField textField_endtime;
-    JLabel goods_id = new JLabel("");
 
+    JLabel goods_id = new JLabel("");
     boolean flag = false;
 
-    int sum = 0;
-    int unfinished = 0;
+    float sum = 0;
     String paystate = "";
-    public ProducingDeptFramePanel() {
+
+    public ProducingFramePanel() {
         super(new BorderLayout());
         tableModel = new MyTableModel();
         table = new JTable(tableModel);
@@ -47,7 +55,7 @@ class ProducingDeptFramePanel extends JPanel {
         this.add(pane, BorderLayout.NORTH);
 
 
-        table.setPreferredScrollableViewportSize(new Dimension(100, 70));
+        table.setPreferredScrollableViewportSize(new Dimension(500, 50));
         table.setFillsViewportHeight(true);
         table.setAutoCreateRowSorter(true);
 
@@ -60,6 +68,9 @@ class ProducingDeptFramePanel extends JPanel {
 
         JPanel panel = new JPanel();
         JLabel tit = new JLabel();
+        textField = new JTextField();
+        textField.setColumns(13);
+        textField.setText("");
         panel.setLayout(new GridLayout(2, 1));
         JPanel panel2 = new JPanel(new FlowLayout());
         JPanel panel3 = new JPanel(new FlowLayout());
@@ -74,19 +85,16 @@ class ProducingDeptFramePanel extends JPanel {
                 ListSelectionModel model = (ListSelectionModel) e.getSource();
                 int index = model.getMaxSelectionIndex();
                 // System.out.println(table.getValueAt(index, 0).toString());
-                orderid.setText(table.getValueAt(index, 0).toString());
-                sum = Integer.parseInt(table.getValueAt(index, 2).toString());
-                goods_id.setText(table.getValueAt(index, 1).toString());
-                unfinished = Integer.parseInt(table.getValueAt(index, 4).toString());
+                orderid.setText(table.getValueAt(index, 1).toString());
+                sum = Integer.parseInt(table.getValueAt(index, 4).toString());
+                goods_id.setText(table.getValueAt(index, 0).toString());
+
 
                 tit.setText("你选择的生产计划是");
                 //   goodsField.setText(goodsTable.getValueAt(index, 0).toString());
                 // goodsPrices=Double.valueOf(goodsTable.getValueAt(index, 8).toString());
             }
         });
-
-
-
 
 
         JButton button1 = new JButton();
@@ -118,28 +126,32 @@ class ProducingDeptFramePanel extends JPanel {
             }
         });
 
-        JButton producingstate = new JButton("流水线状态");
-
 
         panel2.add(button1);
         panel2.add(refresh);
-        panel2.add(producingstate);
+        panel2.add(textField);
         panel3 = new JPanel();//选择支付页面
 
-        pay.addActionListener(new ActionListener() {
+       /* pay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (tit.getText() == "") {
-                    JOptionPane.showMessageDialog(null, "请选择一个生产计划", "警告", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "请选择一个销售记录", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    ProducingFrame pf = new ProducingFrame(orderid.getText(), goods_id.getText(), sum, unfinished);
-                    MainFrame.getMainFrame().getContentPane().add(
-                            pf);
-                    pf.setVisible(true);
+                    System.out.println(paystate + "|");
+                    if (paystate != "true") {
+
+                        SalesInServicesHandler handler = CommonFactory.getSalesInServices();
+                        handler.pay(orderid.getText());
+                        JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "以成功缴费", "警告", JOptionPane.WARNING_MESSAGE);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "此订单已经缴费", "警告", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         });
-
+*/
         pay.setText("生产");
 
         panel3.add(tit);

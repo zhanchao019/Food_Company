@@ -20,7 +20,7 @@ public class ProducingDAO extends ManagerDAO {
             String sql = "{call pr_getAllScheduleproducing()}";
             ResultSet rs = manager.executeQuery(sql, null, Constants.CALL_TYPE);
             while (rs.next()) {
-                Producing producing = new Producing(rs.getString("goodsid"), rs.getString("scheduleid"), rs.getInt("sum"), rs.getInt("finished"), rs.getInt("unfinished"));
+                Producing producing = new Producing(rs.getString("scheduleid"), rs.getString("goodsid"), rs.getInt("sum"), rs.getInt("finished"), rs.getInt("unfinished"));
                 result.add(producing);
             }
             manager.closeDB();

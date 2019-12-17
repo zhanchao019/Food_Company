@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 17/12/2019 01:56:59
+ Date: 17/12/2019 03:41:41
 */
 
 SET NAMES utf8mb4;
@@ -466,6 +466,19 @@ INSERT INTO `tb_storagecheck`
 VALUES (5, '4', 10);
 
 -- ----------------------------
+-- Procedure structure for getAllScheduleproducing
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `getAllScheduleproducing`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `getAllScheduleproducing`()
+BEGIN
+  select * from tb_producing ;
+END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Procedure structure for pr_getAllCustomer
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `pr_getAllCustomer`;
@@ -557,6 +570,19 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllSchedule`()
 BEGIN
      select * from tb_schedule;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllScheduleproducing
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllScheduleproducing`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_getAllScheduleproducing`()
+BEGIN
+  select * from tb_producing ;
 END
 ;;
 delimiter ;

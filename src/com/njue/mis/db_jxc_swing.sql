@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 17/12/2019 03:41:41
+ Date: 17/12/2019 17:28:10
 */
 
 SET NAMES utf8mb4;
@@ -225,8 +225,8 @@ INSERT INTO `tb_outport` VALUES ('PO20190227094232', '1', '现金', '2019-02-27 
 DROP TABLE IF EXISTS `tb_producing`;
 CREATE TABLE `tb_producing`
 (
-  `goodsid`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `scheduleid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `goodsid`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sum`        int(32)                                                 NULL DEFAULT NULL,
   `finished`   int(32)                                                 NULL DEFAULT NULL,
   `unfinished` int(32)                                                 NULL DEFAULT NULL
@@ -239,7 +239,7 @@ CREATE TABLE `tb_producing`
 -- Records of tb_producing
 -- ----------------------------
 INSERT INTO `tb_producing`
-VALUES ('1', 'SI20191213012059', 28, 0, 28);
+VALUES ('SI20191213012059', '1', 28, 0, 28);
 
 -- ----------------------------
 -- Table structure for tb_producingdetail
@@ -266,6 +266,7 @@ DROP TABLE IF EXISTS `tb_producingline`;
 CREATE TABLE `tb_producingline`
 (
   `producinglineid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `number`          int(32)                                                NULL DEFAULT NULL,
   PRIMARY KEY (`producinglineid`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -276,17 +277,17 @@ CREATE TABLE `tb_producingline`
 -- Records of tb_producingline
 -- ----------------------------
 INSERT INTO `tb_producingline`
-VALUES ('1');
+VALUES ('1', 0);
 INSERT INTO `tb_producingline`
-VALUES ('2');
+VALUES ('2', 0);
 INSERT INTO `tb_producingline`
-VALUES ('3');
+VALUES ('3', 0);
 INSERT INTO `tb_producingline`
-VALUES ('4');
+VALUES ('4', 0);
 INSERT INTO `tb_producingline`
-VALUES ('5');
+VALUES ('5', 0);
 INSERT INTO `tb_producingline`
-VALUES ('6');
+VALUES ('6', 0);
 
 -- ----------------------------
 -- Table structure for tb_provider
@@ -466,19 +467,6 @@ INSERT INTO `tb_storagecheck`
 VALUES (5, '4', 10);
 
 -- ----------------------------
--- Procedure structure for getAllScheduleproducing
--- ----------------------------
-DROP PROCEDURE IF EXISTS `getAllScheduleproducing`;
-delimiter ;;
-CREATE
-  DEFINER =`root`@`localhost` PROCEDURE `getAllScheduleproducing`()
-BEGIN
-  select * from tb_producing ;
-END
-;;
-delimiter ;
-
--- ----------------------------
 -- Procedure structure for pr_getAllCustomer
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `pr_getAllCustomer`;
@@ -522,6 +510,19 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllPortOut`()
 BEGIN
      select * from tb_outport;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllProducingLine
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllProducingLine`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_getAllProducingLine`()
+BEGIN
+  select * from tb_producingline ;
 END
 ;;
 delimiter ;
