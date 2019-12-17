@@ -19,4 +19,12 @@ public interface ProducingServicesHandeler {
      * @return 销售信息集合
      */
     Vector<ProducingLine> getAllProducingLine();
+
+    /**
+     * 获取所有的流水线新信息
+     *
+     * @return 销售信息集合
+     */
+    boolean addProducingDetail(String scheduleid, String goodsid, String pici, String producinglineid, int number);
+
 }

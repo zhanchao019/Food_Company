@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 17/12/2019 17:28:10
+ Date: 17/12/2019 20:50:41
 */
 
 SET NAMES utf8mb4;
@@ -258,6 +258,12 @@ CREATE TABLE `tb_producingdetail`
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci
   ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_producingdetail
+-- ----------------------------
+INSERT INTO `tb_producingdetail`
+VALUES ('SI20191213012059', '1', 'CGokEWSCJE', '1', 1, NULL, 'false');
 
 -- ----------------------------
 -- Table structure for tb_producingline

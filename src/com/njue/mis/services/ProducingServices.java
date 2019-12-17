@@ -35,4 +35,14 @@ public class ProducingServices implements ProducingServicesHandeler {
         return producingLIneDAO.getAllProducingLine();
     }
 
+    /**
+     * 获取添加流水线新信息
+     *
+     * @return 销售信息集合
+     */
+    public boolean addProducingDetail(String scheduleid, String goodsid, String pici, String producinglineid, int number) {
+        producingLIneDAO = new ProducingLineDAO();
+        return producingLIneDAO.addProducingDetail(scheduleid, goodsid, pici, producinglineid, number);
+    }
+
 }

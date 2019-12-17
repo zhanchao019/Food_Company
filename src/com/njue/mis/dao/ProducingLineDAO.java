@@ -28,4 +28,18 @@ public class ProducingLineDAO extends ManagerDAO {
         }
         return result;
     }
+
+    public boolean addProducingDetail(String scheduleid, String goodsid, String pici, String producinglineid, int number) {
+        boolean result = false;
+        try {
+            String sql = "insert into tb_producingdetail(scheduleid,goodsid,pici,producinglineid,num,state) values(?,?,?,?,?,?)";
+            Object[] params = new Object[]{scheduleid, goodsid, pici, producinglineid, number, "false"};
+            result = super.add(sql, params);
+        } catch (Exception e) {
+            ErrorManager.printError("ProducingLineDAO.addProducingDetail", e);
+        }
+        return result;
+
+
+    }
 }
