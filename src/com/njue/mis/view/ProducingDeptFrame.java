@@ -120,7 +120,15 @@ class ProducingDeptFramePanel extends JPanel {
         });
 
         JButton producingstate = new JButton("流水线状态");
-
+        producingstate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //ProducingLineFrame
+                ProducingLineFrame pf = new ProducingLineFrame();
+                MainFrame.getMainFrame().getContentPane().add(pf);
+                pf.setVisible(true);
+            }
+        });
 
         panel2.add(button1);
         panel2.add(refresh);
@@ -130,7 +138,7 @@ class ProducingDeptFramePanel extends JPanel {
         pay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tit.getText() == "") {
+                if (orderid.getText().equals("请在查询结果中选择相应的订单")) {
                     JOptionPane.showMessageDialog(null, "请选择一个生产计划", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
                     ProducingFrame pf = new ProducingFrame(orderid.getText(), goods_id.getText(), sum, unfinished);
