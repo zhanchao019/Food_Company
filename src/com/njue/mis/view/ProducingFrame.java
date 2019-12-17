@@ -19,7 +19,7 @@ public class ProducingFrame extends JInternalFrame {
 
     public ProducingFrame(String scheduleid, String goodsid, int sum, int unfinished) {
 
-        super("生产车间", true, true, true, true);
+        super("生产车间流水线任务管理", true, true, true, true);
         this.scheduleid = scheduleid;
         this.goodsid = goodsid;
         this.sum = sum;
@@ -29,7 +29,7 @@ public class ProducingFrame extends JInternalFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setBounds(0, 0, screenSize.width * 2 / 6,
                 screenSize.height * 2 / 6);
-        this.setContentPane(new ProducingFramePanel());
+        this.setContentPane(new ProducingFramePanel(scheduleid, goodsid, sum, unfinished));
     }
 }
 
@@ -40,15 +40,24 @@ class ProducingFramePanel extends JPanel {
     JComboBox comboBox;
     JTextField textField;
     JCheckBox checkBox;
+    public String scheduleid, goodsid;
+    public int sum, unfinished, finished;
+
 
     JLabel goods_id = new JLabel("");
     boolean flag = false;
 
-    float sum = 0;
+
     String paystate = "";
 
-    public ProducingFramePanel() {
+    public ProducingFramePanel(String scheduleid, String goodsid, int sum, int unfinished) {
         super(new BorderLayout());
+        this.scheduleid = scheduleid;
+        this.goodsid = goodsid;
+        this.sum = sum;
+        this.unfinished = unfinished;
+        this.finished = this.sum - this.unfinished;
+
         tableModel = new MyTableModel();
         table = new JTable(tableModel);
         JPanel pane = search();
@@ -71,7 +80,12 @@ class ProducingFramePanel extends JPanel {
         textField = new JTextField();
         textField.setColumns(13);
         textField.setText("");
-        panel.setLayout(new GridLayout(2, 1));
+
+        panel.setLayout(new GridLayout(3, 1));
+        JPanel title = new JPanel();
+        JLabel detail = new JLabel("生产计划编号" + scheduleid + " 产品编号" + goodsid + " 完成状态" + finished + "/" + sum);
+        title.add(detail);
+        panel.add(title);
         JPanel panel2 = new JPanel(new FlowLayout());
         JPanel panel3 = new JPanel(new FlowLayout());
         JLabel orderid = new JLabel("请在查询结果中选择相应的订单");
@@ -126,7 +140,7 @@ class ProducingFramePanel extends JPanel {
             }
         });
 
-
+        JLabel jj = new JLabel("输入生产的数量");
         panel2.add(button1);
         panel2.add(refresh);
         panel2.add(textField);

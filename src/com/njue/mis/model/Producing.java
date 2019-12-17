@@ -74,7 +74,7 @@ public class Producing {
                 return getFinished();
             }
             case 4:
-                return getFinished();
+                return getUnfinished();
             default:
                 return "";
         }

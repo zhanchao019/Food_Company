@@ -77,8 +77,9 @@ class ProducingDeptFramePanel extends JPanel {
                 orderid.setText(table.getValueAt(index, 0).toString());
                 sum = Integer.parseInt(table.getValueAt(index, 2).toString());
                 goods_id.setText(table.getValueAt(index, 1).toString());
+                System.out.println(table.getValueAt(index, 4).toString());
                 unfinished = Integer.parseInt(table.getValueAt(index, 4).toString());
-
+                System.out.println(unfinished);
                 tit.setText("你选择的生产计划是");
                 //   goodsField.setText(goodsTable.getValueAt(index, 0).toString());
                 // goodsPrices=Double.valueOf(goodsTable.getValueAt(index, 8).toString());
