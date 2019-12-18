@@ -59,5 +59,12 @@ public interface ProducingServicesHandeler {
      */
     boolean finish(String pici, String producinglineid);
 
+    /**
+     * 输出
+     *
+     * @param pici 批次号
+     * @return 执行结果
+     */
+    boolean getout(String goodsid, String pici, String date, int number, String state);
 
 }

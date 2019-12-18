@@ -118,4 +118,27 @@ public class ProducingLineDetailDAO extends ManagerDAO {
         }
 
     }
+
+    /**
+     * 输出
+     *
+     * @param pici 批次号
+     * @return 执行结果
+     */
+    public boolean getout(String goodsid, String pici, int number, String date, String state) {
+        try {
+            String sql = "insert into tb_storage(goodsid,pici,producedate,state) values (?,?,?,?)";
+            Object[] params = new Object[]{goodsid, pici, date, "in"};
+
+
+            super.add(sql, params, number);
+
+
+            return true;
+        } catch (Exception e) {
+            ErrorManager.printError("ProducingLineDetail.出货", e);
+            return false;
+        }
+    }
 }
+

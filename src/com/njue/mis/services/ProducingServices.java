@@ -92,4 +92,15 @@ public class ProducingServices implements ProducingServicesHandeler {
         producingLineDetailDAO = new ProducingLineDetailDAO();
         return producingLineDetailDAO.finish(pici, producinglineid);
     }
+
+    /**
+     * 输出
+     *
+     * @param pici 批次号
+     * @return 执行结果
+     */
+    public boolean getout(String goodsid, String pici, String date, int number, String state) {
+        producingLineDetailDAO = new ProducingLineDetailDAO();
+        return producingLineDetailDAO.getout(goodsid, pici, number, date, state);
+    }
 }

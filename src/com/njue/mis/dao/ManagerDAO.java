@@ -40,6 +40,27 @@ public abstract class ManagerDAO
 		manager.closeDB();
 		return result;
 	}
+
+	/**
+	 * 向数据库中添加记录
+	 *
+	 * @param number 执行次数
+	 * @param sql    sql语句
+	 * @param params 参数列表
+	 * @return 执行结果
+	 */
+	protected boolean add(String sql, Object[] params, int num) {
+		boolean result = false;
+		try {
+			result = manager.executeUpdate(sql, params, Constants.PSTM_TYPE, num);
+			manager.closeDB();
+		} catch (Exception e) {
+			ErrorManager.printError("ManagerDAO.add", e);
+		}
+		manager.closeDB();
+		return result;
+	}
+
 	/**
 	 * 判断记录是否存在
 	 * @param tableName 被查询的表名

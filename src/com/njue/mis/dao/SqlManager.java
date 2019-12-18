@@ -292,6 +292,49 @@ public class SqlManager
 
 	/**
 	 * 更新数据库操作
+	 *
+	 * @param sql    sql语句
+	 * @param params 参数列表
+	 * @param type   sql语句的类型
+	 * @param num    添加次数
+	 * @return 执行操作的结果
+	 */
+	public boolean executeUpdate(String sql, Object[] params, int type, int num) // 执行无返回数据的数据查询，返回值是被改变的书库的数据库项数
+	{
+		boolean result = false;
+		try {
+			switch (type)
+			//判断是PrepareStatement还是CallableStatement
+			{
+				case PSTM_TYPE:
+					manager.setPrepareStatementParams(sql, params); //填充参数
+					for (int i = 0; i < num; i++) {
+						pstm.executeUpdate(); // 执行更新
+						manager.commitChange();
+					}
+					result = true;
+					break;
+				case CALL_TYPE:
+					manager.setCallableStatementParams(sql, params); //填充参数
+					for (int i = 0; i < num; i++) {
+						pstm.executeUpdate(); // 执行更新
+						manager.commitChange();
+					}
+					result = true;
+					break;
+
+				default:
+					throw new Exception("不存在该选项");
+			}
+		} catch (Exception e) {
+			System.err.println("executeUpdate Error!:" + e.getMessage());
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/**
+	 * 更新数据库操作
 	 * @param sql sql语句
 	 * @param params 参数列表
 	 * @param type sql语句的类型
@@ -317,6 +360,7 @@ public class SqlManager
 				manager.commitChange();
 				result=true;
 				break;
+
 			default:
 				throw new Exception("不存在该选项");
 			}

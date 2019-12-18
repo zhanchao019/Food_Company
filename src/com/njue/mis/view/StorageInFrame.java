@@ -37,7 +37,7 @@ class StorageInFramePanel extends JPanel {
     String state = "";
     String pici = "";
     String line = "";
-
+    String goods = "";
     public StorageInFramePanel() {
         super(new BorderLayout());
         tableModel = new MyTableModel();
@@ -79,6 +79,7 @@ class StorageInFramePanel extends JPanel {
                 state = table.getValueAt(index, 5).toString();//get pay state
                 pici = table.getValueAt(index, 2).toString();
                 line = table.getValueAt(index, 3).toString();
+                goods = table.getValueAt(index, 1).toString();
                 state.trim();
                 System.out.println(state);
                 tit.setText("你选择的订单是");
@@ -88,7 +89,7 @@ class StorageInFramePanel extends JPanel {
         });
 
         comboBox = new JComboBox();
-        comboBox.addItem("生产计划编号");
+        comboBox.addItem("生产日期");
         comboBox.addItem("产品编号");
         comboBox.addItem("批次编号");
         comboBox.addItem("生产线编号");
@@ -162,14 +163,14 @@ class StorageInFramePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (scheduleid.getText() == "") {
-                    JOptionPane.showMessageDialog(null, "请选择生产批次", "警告", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "请选择产品批次信息", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
                     System.out.println(state.length() + "|");
                     state = state.trim();
                     if (state.length() != 3) {
 
                         ProducingServicesHandeler handler = CommonFactory.getProducingServices();
-                        handler.finish(pici.trim(), line);
+                        handler.getout(goods, pici, scheduleid.getText().trim(), sum, state);
                         JOptionPane.showMessageDialog(null, "生产批次" + pici + "已经成功接受", "警告", JOptionPane.WARNING_MESSAGE);
 
                     } else {
@@ -193,7 +194,7 @@ class StorageInFramePanel extends JPanel {
     }
 
     private String getValue(String field) {
-        if (field.equals("生产计划编号")) {
+        if (field.equals("生产日期")) {
             return "scheduleid";
         } else if (field.equals("商品编号")) {
             return "goodsid";
@@ -215,7 +216,7 @@ class StorageInFramePanel extends JPanel {
 
         private String[] columnNames =
                 {
-                        "生产计划编号", "产品编号", "批次编号", "流水线编号", "数量", "完成状态"
+                        "生产日期", "产品编号", "批次编号", "流水线编号", "数量", "完成状态"
                 };
 
         public int getColumnCount() {
