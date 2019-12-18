@@ -56,6 +56,29 @@ public class ProducingLineDetailDAO extends ManagerDAO {
     }
 
     /**
+     * 获取所有的完成的流水线记录信息
+     *
+     * @return 销售信息集合
+     */
+    public Vector<ProducingLineDetail> getAllFinishedProducingLineDetail() {
+        Vector<ProducingLineDetail> result = new Vector<ProducingLineDetail>();
+        try {
+            String sql = "{call pr_getAllProducingLineDetail()}";
+            ResultSet rs = manager.executeQuery(sql, null, Constants.CALL_TYPE);
+            while (rs.next()) {
+                ProducingLineDetail producingLineDetail = new ProducingLineDetail(rs.getString("scheduleid"), rs.getString("goodsid"), rs.getString("pici"),
+                        rs.getString("producinglineid"), rs.getString("state"), rs.getInt("num"), rs.getString("producedate"));
+                result.add(producingLineDetail);
+            }
+            manager.closeDB();
+        } catch (Exception e) {
+            ErrorManager.printError("ProducingLineDetailDAO.getAllProducingLineDetail", e);
+        }
+        return result;
+    }
+
+
+    /**
      * 完成流水线任务
      *
      * @param pici 批次号

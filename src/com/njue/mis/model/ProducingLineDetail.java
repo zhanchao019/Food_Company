@@ -1,7 +1,27 @@
 package com.njue.mis.model;
 
 public class ProducingLineDetail {
-    String scheduleid, goodsid, pici, producinglineid, state;
+    String scheduleid;
+    String goodsid;
+    String pici;
+    String producinglineid;
+    String state;
+    String producedate;
+
+    public ProducingLineDetail(String scheduleid, String goodsid, String pici, String producinglineid, String state, int num, String producedate) {
+        this.scheduleid = scheduleid;
+        this.goodsid = goodsid;
+        this.pici = pici;
+        this.producinglineid = producinglineid;
+        this.state = state;
+        this.num = num;
+        this.producedate = producedate;
+    }
+
+    public String getProducedate() {
+        return producedate;
+    }
+
     int num;
 
     public ProducingLineDetail(String scheduleid, String goodsid, String pici, String producinglineid, String state, int num) {
@@ -13,6 +33,9 @@ public class ProducingLineDetail {
         this.num = num;
     }
 
+    public void setProducedate(String producedate) {
+        this.producedate = producedate;
+    }
 
     public Object getProducingLineDetailValue(int columnNumber) {
         switch (columnNumber) {
@@ -28,6 +51,8 @@ public class ProducingLineDetail {
                 return getNum();
             case 5:
                 return getState();
+            case 6:
+                return getProducedate();
 
 
             default:

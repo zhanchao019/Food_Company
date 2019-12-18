@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 18/12/2019 02:22:51
+ Date: 18/12/2019 12:59:52
 */
 
 SET NAMES utf8mb4;
@@ -85,24 +85,6 @@ INSERT INTO `tb_goods` VALUES ('4', '牙膏', '中国', '支', '牙膏', '213771
 INSERT INTO `tb_goods` VALUES ('5', '可贺', '上海市', '瓶', '钱', '21321342', '213232147', '可乐', 3, '3', 1);
 INSERT INTO `tb_goods` VALUES ('6', '锤子', '茂名', '把', '杠精', '1', '1', '数据库再错我上去就是一锤子', 1, '1', 1);
 INSERT INTO `tb_goods` VALUES ('7', '鼠标', '山东', '1', '键盘侠', '1', '1', '看看触发器', 1, '1', 1);
-
--- ----------------------------
--- Table structure for tb_goods_copy1
--- ----------------------------
-DROP TABLE IF EXISTS `tb_goods_copy1`;
-CREATE TABLE `tb_goods_copy1`  (
-  `provider` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `goodsname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_goods_copy1
--- ----------------------------
-INSERT INTO `tb_goods_copy1` VALUES ('1', '牙刷');
-INSERT INTO `tb_goods_copy1` VALUES ('2', '小游戏机');
-INSERT INTO `tb_goods_copy1` VALUES ('3', '小面包');
-INSERT INTO `tb_goods_copy1` VALUES ('4', '牙膏');
-INSERT INTO `tb_goods_copy1` VALUES ('5', '可贺');
 
 -- ----------------------------
 -- Table structure for tb_goodsschedule
@@ -239,7 +221,7 @@ CREATE TABLE `tb_producing`
 -- Records of tb_producing
 -- ----------------------------
 INSERT INTO `tb_producing`
-VALUES ('SI20191213012059', '1', 28, 10, 18);
+VALUES ('SI20191213012059', '1', 28, 22, 6);
 
 -- ----------------------------
 -- Table structure for tb_producingdetail
@@ -287,11 +269,11 @@ CREATE TABLE `tb_producingline`
 INSERT INTO `tb_producingline`
 VALUES ('1', 0);
 INSERT INTO `tb_producingline`
-VALUES ('2', 0);
+VALUES ('2', -1);
 INSERT INTO `tb_producingline`
 VALUES ('3', 0);
 INSERT INTO `tb_producingline`
-VALUES ('4', 0);
+VALUES ('4', -1);
 INSERT INTO `tb_producingline`
 VALUES ('5', 0);
 INSERT INTO `tb_producingline`
@@ -449,6 +431,22 @@ INSERT INTO `tb_schedule`
 VALUES ('SI20191213012322', '5', 25, '成品出库导致库存低于阈值', 'false');
 
 -- ----------------------------
+-- Table structure for tb_storage
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_storage`;
+CREATE TABLE `tb_storage`
+(
+  `goodsid`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `pici`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `number`      int(32)                                                 NULL DEFAULT NULL,
+  `producedate` datetime(0)                                             NULL DEFAULT NULL,
+  `state`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci
+  ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for tb_storagecheck
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_storagecheck`;
@@ -498,6 +496,21 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllCustomer`()
 BEGIN
      select * from tb_customer where available!=0;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllFinishedProducingLineDetail
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllFinishedProducingLineDetail`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_getAllFinishedProducingLineDetail`()
+BEGIN
+  select *
+  from tb_producingdetail
+  where state = 'true';
 END
 ;;
 delimiter ;

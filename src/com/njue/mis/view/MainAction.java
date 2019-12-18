@@ -6,6 +6,17 @@ import java.awt.event.ActionListener;
 
 public class MainAction {
 
+	public static ActionListener clickStorageInfoManager() {
+
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StorageInFrame storageInFrame = new StorageInFrame();
+				MainFrame.getMainFrame().getContentPane().add(storageInFrame);
+				storageInFrame.setVisible(true);
+			}
+		};
+	}
+
 	public static ActionListener clickProducingInfoManager() {
 
 		return new ActionListener() {

@@ -45,6 +45,13 @@ public interface ProducingServicesHandeler {
     Vector<ProducingLineDetail> getAllProducingLineDetail();
 
     /**
+     * 获取所有的流水线记录信息
+     *
+     * @return 销售信息集合
+     */
+    Vector<ProducingLineDetail> getAllFinishedProducingLineDetail();
+
+    /**
      * 完成流水线任务
      *
      * @param pici 批次号

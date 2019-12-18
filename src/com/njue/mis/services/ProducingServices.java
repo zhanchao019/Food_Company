@@ -72,6 +72,17 @@ public class ProducingServices implements ProducingServicesHandeler {
     }
 
     /**
+     * 获取所有的流水线记录信息
+     *
+     * @return 销售信息集合
+     */
+    public Vector<ProducingLineDetail> getAllFinishedProducingLineDetail() {
+        producingLineDetailDAO = new ProducingLineDetailDAO();
+        return producingLineDetailDAO.getAllFinishedProducingLineDetail();
+
+    }
+
+    /**
      * 完成流水线任务
      *
      * @param pici 批次号
