@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 18/12/2019 12:59:52
+ Date: 18/12/2019 18:23:56
 */
 
 SET NAMES utf8mb4;
@@ -221,7 +221,7 @@ CREATE TABLE `tb_producing`
 -- Records of tb_producing
 -- ----------------------------
 INSERT INTO `tb_producing`
-VALUES ('SI20191213012059', '1', 28, 22, 6);
+VALUES ('SI20191213012059', '1', 28, 28, 0);
 
 -- ----------------------------
 -- Table structure for tb_producingdetail
@@ -245,9 +245,11 @@ CREATE TABLE `tb_producingdetail`
 -- Records of tb_producingdetail
 -- ----------------------------
 INSERT INTO `tb_producingdetail`
-VALUES ('SI20191213012059', '1', 'K3drgc8OOn', '2', 2, '2019-12-18 00:00:00', 'true');
+VALUES ('SI20191213012059', '1', 'K3drgc8OOn', '2', 2, '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_producingdetail`
-VALUES ('SI20191213012059', '1', 'XmMxDG0PXq', '4', 10, '2019-12-18 00:00:00', 'true');
+VALUES ('SI20191213012059', '1', 'XmMxDG0PXq', '4', 10, '2019-12-18 00:00:00', 'out');
+INSERT INTO `tb_producingdetail`
+VALUES ('SI20191213012059', '1', '88UyoLEVAn', '1', 1, '2019-12-18 00:00:00', 'true');
 
 -- ----------------------------
 -- Table structure for tb_producingline
@@ -269,11 +271,11 @@ CREATE TABLE `tb_producingline`
 INSERT INTO `tb_producingline`
 VALUES ('1', 0);
 INSERT INTO `tb_producingline`
-VALUES ('2', -1);
+VALUES ('2', -3);
 INSERT INTO `tb_producingline`
 VALUES ('3', 0);
 INSERT INTO `tb_producingline`
-VALUES ('4', -1);
+VALUES ('4', -2);
 INSERT INTO `tb_producingline`
 VALUES ('5', 0);
 INSERT INTO `tb_producingline`
@@ -445,6 +447,182 @@ CREATE TABLE `tb_storage`
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci
   ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_storage
+-- ----------------------------
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'K3drgc8OOn', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'K3drgc8OOn', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'K3drgc8OOn', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'K3drgc8OOn', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', '88UyoLEVAn', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', '88UyoLEVAn', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', NULL, '2019-12-18 00:00:00', 'in');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck

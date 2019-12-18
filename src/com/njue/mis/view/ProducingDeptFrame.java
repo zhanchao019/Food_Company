@@ -141,10 +141,14 @@ class ProducingDeptFramePanel extends JPanel {
                 if (orderid.getText().equals("请在查询结果中选择相应的订单")) {
                     JOptionPane.showMessageDialog(null, "请选择一个生产计划", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    ProducingFrame pf = new ProducingFrame(orderid.getText(), goods_id.getText(), sum, unfinished);
-                    MainFrame.getMainFrame().getContentPane().add(
-                            pf);
-                    pf.setVisible(true);
+                    if (unfinished <= 0) {
+                        JOptionPane.showMessageDialog(null, "此生产计划已经完成，无法继续生产", "警告", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        ProducingFrame pf = new ProducingFrame(orderid.getText(), goods_id.getText(), sum, unfinished);
+                        MainFrame.getMainFrame().getContentPane().add(
+                                pf);
+                        pf.setVisible(true);
+                    }
                 }
             }
         });

@@ -40,6 +40,27 @@ public class ProducingLineDetail {
     public Object getProducingLineDetailValue(int columnNumber) {
         switch (columnNumber) {
             case 0:
+                return getScheduleid();
+            case 1:
+                return getGoodsid();
+            case 2:
+                return getPici();
+            case 3:
+                return getProducinglineid();
+            case 4:
+                return getNum();
+            case 5:
+                return getState();
+
+
+            default:
+                return "";
+        }
+    }
+
+    public Object getProducingLineDetailValue0(int columnNumber) {
+        switch (columnNumber) {
+            case 0:
                 return getProducedate();
             case 1:
                 return getGoodsid();

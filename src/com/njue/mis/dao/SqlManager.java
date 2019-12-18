@@ -199,6 +199,11 @@ public class SqlManager
 	{
 		try
 		{
+			System.out.println(sql);
+			if (conn == null) {
+				conn = DriverManager.getConnection(strcon, DBuser, DBpasswd); // 获取连接
+				conn.setAutoCommit(false); //设置自动提交为false
+			}
 			pstm = conn.prepareStatement(sql); //获取对象
 			if (params != null)
 			{

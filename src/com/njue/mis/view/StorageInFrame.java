@@ -66,7 +66,7 @@ class StorageInFramePanel extends JPanel {
         JLabel scheduleid = new JLabel("请在查询结果中选择相应的订单");
         JButton pay = new JButton();
         JLabel lable = new JLabel("请选择查询条件：");
-        panel2.add(lable);
+        // panel2.add(lable);
 
         //获取点击的信息
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -94,11 +94,11 @@ class StorageInFramePanel extends JPanel {
         comboBox.addItem("批次编号");
         comboBox.addItem("生产线编号");
         comboBox.setSelectedIndex(0);
-        panel2.add(comboBox);
+        // panel2.add(comboBox);
 
         textField = new JTextField();
         textField.setColumns(13);
-        panel2.add(textField);
+        // panel2.add(textField);
 
         JButton button = new JButton();
         button.setText("查询");
@@ -123,7 +123,7 @@ class StorageInFramePanel extends JPanel {
                 }
             }
         });
-        panel2.add(button);
+        // panel2.add(button);
 
 
         JButton button1 = new JButton();
@@ -233,7 +233,7 @@ class StorageInFramePanel extends JPanel {
 
         public Object getValueAt(int row, int col) {
             ProducingLineDetail producingLineDetail = producingLineDetailVector.get(row);
-            return producingLineDetail.getProducingLineDetailValue(col);
+            return producingLineDetail.getProducingLineDetailValue0(col);
         }
 
         @SuppressWarnings("unchecked")
