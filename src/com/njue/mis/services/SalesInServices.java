@@ -21,6 +21,12 @@ public class SalesInServices implements SalesInServicesHandler
 		salesInDAO = new SalesInDAO();
 		return salesInDAO.pay(orderid);
 	}
+
+
+	public boolean opt(String orderid) {
+		salesInDAO = new SalesInDAO();
+		return salesInDAO.opt(orderid);
+	}
 	public boolean addSalesIn(SalesIn salesIn)
 	{
 		salesInDAO=new SalesInDAO();
@@ -49,7 +55,17 @@ public class SalesInServices implements SalesInServicesHandler
 		salesInDAO=new SalesInDAO();
 		return salesInDAO.searchPortInByTime(beginTime, endTime);
 	}
-	
+
+
+	public Vector<SalesIn> getAllOnTimeSalesIn() {
+		salesInDAO = new SalesInDAO();
+		return salesInDAO.getAllOnTimeSalesIn();
+	}
+
+	public Vector<SalesIn> getAllOrderedSalesIn() {
+		salesInDAO = new SalesInDAO();
+		return salesInDAO.getAllOrderedSalesIn();
+	}
 	public boolean isExited(String id)
 	{
 		salesInDAO=new SalesInDAO();

@@ -27,7 +27,20 @@ public interface SalesInServicesHandler
 	 * @return 销售信息集合
 	 */
 	Vector<SalesIn> getAllSalesIn();
-	
+
+	/**
+	 * 获取所有的销售信息
+	 *
+	 * @return 销售信息集合
+	 */
+	Vector<SalesIn> getAllOnTimeSalesIn();//getAllOnTimeSalesIn
+
+	/**
+	 * 获取所有的销售信息
+	 *
+	 * @return 销售信息集合
+	 */
+	Vector<SalesIn> getAllOrderedSalesIn();
 	/**
 	 * 查询数据库中满足条件的销售记录
 	 * @param field 查询的字段
@@ -41,7 +54,15 @@ public interface SalesInServicesHandler
 	 * @param endTime  查询的结束时间
 	 * @return 查询结果集
 	 */
-	Vector<SalesIn> searchPortInByTime(String beginTime,String endTime);
+	Vector<SalesIn> searchPortInByTime(String beginTime, String endTime);
+
+	/**
+	 * 向数据库中添加新的销售记录
+	 * @param orderid 封装好的SalesIn对象
+	 * @return 执行结果
+	 */
+	boolean opt(String orderid);
+
 	/**
 	 * 判断销售编号是否存在
 	 * @param id 

@@ -17,6 +17,18 @@ public class MainAction {
 		};
 	}
 
+    public static ActionListener clickStorageManageInfoManager() {
+
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                StorageFrame storageFrame = new StorageFrame();
+                MainFrame.getMainFrame().getContentPane().add(storageFrame);
+                storageFrame.setVisible(true);
+            }
+        };
+    }
+
+
 	public static ActionListener clickProducingInfoManager() {
 
 		return new ActionListener() {

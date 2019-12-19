@@ -130,10 +130,12 @@ public class MainFrame extends JFrame
 		//成品库
 		menu = new JMenu("成品库管理");
 		menuBar.add(menu);
-		menuItem = new JMenuItem("成品库");
-
+        menuItem = new JMenuItem("成品库入库");
 		menuItem.addActionListener(MainAction.clickStorageInfoManager());
 		menu.add(menuItem);
+        menuItem = new JMenuItem("成品库管理");
+        menuItem.addActionListener(MainAction.clickStorageManageInfoManager());
+        menu.add(menuItem);
 
 
         // Set up the select menu.

@@ -39,6 +39,40 @@ public class SalesInDAO extends ManagerDAO {
 
     }
 
+
+    /**
+     * 出库
+     *
+     * @param orderid 封装好的SalesIn对象
+     * @return 执行结果
+     */
+
+    public boolean opt(String orderid) {
+        try {
+            boolean tmp = true;
+            String sql = "update (tb_sales)" +
+                    "set paid = 'out'" +
+                    "where id= ?";
+            Object[] params = new Object[]{
+                    orderid};
+            tmp = super.add(sql, params);
+
+
+            sql = "update (tb_storage)" +
+                    "set state = 'out'" +
+                    "where orderid= ?";
+            params = new Object[]{
+                    orderid};
+            tmp = super.add(sql, params) && tmp;
+            return tmp;
+
+        } catch (Exception e) {
+            ErrorManager.printError("SalesInDAO.opt", e);
+            return false;
+        }
+
+    }
+
     /**
      * 向数据库中添加新的销售记录
      *
@@ -78,6 +112,53 @@ public class SalesInDAO extends ManagerDAO {
             manager.closeDB();
         } catch (Exception e) {
             ErrorManager.printError("SalesInDAO.getAllSalesIn", e);
+        }
+        return result;
+    }
+
+
+    /**
+     * 获取所有的销售信息
+     *
+     * @return 销售信息集合
+     */
+    public Vector<SalesIn> getAllOnTimeSalesIn() {
+        Vector<SalesIn> result = new Vector<SalesIn>();
+        try {
+            String sql = "{call pr_getAllOnTimeSalesIn()}";
+            ResultSet rs = manager.executeQuery(sql, null, Constants.CALL_TYPE);
+            while (rs.next()) {
+                SalesIn salesIn = new SalesIn(rs.getString("id"), rs.getString("customerid"), rs.getString("goodsid"),
+                        rs.getString("paytype"), rs.getInt("number"), rs.getDouble("price"),
+                        rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"), rs.getString("paid"));
+                result.add(salesIn);
+            }
+            manager.closeDB();
+        } catch (Exception e) {
+            ErrorManager.printError("SalesInDAO.getAllOnTimeSalesIn", e);
+        }
+        return result;
+    }
+
+    /**
+     * 获取所有的销售信息
+     *
+     * @return 销售信息集合
+     */
+    public Vector<SalesIn> getAllOrderedSalesIn() {
+        Vector<SalesIn> result = new Vector<SalesIn>();
+        try {
+            String sql = "{call pr_getAllOrderedSalesIn()}";
+            ResultSet rs = manager.executeQuery(sql, null, Constants.CALL_TYPE);
+            while (rs.next()) {
+                SalesIn salesIn = new SalesIn(rs.getString("id"), rs.getString("customerid"), rs.getString("goodsid"),
+                        rs.getString("paytype"), rs.getInt("number"), rs.getDouble("price"),
+                        rs.getString("salestime"), rs.getString("operateperson"), rs.getString("comment"), rs.getString("state"), rs.getString("paid"));
+                result.add(salesIn);
+            }
+            manager.closeDB();
+        } catch (Exception e) {
+            ErrorManager.printError("SalesInDAO.pr_getAllOrderedSalesIn", e);
         }
         return result;
     }

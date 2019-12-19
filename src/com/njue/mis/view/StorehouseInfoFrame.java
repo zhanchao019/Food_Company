@@ -102,7 +102,7 @@ class StorehouseInfoPanel extends JPanel
 
 		private String[] columnNames =
 		{
-				"商品编号", "商品全称", "供应商名称", "产地", "数量", "单价", "规格", "原料",
+                "商品编号", "商品全称", "供应商名称", "产地", "数量", "单价", "保质期", "原料",
 		};
 		 
 		public int getColumnCount()

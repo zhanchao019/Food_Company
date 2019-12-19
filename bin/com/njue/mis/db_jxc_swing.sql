@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 19/12/2019 23:33:59
+ Date: 20/12/2019 00:13:46
 */
 
 SET NAMES utf8mb4;
@@ -76,14 +76,22 @@ CREATE TABLE `tb_goods`  (
 -- ----------------------------
 -- Records of tb_goods
 -- ----------------------------
-INSERT INTO `tb_goods` VALUES ('1', '牙刷', '中国', '支', '小牙刷', '23876374', '374638261', '牙刷', 2, '1', 1);
-INSERT INTO `tb_goods` VALUES ('13', '123', '1', '1', 'ada', '1', '1', 'qe', 1, '1', 1);
-INSERT INTO `tb_goods` VALUES ('2', '小游戏机', '日本', '个', '电路板', '31245324', '343123452', '游戏机', 33, '1', 1);
-INSERT INTO `tb_goods` VALUES ('3', '小面包', '广州', '个', '面粉', '32848672', '324764243', '面包', 25, '1', 1);
-INSERT INTO `tb_goods` VALUES ('4', '牙膏', '中国', '支', '牙膏', '21377128', '231739832', '牙膏', 12, '2', 1);
-INSERT INTO `tb_goods` VALUES ('5', '可贺', '上海市', '瓶', '钱', '21321342', '213232147', '可乐', 3, '3', 1);
-INSERT INTO `tb_goods` VALUES ('6', '锤子', '茂名', '把', '杠精', '1', '1', '数据库再错我上去就是一锤子', 1, '1', 1);
-INSERT INTO `tb_goods` VALUES ('7', '鼠标', '山东', '1', '键盘侠', '1', '1', '看看触发器', 1, '1', 1);
+INSERT INTO `tb_goods`
+VALUES ('1', '牙刷', '中国', '30', '小牙刷', '23876374', '374638261', '牙刷', 2, '1', 1);
+INSERT INTO `tb_goods`
+VALUES ('13', '123', '1', '30', 'ada', '1', '1', 'qe', 1, '1', 1);
+INSERT INTO `tb_goods`
+VALUES ('2', '小游戏机', '日本', '30', '电路板', '31245324', '343123452', '游戏机', 33, '1', 1);
+INSERT INTO `tb_goods`
+VALUES ('3', '小面包', '广州', '30', '面粉', '32848672', '324764243', '面包', 25, '1', 1);
+INSERT INTO `tb_goods`
+VALUES ('4', '牙膏', '中国', '30', '牙膏', '21377128', '231739832', '牙膏', 12, '2', 1);
+INSERT INTO `tb_goods`
+VALUES ('5', '可贺', '上海市', '30', '钱', '21321342', '213232147', '可乐', 3, '3', 1);
+INSERT INTO `tb_goods`
+VALUES ('6', '锤子', '茂名', '30', '杠精', '1', '1', '数据库再错我上去就是一锤子', 1, '1', 1);
+INSERT INTO `tb_goods`
+VALUES ('7', '鼠标', '山东', '30', '键盘侠', '1', '1', '看看触发器', 1, '1', 1);
 
 -- ----------------------------
 -- Table structure for tb_goodsschedule
@@ -248,7 +256,7 @@ VALUES ('SI20191213012059', '1', 'K3drgc8OOn', '2', 2, '2019-12-18 00:00:00', 'o
 INSERT INTO `tb_producingdetail`
 VALUES ('SI20191213012059', '1', 'XmMxDG0PXq', '4', 10, '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_producingdetail`
-VALUES ('SI20191213012059', '1', '88UyoLEVAn', '1', 1, '2019-12-18 00:00:00', 'true');
+VALUES ('SI20191213012059', '1', '88UyoLEVAn', '1', 1, '2019-12-18 00:00:00', 'out');
 
 -- ----------------------------
 -- Table structure for tb_producingline
@@ -629,6 +637,84 @@ INSERT INTO `tb_storage`
 VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
 VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', '88UyoLEVAn', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', '88UyoLEVAn', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', '88UyoLEVAn', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'K3drgc8OOn', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'K3drgc8OOn', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', '88UyoLEVAn', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', '88UyoLEVAn', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'K3drgc8OOn', 'NULL', '2019-12-18 00:00:00', 'in');
+INSERT INTO `tb_storage`
+VALUES ('1', 'K3drgc8OOn', 'NULL', '2019-12-18 00:00:00', 'in');
 
 -- ----------------------------
 -- Table structure for tb_storagecheck
@@ -647,9 +733,9 @@ CREATE TABLE `tb_storagecheck`  (
 -- Records of tb_storagecheck
 -- ----------------------------
 INSERT INTO `tb_storagecheck`
-VALUES (1, '3', -122);
+VALUES (1, '3', 0);
 INSERT INTO `tb_storagecheck`
-VALUES (2, '1', -3);
+VALUES (2, '1', 2);
 INSERT INTO `tb_storagecheck`
 VALUES (3, '5', 5);
 INSERT INTO `tb_storagecheck` VALUES (4, '2', 5);

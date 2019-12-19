@@ -135,49 +135,70 @@ public abstract class Sales
 	}
 
 
-    public Object getSalesValue(int columnNumber)
+	public Object getStorageSaleValue(int columnNumber) {
+		switch (columnNumber) {
+			case 0:
+				return ValidationManager.changeNull(getId());
+
+			case 1:
+				return ValidationManager.changeNull(getGoodsId());
+			case 2: {
+				return getNumber();
+			}
+			case 3: {
+				return getTime();
+			}
+			case 4:
+				return getState();
+
+			default:
+				return "";
+		}
+	}
+
+	public Object getSalesValue(int columnNumber)
 	{
 		switch (columnNumber)
 		{
-		case 0:
-			return ValidationManager.changeNull(getId());
-			
-		case 1:
-			return ValidationManager.changeNull(getGoodsId());
-		case 2:
+			case 0:
+				return ValidationManager.changeNull(getId());
+
+			case 1:
+				return ValidationManager.changeNull(getGoodsId());
+			case 2:
 			{
 				GoodsServicesHandler handler=CommonFactory.getGoodsServices();
 				Goods goods=handler.getGoodsInfo(getGoodsId());
 				return  ValidationManager.changeNull(goods.getGoodsName());
 			}
-		case 3:
+			case 3:
 			{
 				GoodsServicesHandler handler=CommonFactory.getGoodsServices();
 				Goods goods=handler.getGoodsInfo(getGoodsId());
 				return  ValidationManager.changeNull(goods.getPrice());
 			}
-		case 4:
-			return ValidationManager.changeNull(getNumber());
-		case 5:
-			return ValidationManager.changeNull(getPrice());
-		case 6:
-			return ValidationManager.changeNull(getCustomerId());
-		case 7:
+			case 4:
+				return ValidationManager.changeNull(getNumber());
+			case 5:
+				return ValidationManager.changeNull(getPrice());
+			case 6:
+				return ValidationManager.changeNull(getCustomerId());
+			case 7:
 			{
 				CustomerServicesHandler handler=CommonFactory.getCustomerServices();
 				Customer customer=handler.getCustomerInfo(getCustomerId());
 				return ValidationManager.changeNull(customer.getName());
 			}
-		case 8:		
-			return ValidationManager.changeNull(getTime());
+			case 8:
+				return ValidationManager.changeNull(getTime());
 			case 9:
 				return ValidationManager.changeNull(getOperatePerson());
 			case 10:
 				return ValidationManager.changeNull(getState());
-            case 11:
-                return ValidationManager.changeNull(getPaid());
-		default:
-			return "";
+			case 11:
+				return ValidationManager.changeNull(getPaid());
+			default:
+				return "";
 		}
 	}
 	
