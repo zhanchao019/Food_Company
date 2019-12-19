@@ -91,7 +91,7 @@ public class GoodsFrame extends JInternalFrame
 		addpanel4.add(ID_privoderLabel);
 
 		addpanel4.add(ID_privoderField);
-		JLabel sizeLabel = new JLabel("规格:");
+		JLabel sizeLabel = new JLabel("保质日期/日:");
 		addpanel4.add(sizeLabel);
 
 		addpanel4.add(sizeField);
@@ -184,7 +184,7 @@ public class GoodsFrame extends JInternalFrame
 
 					if (handler.addGoods(new Goods(ID_goodsField.getText(),
 							goodsField.getText(), goodsdressField.getText(),
-							sizeField.getText(), packageField.getText(),
+							Integer.parseInt(sizeField.getText().trim()), packageField.getText(),
 							productField.getText(), promitField.getText(),
 							decriptionField.getText(), Double
 									.valueOf(priceField.getText()),
@@ -285,7 +285,7 @@ public class GoodsFrame extends JInternalFrame
 						priceField1.setText(String.valueOf(goods.getPrice()));
 						goodsdressField1.setText(goods.getProducePlace());
 						ID_privoderField1.setText(goods.getProviderId());
-						sizeField1.setText(goods.getSize());
+						sizeField1.setText(String.valueOf(goods.getSize()));
 						packageField1.setText(goods.get_package());
 						productField1.setText(goods.getProductCode());
 						promitField1.setText(goods.getPromitCode());
@@ -319,7 +319,7 @@ public class GoodsFrame extends JInternalFrame
 		deletepanel4.add(ID_privoderLabel1);
 
 		deletepanel4.add(ID_privoderField1);
-		JLabel sizeLabel1 = new JLabel("规格:");
+		JLabel sizeLabel1 = new JLabel("保质期/日:");
 		deletepanel4.add(sizeLabel1);
 
 		deletepanel4.add(sizeField1);

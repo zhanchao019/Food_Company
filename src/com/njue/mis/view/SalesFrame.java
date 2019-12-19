@@ -231,7 +231,7 @@ public class SalesFrame extends JInternalFrame
 		
 		private String[] columnNames =
 		{
-				"商品编号", "商品名称", "产地", "规格","包装","生产批号",
+				"商品编号", "商品名称", "产地", "保质日期", "包装", "生产批号",
                 "批准文号","描述","价格","供应商编号"
 		};
 		

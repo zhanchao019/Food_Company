@@ -11,7 +11,7 @@ public class Goods
 	private String id;  //商品编号
 	private String goodsName;  //商品名称
 	private String producePlace;  //商品产地
-	private String size;  //规格
+	private int size;  //规格
 	private String _package; //原材料
 	private String productCode;  //生产批号
 	private String promitCode;  //批转文号
@@ -20,13 +20,15 @@ public class Goods
 	private String providerId;  //供应商编号
 	private int available;  //状态 非0代表可用
 
+
 	public Goods()
 	{
 		super();
 	}
-	public Goods(String id, String goodsName, String producePlace, String size,
-			String _package, String productCode, String promitCode,
-			String description,double price, String providerId)
+
+	public Goods(String id, String goodsName, String producePlace, int size,
+				 String _package, String productCode, String promitCode,
+				 String description, double price, String providerId)
 	{
 		super();
 		this.id = id;
@@ -40,11 +42,11 @@ public class Goods
 		this.description = description;
 		this.providerId = providerId;
 	}
-	
-	public Goods(String id, String goodsName, String producePlace, String size,
-			String _package, String productCode, String promitCode,
-			String description,double price, String providerId,
-			int available)
+
+	public Goods(String id, String goodsName, String producePlace, int size,
+				 String _package, String productCode, String promitCode,
+				 String description, double price, String providerId,
+				 int available)
 	{
 		super();
 		this.id = id;
@@ -83,11 +85,13 @@ public class Goods
 	{
 		this.producePlace = producePlace;
 	}
-	public String getSize()
+
+	public int getSize()
 	{
 		return size;
 	}
-	public void setSize(String size)
+
+	public void setSize(int size)
 	{
 		this.size = size;
 	}

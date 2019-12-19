@@ -85,7 +85,7 @@ public class GoodsDAO
 			while(rs.next())
 			{
 				Goods goods=new Goods(rs.getString("id"),rs.getString("goodsName"),rs.getString("producePlace"),
-                        rs.getString("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
+						rs.getInt("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
 									  rs.getString("promitCode"),rs.getString("description"),rs.getDouble("price"),
 									  rs.getString("providerId"));
 				result.add(goods);
@@ -134,8 +134,9 @@ public class GoodsDAO
 			while(rs.next())
 			{
 				Goods goods=new Goods(rs.getString("id"),rs.getString("goodsName"),rs.getString("producePlace"),
-                        rs.getString("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
-						rs.getString("promitCode"),rs.getString("description"),rs.getDouble("price"),rs.getString("providerId"));
+						rs.getInt("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
+						rs.getString("promitCode"), rs.getString("description"), rs.getDouble("price"),
+						rs.getString("providerId"));
 				result.add(goods);
 			}
 
@@ -161,8 +162,9 @@ public class GoodsDAO
 			while(rs.next())
 			{
 				Goods goods=new Goods(rs.getString("id"),rs.getString("goodsName"),rs.getString("producePlace"),
-                        rs.getString("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
-						rs.getString("promitCode"),rs.getString("description"),rs.getDouble("price"),rs.getString("providerId"));
+						rs.getInt("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
+						rs.getString("promitCode"), rs.getString("description"), rs.getDouble("price"),
+						rs.getString("providerId"));
 				StorageGoods storageGoods=new StorageGoods(rs.getInt("id"),rs.getInt("number"),goods);
 				result.add(storageGoods);
 			}
@@ -269,8 +271,9 @@ public class GoodsDAO
 			if(rs.next())
 			{
 				goods=new Goods(rs.getString("id"),rs.getString("goodsName"),rs.getString("producePlace"),
-                        rs.getString("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
-						rs.getString("promitCode"),rs.getString("description"),rs.getDouble("price"),rs.getString("providerId"),rs.getInt("available"));
+						rs.getInt("size"), rs.getString("rawmaterial"), rs.getString("productCode"),
+						rs.getString("promitCode"), rs.getString("description"), rs.getDouble("price"),
+						rs.getString("providerId"));
 			}
 			manage.closeDB();
 		}
