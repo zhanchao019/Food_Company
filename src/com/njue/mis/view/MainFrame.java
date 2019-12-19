@@ -99,7 +99,7 @@ public class MainFrame extends JFrame
 		// Set up the sales menu.
 		menu = new JMenu("销售管理");
 		menuBar.add(menu);
-		menuItem = new JMenuItem("销售单");
+		menuItem = new JMenuItem("销售订单创建");
 		menuItem.addActionListener(MainAction.sales());
 		menu.add(menuItem);
 		/*menuItem = new JMenuItem("退货单");

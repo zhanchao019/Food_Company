@@ -135,12 +135,14 @@ public class ProducingLineDetailDAO extends ManagerDAO {
 
             sql = "update (tb_producingdetail)" +
                     "set state = 'out'" +
-                    "where pici= ?";
+                    "where pici= ? ";
             params = new Object[]{pici};
             super.add(sql, params);
+
+            System.out.println(number + " " + goodsid);
             sql = "update (tb_storagecheck)" +
-                    "set number = number+ ?" +
-                    "where pici= ?";
+                    "set number =( number+ ? )" +
+                    "where tb_storagecheck.goodsid = ?";
             params = new Object[]{number, goodsid};
             super.add(sql, params);
 
