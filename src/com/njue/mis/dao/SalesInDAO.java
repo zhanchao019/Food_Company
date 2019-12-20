@@ -126,14 +126,14 @@ public class SalesInDAO extends ManagerDAO {
             params = new Object[]{
                     orderid};
             tmp = super.add(sql, params) && tmp;
-
-
-            sql = "update (tb_storage)" +
-                    "set state = 'out'" +
-                    "where orderid= ?";
-            params = new Object[]{
-                    orderid};
             tmp = super.add(sql, params) && tmp;
+
+
+            sql = "{call pr_updateStorage()}";
+            manager.executeQuery(sql, null, Constants.CALL_TYPE);
+
+
+
             return tmp;
 
         } catch (Exception e) {
@@ -184,12 +184,8 @@ public class SalesInDAO extends ManagerDAO {
             tmp = super.add(sql, params) && tmp;
 
 
-            sql = "update (tb_storage)" +
-                    "set state = 'out'" +
-                    "where orderid= ?";
-            params = new Object[]{
-                    orderid};
-            tmp = super.add(sql, params) && tmp;
+            sql = "{call pr_updateStorage()}";
+            manager.executeQuery(sql, null, Constants.CALL_TYPE);
             return tmp;
 
         } catch (Exception e) {
