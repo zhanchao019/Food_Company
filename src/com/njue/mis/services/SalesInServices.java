@@ -23,9 +23,9 @@ public class SalesInServices implements SalesInServicesHandler
 	}
 
 
-	public boolean opt(String orderid) {
+    public boolean opt(String orderid, String goodsid) {
 		salesInDAO = new SalesInDAO();
-		return salesInDAO.opt(orderid);
+        return salesInDAO.opt(orderid, goodsid);
 	}
 	public boolean addSalesIn(SalesIn salesIn)
 	{

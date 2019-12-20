@@ -61,7 +61,7 @@ public interface SalesInServicesHandler
 	 * @param orderid 封装好的SalesIn对象
 	 * @return 执行结果
 	 */
-	boolean opt(String orderid);
+	boolean opt(String orderid, String goodsid);
 
 	/**
 	 * 判断销售编号是否存在

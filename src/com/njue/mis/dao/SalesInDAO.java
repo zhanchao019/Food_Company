@@ -47,7 +47,7 @@ public class SalesInDAO extends ManagerDAO {
      * @return Ö´ÐÐ½á¹û
      */
 
-    public boolean opt(String orderid) {
+    public boolean opt(String orderid, String goodsid) {
         try {
             boolean tmp = true;
             String sql = "update (tb_sales)" +
@@ -63,6 +63,14 @@ public class SalesInDAO extends ManagerDAO {
                     "where orderid= ?";
             params = new Object[]{
                     orderid};
+            tmp = super.add(sql, params) && tmp;
+
+
+            sql = "update (tb_storagecheck)" +
+                    "set number = (select count(*) from tb_storage where goodsid = ? and state= 'in')" +
+                    "where goodsid= ?";
+            params = new Object[]{
+                    goodsid, goodsid};
             tmp = super.add(sql, params) && tmp;
             return tmp;
 

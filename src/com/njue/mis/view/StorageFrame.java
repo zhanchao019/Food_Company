@@ -151,7 +151,7 @@ class StorageFramePanel extends JPanel {
 
                         SalesInServicesHandler handler = CommonFactory.getSalesInServices();
 
-                        handler.opt(orderid.getText());
+                        handler.opt(orderid.getText(), goods_id.getText());
                         JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "成功交付", "警告", JOptionPane.WARNING_MESSAGE);
                         //handler.getAllSchedule();handler.getAllSchedule();//刷新
                     } else {
