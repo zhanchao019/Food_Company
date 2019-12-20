@@ -23,9 +23,20 @@ public class SalesInServices implements SalesInServicesHandler
 	}
 
 
+	public int getSum(String goodsid) {
+		salesInDAO = new SalesInDAO();
+		return salesInDAO.getSum(goodsid);
+	}
+
     public boolean opt(String orderid, String goodsid) {
 		salesInDAO = new SalesInDAO();
         return salesInDAO.opt(orderid, goodsid);
+	}
+
+
+	public boolean optR(String orderid, String goodsid, int sum) {
+		salesInDAO = new SalesInDAO();
+		return salesInDAO.optR(orderid, goodsid, sum);
 	}
 	public boolean addSalesIn(SalesIn salesIn)
 	{

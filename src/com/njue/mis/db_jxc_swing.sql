@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 20/12/2019 02:34:20
+ Date: 20/12/2019 14:06:12
 */
 
 SET NAMES utf8mb4;
@@ -364,19 +364,23 @@ CREATE TABLE `tb_sales`  (
 -- Records of tb_sales
 -- ----------------------------
 INSERT INTO `tb_sales`
-VALUES ('SI20191211101310', '1', '现金', '2019-12-11 10:13:10', 'admin', 2, 3, '人人', '1', '现货', 'out');
+VALUES ('SI20191211101310', '1', '现金', '2019-12-11 10:13:10', 'admin', 2, 3, '人人', '1', '已出货', 'out');
 INSERT INTO `tb_sales`
-VALUES ('SI20191213011706', '1', '支票', '2019-12-13 01:17:06', 'admin', 1, 3, 'nill', '5', '现货', 'false');
+VALUES ('SI20191213011706', '1', '支票', '2019-12-13 01:17:06', 'admin', 1, 3, 'nill', '5', '已出货', 'out');
 INSERT INTO `tb_sales`
-VALUES ('SI20191213012059', '1', '现金', '2019-12-13 01:20:59', 'admin', 1, 7, '12313', '1', '现货', 'false');
-INSERT INTO `tb_sales` VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01:23:22', 'admin', 1, 3, 'all', '5', '现货', 'true');
-INSERT INTO `tb_sales` VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12:09:01', '', 3, 6, '应该时2*3', '1', '现货', 'true');
-INSERT INTO `tb_sales` VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13:10:22', 'admin', 123131, 1477580, '', '4', '预定', 'true');
-INSERT INTO `tb_sales` VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '现货', 'true');
+VALUES ('SI20191213012059', '1', '现金', '2019-12-13 01:20:59', 'admin', 1, 7, '12313', '1', '现货', 'out');
 INSERT INTO `tb_sales`
-VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '预定', 'true');
+VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01:23:22', 'admin', 1, 3, 'all', '1', '已出货', 'out');
 INSERT INTO `tb_sales`
-VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 10, 1477340, '', '4', '预定', 'true');
+VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12:09:01', '', 3, 6, '应该时2*3', '1', '已出货', 'out');
+INSERT INTO `tb_sales`
+VALUES ('SI20191214131022', '1', '现金', '2019-12-14 13:10:22', 'admin', 123131, 1477580, '', '4', '已出货', 'out');
+INSERT INTO `tb_sales`
+VALUES ('SI20191214132024', '2', '现金', '2019-12-14 13:20:24', '', 1, 33, '', '2', '已出货', 'out');
+INSERT INTO `tb_sales`
+VALUES ('SI20191214132101', '2', '现金', '2019-12-14 13:21:01', '', 1999, 5997, '', '5', '已出货', 'out');
+INSERT INTO `tb_sales`
+VALUES ('SI20191214132234', '1', '银行卡', '2019-12-14 13:22:34', '', 10, 1477340, '', '1', '已出货', 'out');
 INSERT INTO `tb_sales`
 VALUES ('SI20191214202114', '3', '现金', '2019-12-14 20:21:14', '', 11, 132, '无', '4', '预定', 'true');
 INSERT INTO `tb_sales`
@@ -447,6 +451,22 @@ INSERT INTO `tb_schedule`
 VALUES ('SI20191211101310', '1', 33, '成品出库导致库存低于阈值', 'false');
 INSERT INTO `tb_schedule`
 VALUES ('SI20191211101310', '1', 30, '成品出库导致库存低于阈值', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191213012322', '1', -90, '预定新订单库存补足', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214132234', '1', -81, '预定新订单库存补足', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214132234', '1', -81, '预定新订单库存补足', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214132234', '1', -81, '预定新订单库存补足', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214132234', '1', -81, '预定新订单库存补足', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214132234', '1', -81, '预定新订单库存补足', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214132234', '1', -81, '预定新订单库存补足', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191214132234', '1', -81, '预定新订单库存补足', 'false');
 
 -- ----------------------------
 -- Table structure for tb_storage
@@ -476,51 +496,51 @@ VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
 VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214202114', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', 'K3drgc8OOn', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'K3drgc8OOn', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', 'K3drgc8OOn', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'K3drgc8OOn', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', 'K3drgc8OOn', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'K3drgc8OOn', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', 'K3drgc8OOn', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'K3drgc8OOn', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', '88UyoLEVAn', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', '88UyoLEVAn', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', '88UyoLEVAn', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', '88UyoLEVAn', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'demo', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191214132234', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
 VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
@@ -737,7 +757,7 @@ CREATE TABLE `tb_storagecheck`  (
 INSERT INTO `tb_storagecheck`
 VALUES (1, '3', 0);
 INSERT INTO `tb_storagecheck`
-VALUES (2, '1', 0);
+VALUES (2, '1', 121);
 INSERT INTO `tb_storagecheck`
 VALUES (3, '5', 5);
 INSERT INTO `tb_storagecheck` VALUES (4, '2', 5);
@@ -810,7 +830,7 @@ BEGIN
   select *
   from tb_sales
   where tb_sales.state = '现货';
-
+		 
 END
 ;;
 delimiter ;
@@ -826,7 +846,7 @@ BEGIN
   select *
   from tb_sales
   where tb_sales.state = '预定';
-
+		 
 END
 ;;
 delimiter ;

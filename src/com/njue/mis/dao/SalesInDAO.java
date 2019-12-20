@@ -6,6 +6,7 @@ package com.njue.mis.dao;
 import com.njue.mis.common.Constants;
 import com.njue.mis.common.ErrorManager;
 import com.njue.mis.model.SalesIn;
+import com.njue.mis.model.Storage;
 
 import java.sql.ResultSet;
 import java.util.Vector;
@@ -66,11 +67,75 @@ public class SalesInDAO extends ManagerDAO {
             tmp = super.add(sql, params) && tmp;
 
 
-            sql = "update (tb_storagecheck)" +
-                    "set number = (select count(*) from tb_storage where goodsid = ? and state= 'in')" +
-                    "where goodsid= ?";
+            sql = "update (tb_sales)" +
+                    "set state = '已出货'" +
+                    "where id= ?";
             params = new Object[]{
-                    goodsid, goodsid};
+                    orderid};
+            tmp = super.add(sql, params) && tmp;
+
+
+            sql = "update (tb_storage)" +
+                    "set state = 'out'" +
+                    "where orderid= ?";
+            params = new Object[]{
+                    orderid};
+            tmp = super.add(sql, params) && tmp;
+            return tmp;
+
+        } catch (Exception e) {
+            ErrorManager.printError("SalesInDAO.opt", e);
+            return false;
+        }
+
+    }
+
+    /**
+     * 预定订单出库
+     *
+     * @param orderid 封装好的SalesIn对象
+     * @return 执行结果
+     */
+
+    public boolean optR(String orderid, String goodsid, int sum) {
+        try {
+
+
+            boolean tmp = true;
+            String sql = "update (tb_sales)" +
+                    "set paid = 'out'" +
+                    "where id= ?";
+            Object[] params = new Object[]{
+                    orderid};
+            tmp = super.add(sql, params);
+
+            sql = "update tb_storage set tb_storage.orderid=? where (tb_storage.goodsid=? and tb_storage.orderid='NULL') LIMIT ? ";
+            params = new Object[]{
+                    orderid, goodsid, sum};
+            tmp = super.add(sql, params);
+
+
+            sql = "update (tb_storage)" +
+                    "set state = 'out'" +
+                    "where orderid= ?";
+            params = new Object[]{
+                    orderid};
+            tmp = super.add(sql, params) && tmp;
+
+
+            sql = "update (tb_sales)" +
+                    "set state = '已出货'" +
+                    "where id= ?";
+            params = new Object[]{
+                    orderid};
+            tmp = super.add(sql, params) && tmp;
+
+
+            sql = "update (tb_storage)" +
+                    "set state = 'out'" +
+                    "where orderid= ?";
+            params = new Object[]{
+                    orderid};
             tmp = super.add(sql, params) && tmp;
             return tmp;
 
@@ -122,6 +187,33 @@ public class SalesInDAO extends ManagerDAO {
             ErrorManager.printError("SalesInDAO.getAllSalesIn", e);
         }
         return result;
+    }
+
+    /**
+     * 向数据库中添加新的销售记录
+     *
+     * @param goodsid
+     * @return 执行结果
+     */
+    public int getSum(String goodsid) {
+        Vector<Storage> result = new Vector<Storage>();
+        int count = 0;
+        try {
+            String sql = "select * from tb_storage where goodsid= ? and orderid = 'NULL'";
+            Object[] params = new Object[]{goodsid};
+            ResultSet rs = manager.executeQuery(sql, params, Constants.PSTM_TYPE);
+            while (rs.next()) {
+                count++;
+                Storage storage = new Storage(rs.getString("goodsid"), rs.getString("pici"), rs.getString("orderid"),
+                        rs.getString("producedate"), rs.getString("state"));
+                result.add(storage);
+            }
+            manager.closeDB();
+
+        } catch (Exception e) {
+            ErrorManager.printError("SalesInDAO.getstorageItemsum", e);
+        }
+        return count;
     }
 
 

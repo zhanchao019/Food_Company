@@ -147,13 +147,26 @@ class StorageFramePanel extends JPanel {
                     JOptionPane.showMessageDialog(null, "请选择一个待交付订单", "警告", JOptionPane.WARNING_MESSAGE);
                 } else {
                     //System.out.println(state + "|");
-                    if (orderState != "true") {
+                    if (orderState.startsWith("现")) {
+                        System.out.println(orderState);
 
                         SalesInServicesHandler handler = CommonFactory.getSalesInServices();
 
                         handler.opt(orderid.getText(), goods_id.getText());
                         JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "成功交付", "警告", JOptionPane.WARNING_MESSAGE);
                         //handler.getAllSchedule();handler.getAllSchedule();//刷新
+                    } else if (orderState.startsWith("预")) {
+
+                        SalesInServicesHandler handler = CommonFactory.getSalesInServices();
+                        int now;
+                        now = handler.getSum(goods_id.getText());
+                        if (now >= sum) {
+                            handler.optR(orderid.getText(), goods_id.getText(), sum);
+                            JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "成功交付", "警告", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "库存数量不足，订单" + orderid.getText() + "无法成功交付", "警告", JOptionPane.WARNING_MESSAGE);
+                        }
+
                     } else {
 
                         JOptionPane.showMessageDialog(null, "订单已经交付", "警告", JOptionPane.WARNING_MESSAGE);

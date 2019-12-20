@@ -64,6 +64,22 @@ public interface SalesInServicesHandler
 	boolean opt(String orderid, String goodsid);
 
 	/**
+	 * 向数据库中添加新的销售记录
+	 *
+	 * @param orderid 封装好的SalesIn对象
+	 * @return 执行结果
+	 */
+	boolean optR(String orderid, String goodsid, int sum);
+
+	/**
+	 * 向数据库中添加新的销售记录
+	 *
+	 * @param goodsid
+	 * @return 执行结果
+	 */
+	int getSum(String goodsid);
+
+	/**
 	 * 判断销售编号是否存在
 	 * @param id 
 	 * @return
