@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 20/12/2019 00:13:46
+ Date: 20/12/2019 02:34:20
 */
 
 SET NAMES utf8mb4;
@@ -364,7 +364,7 @@ CREATE TABLE `tb_sales`  (
 -- Records of tb_sales
 -- ----------------------------
 INSERT INTO `tb_sales`
-VALUES ('SI20191211101310', '1', '现金', '2019-12-11 10:13:10', 'admin', 2, 3, '人人', '1', '现货', 'true');
+VALUES ('SI20191211101310', '1', '现金', '2019-12-11 10:13:10', 'admin', 2, 3, '人人', '1', '现货', 'out');
 INSERT INTO `tb_sales`
 VALUES ('SI20191213011706', '1', '支票', '2019-12-13 01:17:06', 'admin', 1, 3, 'nill', '5', '现货', 'false');
 INSERT INTO `tb_sales`
@@ -445,6 +445,8 @@ INSERT INTO `tb_schedule`
 VALUES ('SI20191211101310', '1', 31, '成品出库导致库存低于阈值', 'false');
 INSERT INTO `tb_schedule`
 VALUES ('SI20191211101310', '1', 33, '成品出库导致库存低于阈值', 'false');
+INSERT INTO `tb_schedule`
+VALUES ('SI20191211101310', '1', 30, '成品出库导致库存低于阈值', 'false');
 
 -- ----------------------------
 -- Table structure for tb_storage
@@ -466,13 +468,13 @@ CREATE TABLE `tb_storage`
 -- Records of tb_storage
 -- ----------------------------
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
-VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
+VALUES ('1', 'XmMxDG0PXq', 'SI20191211101310', '2019-12-18 00:00:00', 'out');
 INSERT INTO `tb_storage`
 VALUES ('1', 'XmMxDG0PXq', 'NULL', '2019-12-18 00:00:00', 'in');
 INSERT INTO `tb_storage`
@@ -735,7 +737,7 @@ CREATE TABLE `tb_storagecheck`  (
 INSERT INTO `tb_storagecheck`
 VALUES (1, '3', 0);
 INSERT INTO `tb_storagecheck`
-VALUES (2, '1', 2);
+VALUES (2, '1', 0);
 INSERT INTO `tb_storagecheck`
 VALUES (3, '5', 5);
 INSERT INTO `tb_storagecheck` VALUES (4, '2', 5);
@@ -793,6 +795,38 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllgoods`()
 BEGIN
      select * from tb_goods;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllOnTimeSalesIn
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllOnTimeSalesIn`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_getAllOnTimeSalesIn`()
+BEGIN
+  select *
+  from tb_sales
+  where tb_sales.state = '现货';
+
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllOrderedSalesIn
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllOrderedSalesIn`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_getAllOrderedSalesIn`()
+BEGIN
+  select *
+  from tb_sales
+  where tb_sales.state = '预定';
+
 END
 ;;
 delimiter ;

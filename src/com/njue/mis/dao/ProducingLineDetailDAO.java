@@ -141,9 +141,10 @@ public class ProducingLineDetailDAO extends ManagerDAO {
 
             System.out.println(number + " " + goodsid);
             sql = "update (tb_storagecheck)" +
-                    "set number =( number+ ? )" +
-                    "where tb_storagecheck.goodsid = ?";
-            params = new Object[]{number, goodsid};
+                    "set number = (select count(*) from tb_storage where goodsid = ? and state= 'in')" +
+                    "where goodsid= ?";
+            params = new Object[]{
+                    goodsid, goodsid};
             super.add(sql, params);
 
             return true;
