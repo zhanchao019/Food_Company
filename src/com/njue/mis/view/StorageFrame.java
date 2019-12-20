@@ -17,7 +17,7 @@ import java.util.Vector;
 public class StorageFrame extends JInternalFrame {
 
     public StorageFrame() {
-        super("？？？", true, true, true, true);
+        super("成品库管理界面", true, true, true, true);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setBounds(0, 0, screenSize.width * 2 / 3,
                 screenSize.height * 2 / 3);
