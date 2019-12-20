@@ -112,6 +112,9 @@ public class MainFrame extends JFrame
 		menuItem = new JMenuItem("销售单缴费");
 		menuItem.addActionListener(MainAction.clickCounterInfoSearch());
 		menu.add(menuItem);
+		menuItem = new JMenuItem("订单退货");
+		menuItem.addActionListener(MainAction.salesBack());
+		menu.add(menuItem);
 
         // Set up the production schedule dept menu.
 		menu = new JMenu("生产计划管理");

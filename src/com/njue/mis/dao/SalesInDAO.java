@@ -8,6 +8,7 @@ import com.njue.mis.common.ErrorManager;
 import com.njue.mis.model.SalesIn;
 import com.njue.mis.model.Storage;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.util.Vector;
 
@@ -40,6 +41,58 @@ public class SalesInDAO extends ManagerDAO {
 
     }
 
+    /**
+     * 向数据库中退货
+     *
+     * @param orderid  封装好的SalesIn对象
+     * @param paystate
+     * @return 执行结果
+     */
+    public boolean back(String orderid, String paystate) {
+        try {
+
+            if (paystate.length() == 3) {//out
+                String sql = "update (tb_sales)" +
+                        "set paid = 'Saleback'" +
+                        "set state = '退货'" +
+                        "where id= ?";
+                Object[] params = new Object[]{
+                        orderid};
+                super.add(sql, params);//更新订单状态
+
+
+                sql = "update (tb_storage)" +
+                        "set state = 'in',set orderid='NULL'" +
+                        "where orderid= ?";
+                params = new Object[]{
+                        orderid};
+                super.add(sql, params);//更新库存中订单状态
+
+
+                JOptionPane.showMessageDialog(null, "订单" + orderid + "成功退单", "警告", JOptionPane.WARNING_MESSAGE);
+            } else if (paystate.length() == 4) {//付款
+                String sql = "update (tb_sales)" +
+                        "set paid = 'Saleback'" +
+                        "where id= ?";
+                Object[] params = new Object[]{
+                        orderid};
+                super.add(sql, params);
+
+                JOptionPane.showMessageDialog(null, "订单" + orderid + "成功退单", "警告", JOptionPane.WARNING_MESSAGE);
+            } else if (paystate.length() == 5) {//未付款
+                JOptionPane.showMessageDialog(null, "订单" + orderid + "成功退单", "警告", JOptionPane.WARNING_MESSAGE);
+            } else if (paystate.length() == 8) {//已退款
+                JOptionPane.showMessageDialog(null, "订单" + orderid + "已经退单，无法重复操作", "警告", JOptionPane.WARNING_MESSAGE);
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            ErrorManager.printError("SalesInDAO.pay", e);
+            return false;
+        }
+
+    }
 
     /**
      * 出库

@@ -23,6 +23,12 @@ public class SalesInServices implements SalesInServicesHandler
 	}
 
 
+	public boolean back(String orderid, String paystate) {
+		salesInDAO = new SalesInDAO();
+		return salesInDAO.back(orderid, paystate);
+	}
+
+
 	public int getSum(String goodsid) {
 		salesInDAO = new SalesInDAO();
 		return salesInDAO.getSum(goodsid);

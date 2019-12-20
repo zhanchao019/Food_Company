@@ -86,5 +86,14 @@ public interface SalesInServicesHandler
 	 */
 	boolean isExited(String id);
 
+	/**
+	 * 向数据库中退货
+	 *
+	 * @param orderid  封装好的SalesIn对象
+	 * @param paystate
+	 * @return 执行结果
+	 */
+	boolean back(String orderid, String paystate);
+
 
 }
