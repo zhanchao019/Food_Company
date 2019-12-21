@@ -12,6 +12,8 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class ScheduleDeptFrame extends JInternalFrame {
@@ -154,6 +156,9 @@ class ScheduleDeptFramePanel extends JPanel {
 
                         JOptionPane.showMessageDialog(null, "生产计划" + orderid.getText() + "已经进入生产部门执行", "警告", JOptionPane.WARNING_MESSAGE);
                         handler.opt(goods_id.getText(), orderid.getText(), sum);
+
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                        handler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "生产计划" + orderid.getText() + "已经进入生产部门执行");
                         //handler.getAllSchedule();handler.getAllSchedule();//刷新
                     } else {
 

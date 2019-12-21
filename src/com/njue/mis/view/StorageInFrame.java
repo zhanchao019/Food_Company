@@ -11,6 +11,8 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class StorageInFrame extends JInternalFrame {
@@ -172,6 +174,8 @@ class StorageInFramePanel extends JPanel {
                         ProducingServicesHandeler handler = CommonFactory.getProducingServices();
                         handler.getout(goods, pici, scheduleid.getText().trim(), sum, state);
                         JOptionPane.showMessageDialog(null, "生产批次" + pici + "已经成功接受", "警告", JOptionPane.WARNING_MESSAGE);
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                        handler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "生产批次" + pici + "成功接受入库");
 
                     } else {
                         JOptionPane.showMessageDialog(null, "此生产批次已经入库", "警告", JOptionPane.WARNING_MESSAGE);

@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class SalesBackFrame extends JInternalFrame {
@@ -223,6 +225,8 @@ class SalesBackFramePanel extends JPanel {
 					System.out.println(paystate + "|");
 					SalesInServicesHandler handler = CommonFactory.getSalesInServices();
 					handler.back(orderid.getText(), paystate);
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+					handler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "订单" + orderid.getText() + "成功退单");
 					JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "成功退单", "警告", JOptionPane.WARNING_MESSAGE);
 
 				}

@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CustomerFrame extends JInternalFrame
 {
@@ -194,6 +196,8 @@ public class CustomerFrame extends JInternalFrame
 									customer_bankField.getText(),
 							customer_bankIDField.getText(),  customer_mailField.getText(),customer_faxField .getText())))
 					{
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                        handler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "添加用户" + custoLabel.getText());
 						JOptionPane.showMessageDialog(null, "客户信息添加成功！", "消息",
 								JOptionPane.INFORMATION_MESSAGE);
 						setNull();

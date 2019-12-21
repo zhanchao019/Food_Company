@@ -12,6 +12,8 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class StorageFrame extends JInternalFrame {
@@ -153,6 +155,9 @@ class StorageFramePanel extends JPanel {
                         SalesInServicesHandler handler = CommonFactory.getSalesInServices();
 
                         handler.opt(orderid.getText(), goods_id.getText());
+
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                        handler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "订单" + orderid.getText() + "成功交付");
                         JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "成功交付", "警告", JOptionPane.WARNING_MESSAGE);
                         //handler.getAllSchedule();handler.getAllSchedule();//刷新
                     } else if (orderState.startsWith("预")) {
@@ -162,6 +167,8 @@ class StorageFramePanel extends JPanel {
                         now = handler.getSum(goods_id.getText());
                         if (now >= sum) {
                             handler.optR(orderid.getText(), goods_id.getText(), sum);
+                            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                            handler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "订单" + orderid.getText() + "成功交付");
                             JOptionPane.showMessageDialog(null, "订单" + orderid.getText() + "成功交付", "警告", JOptionPane.WARNING_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "库存数量不足，订单" + orderid.getText() + "无法成功交付", "警告", JOptionPane.WARNING_MESSAGE);

@@ -144,6 +144,7 @@ class ProducingDeptFramePanel extends JPanel {
                     if (unfinished <= 0) {
                         JOptionPane.showMessageDialog(null, "此生产计划已经完成，无法继续生产", "警告", JOptionPane.WARNING_MESSAGE);
                     } else {
+
                         ProducingFrame pf = new ProducingFrame(orderid.getText(), goods_id.getText(), sum, unfinished);
                         MainFrame.getMainFrame().getContentPane().add(
                                 pf);

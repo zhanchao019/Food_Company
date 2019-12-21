@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class GoodsFrame extends JInternalFrame
 {
@@ -190,6 +192,8 @@ public class GoodsFrame extends JInternalFrame
 									.valueOf(priceField.getText()),
 							ID_privoderField.getText())))
 					{
+						SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+						handler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "添加商品" + ID_goodsField.getText());
 						JOptionPane.showMessageDialog(null, "商品信息添加成功！", "消息",
 								JOptionPane.INFORMATION_MESSAGE);
 						setNull();

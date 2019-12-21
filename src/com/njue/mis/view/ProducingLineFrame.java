@@ -11,6 +11,8 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class ProducingLineFrame extends JInternalFrame {
@@ -169,6 +171,8 @@ class ProducingLineFramePanel extends JPanel {
 
                         ProducingServicesHandeler handler = CommonFactory.getProducingServices();
                         handler.finish(pici.trim(), line);
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                        handler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "生产任务" + scheduleid.getText() + "成功完成");
                         JOptionPane.showMessageDialog(null, "生产任务" + scheduleid.getText() + "已经成功完成", "警告", JOptionPane.WARNING_MESSAGE);
 
                     } else {

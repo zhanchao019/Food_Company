@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ProviderFrame extends JInternalFrame
 {
@@ -366,6 +368,8 @@ public class ProviderFrame extends JInternalFrame
 				{
 					ProviderServicesHandler providerServicesHandler = CommonFactory.getProviderServices();
 					if(providerServicesHandler.deleteProvider(ID_providerField1.getText())){
+						SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+						providerServicesHandler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "删除供应商" + ID_providerField1.getText() + "成功完成");
 						JOptionPane.showMessageDialog(null, "恭喜你，删除成功！","消息",JOptionPane.INFORMATION_MESSAGE);
 						ID_providerField1.setEditable(true);
 						dispose();

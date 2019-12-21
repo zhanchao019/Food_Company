@@ -12,6 +12,8 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class ProducingFrame extends JInternalFrame {
@@ -171,7 +173,8 @@ class ProducingFramePanel extends JPanel {
                         String pici = rb.getRandomString();
                         ProducingServicesHandeler handler = CommonFactory.getProducingServices();
                         handler.addProducingDetail(scheduleid, goodsid, pici, orderid.getText(), tmp);
-
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                        handler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "生产批次" + pici + "加入生产队列");
                         JOptionPane.showMessageDialog(null, "生产批次" + pici + "以成功加入生产队列", "警告", JOptionPane.WARNING_MESSAGE);
 
                     } else {

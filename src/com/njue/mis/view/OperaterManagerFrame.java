@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class OperaterManagerFrame extends JInternalFrame
@@ -184,6 +186,9 @@ public class OperaterManagerFrame extends JInternalFrame
 					{
 						JOptionPane.showMessageDialog(null, "恭喜你，该用户名可用", "消息",
 								JOptionPane.INFORMATION_MESSAGE);
+
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                        operator.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "添加用户" + text_login_name.getText());
 					}
 				}
 
@@ -236,6 +241,8 @@ public class OperaterManagerFrame extends JInternalFrame
 									loginnameString, passwordString,
 									operatorNameString, powerString, selecteddept)))
 							{
+                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                                addOperator.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "添加用户" + loginnameString);
 								JOptionPane.showMessageDialog(null, "恭喜你，添加"
 										+ powerString + "已成功！", "消息",
 										JOptionPane.INFORMATION_MESSAGE);
@@ -281,6 +288,8 @@ public class OperaterManagerFrame extends JInternalFrame
 				{
 					if (operator.deleteOperator(usernameString))
 					{
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                        operator.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "删除用户" + usernameString);
 						JOptionPane.showMessageDialog(null, "恭喜你，删除成功！", "消息",
 								JOptionPane.INFORMATION_MESSAGE);
 						jcbname.removeAllItems();

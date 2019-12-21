@@ -1,21 +1,16 @@
 package com.njue.mis.view;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.common.ValidationManager;
 import com.njue.mis.handler.GoodsServicesHandler;
 import com.njue.mis.model.Goods;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PriceChangeFrame extends JInternalFrame
 {
@@ -68,6 +63,7 @@ public class PriceChangeFrame extends JInternalFrame
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 					else {
+
 						textField_price1.setText(String.valueOf(goods.getPrice()));
 						button_sure.setEnabled(true);
 					}
@@ -125,6 +121,8 @@ public class PriceChangeFrame extends JInternalFrame
 				if (goodsServicesHandler.modifyGoodsPrice(textField_name
 						.getText(), Double.valueOf(textField_price2.getText())))
 				{
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+					goodsServicesHandler.addLog(MainFrame.username, df.format(new Date()), (MainFrame.username), MainFrame.dept, "更改商品" + textField_name.getText() + "从" + textField_price1 + "到" + textField_price2.getText());
 					JOptionPane.showMessageDialog(null, "恭喜你，价格调整成功！", "消息",
 							JOptionPane.INFORMATION_MESSAGE);
 					textField_name.setText("");

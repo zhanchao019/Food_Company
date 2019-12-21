@@ -1,20 +1,14 @@
 package com.njue.mis.view;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
 import com.njue.mis.common.CommonFactory;
 import com.njue.mis.handler.OperatorServicesHandler;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ChangePasswordFrame extends JInternalFrame
 {
@@ -85,6 +79,8 @@ public class ChangePasswordFrame extends JInternalFrame
 						{
 							if (newPasswordString.equals(rePasswordString))
 							{
+                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                                operator.addLog(MainFrame.username, df.format(new Date()), operator.getPower(MainFrame.username), MainFrame.dept, "更改密码成功");
 								operator.modifyPassword(MainFrame.username, newPasswordString);
 								JOptionPane.showMessageDialog(null,
 										"恭喜你，密码已修改成功！", "消息",
@@ -93,6 +89,8 @@ public class ChangePasswordFrame extends JInternalFrame
 							}
 							else
 							{
+                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                                operator.addLog(MainFrame.username, df.format(new Date()), operator.getPower(MainFrame.username), MainFrame.dept, "更改密码失败");
 								JOptionPane.showMessageDialog(null,
 										"请输入相同新密码！", "警告",
 										JOptionPane.WARNING_MESSAGE);
