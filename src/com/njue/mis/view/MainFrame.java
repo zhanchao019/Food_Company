@@ -164,7 +164,7 @@ public class MainFrame extends JFrame
 		menu.add(menuItem);
 		menuItem = new JMenuItem("入库退货查询");
 		menuItem.addActionListener(MainAction.clickOutputInforserch());
-		menu.add(menuItem);
+		//menu.add(menuItem);
 
 		// Set up the save menu.
 		menu = new JMenu("库存管理");

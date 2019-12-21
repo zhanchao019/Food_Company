@@ -36,6 +36,18 @@ public class GoodsDAO
 					goods.getPromitCode(), goods.getDescription(), goods.getPrice(),
 					goods.getProviderId()};
             String sql = "insert into tb_goods(id,goodsname,produceplace,size,rawmaterial,productcode,promitcode,description,price,providerid,available) values(?,?,?,?,?,?,?,?,?,?,1)";
+
+			result = manage.executeUpdate(sql, params, Constants.PSTM_TYPE);
+
+			params = new Object[]{goods.getId(), goods.getGoodsName(), goods.getProducePlace(),
+					goods.getSize(), goods.get_package(), goods.getProductCode(),
+					goods.getPromitCode(), goods.getDescription(), goods.getPrice(),
+					goods.getProviderId()};
+			sql = "insert into tb_storagecheck(goodsid,number) values(?,0)";
+			params = new Object[]{
+					goods.getId()
+			};
+
 			result = manage.executeUpdate(sql, params, Constants.PSTM_TYPE);
 			System.out.println("ÃÌº”ÕÍ≥…£ø");
 			manage.closeDB();

@@ -80,6 +80,12 @@ public class SalesInDAO extends ManagerDAO {
 
                 JOptionPane.showMessageDialog(null, "订单" + orderid + "成功退单", "警告", JOptionPane.WARNING_MESSAGE);
             } else if (paystate.length() == 5) {//未付款
+                String sql = "update (tb_sales)" +
+                        "set paid = 'Saleback'" +
+                        "where id= ?";
+                Object[] params = new Object[]{
+                        orderid};
+                super.add(sql, params);
                 JOptionPane.showMessageDialog(null, "订单" + orderid + "成功退单", "警告", JOptionPane.WARNING_MESSAGE);
             } else if (paystate.length() == 8) {//已退款
                 JOptionPane.showMessageDialog(null, "订单" + orderid + "已经退单，无法重复操作", "警告", JOptionPane.WARNING_MESSAGE);
