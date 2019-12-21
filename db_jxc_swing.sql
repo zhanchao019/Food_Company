@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 21/12/2019 13:28:31
+ Date: 21/12/2019 14:08:31
 */
 
 SET NAMES utf8mb4;
@@ -77,6 +77,7 @@ CREATE TABLE `tb_goods`  (
 -- Records of tb_goods
 -- ----------------------------
 INSERT INTO `tb_goods` VALUES ('1', '牙刷', '中国', '30', '小牙刷', '23876374', '374638261', '牙刷', 2, '1', 1);
+INSERT INTO `tb_goods` VALUES ('11', '小水果', '1', '1', '1', '1', '1', '1', 1, '1', 1);
 INSERT INTO `tb_goods` VALUES ('12', 'xiaotuzi', '112', '30', 'ra', '123133', '131231', 'dsad', 1, '1', 1);
 INSERT INTO `tb_goods` VALUES ('13', '123', '1', '30', 'ada', '1', '1', 'qe', 1, '1', 1);
 INSERT INTO `tb_goods` VALUES ('2', '小游戏机', '日本', '30', '电路板', '31245324', '343123452', '游戏机', 33, '1', 1);
@@ -153,6 +154,10 @@ CREATE TABLE `tb_log`  (
 -- Records of tb_log
 -- ----------------------------
 INSERT INTO `tb_log` VALUES ('admin', '2019-12-21 12:53:52', '管理员', '管理员', '登录');
+INSERT INTO `tb_log` VALUES ('admin', '2019-12-21 13:29:36', '管理员', '管理员', '登录');
+INSERT INTO `tb_log` VALUES ('admin', '2019-12-21 14:06:17', '管理员', '管理员', '登录');
+INSERT INTO `tb_log` VALUES ('admin', '2019-12-21 14:06:41', '管理员', '管理员', '登录');
+INSERT INTO `tb_log` VALUES ('admin', '2019-12-21 14:07:00', 'admin', '管理员', '添加商品11');
 
 -- ----------------------------
 -- Table structure for tb_operator
@@ -317,6 +322,7 @@ INSERT INTO `tb_rawmaterial` VALUES ('键盘侠', '7');
 INSERT INTO `tb_rawmaterial` VALUES ('ada', '13');
 INSERT INTO `tb_rawmaterial` VALUES ('ra', '12');
 INSERT INTO `tb_rawmaterial` VALUES ('132', '23');
+INSERT INTO `tb_rawmaterial` VALUES ('1', '11');
 
 -- ----------------------------
 -- Table structure for tb_sales
@@ -645,6 +651,19 @@ delimiter ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllgoods`()
 BEGIN
      select * from tb_goods;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_getAllLog
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_getAllLog`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_getAllLog`()
+BEGIN
+
+     select * from tb_log;
 END
 ;;
 delimiter ;
