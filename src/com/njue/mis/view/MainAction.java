@@ -174,6 +174,21 @@ public class MainAction {
 		};
 	}
 
+	public static ActionListener logManager() {
+		return new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				LogFrame operaterManagerFrame = new LogFrame();
+
+				MainFrame.getMainFrame().getContentPane().add(
+						operaterManagerFrame);
+
+
+				operaterManagerFrame.setVisible(true);
+			}
+		};
+	}
+
 
 	public static ActionListener operaterManager() {
 		return new ActionListener() {
@@ -258,6 +273,18 @@ public class MainAction {
 				MainFrame.getMainFrame().getContentPane().add(
 						storehouseInfoFrame);
 				storehouseInfoFrame.setVisible(true);
+			}
+		};
+	}
+
+	public static ActionListener Log() {
+		return new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				LogFrame log = new LogFrame();
+				MainFrame.getMainFrame().getContentPane().add(
+						log);
+				log.setVisible(true);
 			}
 		};
 	}

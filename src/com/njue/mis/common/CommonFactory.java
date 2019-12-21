@@ -21,6 +21,23 @@ public class CommonFactory
 	}
 
 	/**
+	 * 获取LogService类的对象
+	 *
+	 * @return LogService类的对象
+	 */
+	public static LogServicesHandler getLogServices() {
+		try {
+			return (LogServicesHandler) Class.forName(Constants.LOG_SERVICES_CLASS).newInstance();
+		} catch (Exception e) {
+			ErrorManager.printError("CommontFactory.getLOGServices", e);
+		}
+		return null;
+	}
+
+
+
+
+	/**
 	 * 获取ScheduleService类的对象
 	 *
 	 * @return ScheduleService类的对象

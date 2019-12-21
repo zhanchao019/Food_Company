@@ -187,6 +187,11 @@ public class MainFrame extends JFrame
 			menuItem = new JMenuItem("操作员管理");
 			menuItem.addActionListener(MainAction.operaterManager());
 			menu.add(menuItem);
+
+			menuItem = new JMenuItem("操作历史记录管理");
+			menuItem.addActionListener(MainAction.logManager());
+			menu.add(menuItem);
+
 		}
 		else if(power.equals("操作员"))
 		{
