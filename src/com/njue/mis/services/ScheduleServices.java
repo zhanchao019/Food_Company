@@ -1,5 +1,6 @@
 package com.njue.mis.services;
 
+import com.njue.mis.dao.LogDAO;
 import com.njue.mis.dao.ScheduleDAO;
 import com.njue.mis.handler.ScheduleServicesHandler;
 import com.njue.mis.model.Schedule;
@@ -33,6 +34,11 @@ public class ScheduleServices implements ScheduleServicesHandler {
         return result;
     }
 
+    public boolean addLog(String username, String time, String power, String dept, String detail) {
+        LogDAO logDAO = new LogDAO();
+        return logDAO.addLog(username, time, power, dept, detail);
+
+    }
     public Vector<Schedule> getAllSchedule() {
         scheduleDAO = new ScheduleDAO();
         return scheduleDAO.getAllSchedule();

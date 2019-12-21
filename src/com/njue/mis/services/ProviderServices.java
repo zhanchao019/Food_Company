@@ -3,11 +3,12 @@
  */
 package com.njue.mis.services;
 
-import java.util.Vector;
-
+import com.njue.mis.dao.LogDAO;
 import com.njue.mis.dao.ProviderDAO;
 import com.njue.mis.handler.ProviderServicesHandler;
 import com.njue.mis.model.Provider;
+
+import java.util.Vector;
 
 public class ProviderServices implements ProviderServicesHandler
 {
@@ -18,7 +19,12 @@ public class ProviderServices implements ProviderServicesHandler
 		super();
 	}
 
-	
+
+	public boolean addLog(String username, String time, String power, String dept, String detail) {
+		LogDAO logDAO = new LogDAO();
+		return logDAO.addLog(username, time, power, dept, detail);
+
+	}
 	public boolean addProvider(Provider provider)
 	{
 		providerDAO=new ProviderDAO();

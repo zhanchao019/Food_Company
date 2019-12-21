@@ -9,6 +9,7 @@ import java.util.Vector;
 
 public interface SalesInServicesHandler
 {
+	boolean addLog(String username, String time, String power, String dept, String detail);
 	/**
 	 * 向数据库中添加新的销售记录
 	 * @param orderid 封装好的SalesIn对象

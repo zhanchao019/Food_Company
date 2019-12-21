@@ -1,5 +1,6 @@
 package com.njue.mis.services;
 
+import com.njue.mis.dao.LogDAO;
 import com.njue.mis.dao.ProducingDAO;
 import com.njue.mis.dao.ProducingLineDAO;
 import com.njue.mis.dao.ProducingLineDetailDAO;
@@ -17,6 +18,14 @@ public class ProducingServices implements ProducingServicesHandeler {
     public ProducingServices() {
         super();
     }
+
+    public boolean addLog(String username, String time, String power, String dept, String detail) {
+        LogDAO logDAO = new LogDAO();
+        return logDAO.addLog(username, time, power, dept, detail);
+
+    }
+
+
 
     /**
      * 获取所有的销售信息

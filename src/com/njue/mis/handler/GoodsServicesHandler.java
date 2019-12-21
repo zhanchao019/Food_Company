@@ -4,14 +4,22 @@
 
 package com.njue.mis.handler;
 
-import java.util.Vector;
-
 import com.njue.mis.model.Goods;
 import com.njue.mis.model.StorageGoods;
 
+import java.util.Vector;
+
 public interface GoodsServicesHandler
 {
-	
+	/**
+	 * 操作记录
+	 *
+	 * @param username 用户名
+	 * @param password 密码
+	 * @param dept     部门
+	 * @return 查询结果
+	 */
+	boolean addLog(String username, String time, String power, String dept, String detail);
 	/**
 	 * 向数据库中添加新商品
 	 * @param goods  封装好的goods对象

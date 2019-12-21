@@ -3,6 +3,7 @@
  */
 package com.njue.mis.services;
 
+import com.njue.mis.dao.LogDAO;
 import com.njue.mis.dao.OperatorDAO;
 import com.njue.mis.handler.OperatorServicesHandler;
 import com.njue.mis.model.Operator;
@@ -15,6 +16,12 @@ public class OperatorServices implements OperatorServicesHandler {
 	public OperatorServices() {
 		super();
 	}
+
+    public boolean addLog(String username, String time, String power, String dept, String detail) {
+        LogDAO logDAO = new LogDAO();
+        return logDAO.addLog(username, time, power, dept, detail);
+
+    }
 
 	public boolean addOperator(Operator operator) {
 		operatorDAO = new OperatorDAO();

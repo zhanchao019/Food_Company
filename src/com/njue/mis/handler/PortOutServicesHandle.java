@@ -3,13 +3,14 @@
  */
 package com.njue.mis.handler;
 
-import java.util.Vector;
-
 import com.njue.mis.model.PortOut;
+
+import java.util.Vector;
 
 public interface PortOutServicesHandle
 {
-	
+
+	boolean addLog(String username, String time, String power, String dept, String detail);
 	/**
 	 * 添加新的退货记录
 	 * @param portOut 封装好的portOut对象

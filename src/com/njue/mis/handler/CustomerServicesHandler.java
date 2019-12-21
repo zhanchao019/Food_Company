@@ -4,9 +4,9 @@
 
 package com.njue.mis.handler;
 
-import java.util.Vector;
-
 import com.njue.mis.model.Customer;
+
+import java.util.Vector;
 
 public interface CustomerServicesHandler
 {
@@ -15,6 +15,15 @@ public interface CustomerServicesHandler
 	 * @param customer 封装好的客户
 	 * @return 执行结果
 	 */
+    /**
+     * 操作记录
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @param dept     部门
+     * @return 查询结果
+     */
+    boolean addLog(String username, String time, String power, String dept, String detail);
 	boolean addCustomer(Customer customer);
 	
 	/**

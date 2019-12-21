@@ -3,11 +3,12 @@
  */
 package com.njue.mis.services;
 
-import java.util.Vector;
-
+import com.njue.mis.dao.LogDAO;
 import com.njue.mis.dao.PortInDAO;
 import com.njue.mis.handler.PortInServicesHandle;
 import com.njue.mis.model.PortIn;
+
+import java.util.Vector;
 
 public class PortInServices implements PortInServicesHandle
 {
@@ -18,7 +19,15 @@ public class PortInServices implements PortInServicesHandle
 		super();
 	}
 
-	
+
+	public boolean addLog(String username, String time, String power, String dept, String detail) {
+		LogDAO logDAO = new LogDAO();
+		return logDAO.addLog(username, time, power, dept, detail);
+
+	}
+
+
+
 	public boolean addPortIn(PortIn portIn)
 	{
 		portInDAO=new PortInDAO();

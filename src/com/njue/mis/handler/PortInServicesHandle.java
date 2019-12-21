@@ -3,9 +3,9 @@
  */
 package com.njue.mis.handler;
 
-import java.util.Vector;
-
 import com.njue.mis.model.PortIn;
+
+import java.util.Vector;
 
 public interface PortInServicesHandle
 {
@@ -15,6 +15,16 @@ public interface PortInServicesHandle
 	 * @return 执行结果
 	 */
 	boolean addPortIn(PortIn portIn);
+
+	/**
+	 * 操作记录
+	 *
+	 * @param username 用户名
+	 * @param password 密码
+	 * @param dept     部门
+	 * @return 查询结果
+	 */
+	boolean addLog(String username, String time, String power, String dept, String detail);
 	
 	/**
 	 * 获取所有的进货信息

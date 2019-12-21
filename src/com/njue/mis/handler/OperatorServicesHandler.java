@@ -18,6 +18,16 @@ public interface OperatorServicesHandler {
 	 */
 	boolean loginCheck(String username, String password, String dept);
 
+    /**
+     * 操作记录
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @param dept     部门
+     * @return 查询结果
+     */
+    boolean addLog(String username, String time, String power, String dept, String detail);
+
 	/**
 	 * 向数据库中田间新的操作员
 	 *

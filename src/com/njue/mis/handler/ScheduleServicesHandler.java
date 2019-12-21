@@ -5,6 +5,7 @@ import com.njue.mis.model.Schedule;
 import java.util.Vector;
 
 public interface ScheduleServicesHandler {
+    boolean addLog(String username, String time, String power, String dept, String detail);
     /**
      * 确认执行生产计划
      *

@@ -3,12 +3,13 @@
  */
 package com.njue.mis.handler;
 
-import java.util.Vector;
-
 import com.njue.mis.model.SalesBack;
+
+import java.util.Vector;
 
 public interface SalesBackServicesHandler
 {
+	boolean addLog(String username, String time, String power, String dept, String detail);
 	/**
 	 * 向数据库中添加新的退货记录
 	 * @param SalesBack 封装好的SalesBack对象

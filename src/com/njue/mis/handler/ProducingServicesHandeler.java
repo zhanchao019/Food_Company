@@ -7,6 +7,8 @@ import com.njue.mis.model.ProducingLineDetail;
 import java.util.Vector;
 
 public interface ProducingServicesHandeler {
+
+    boolean addLog(String username, String time, String power, String dept, String detail);
     /**
      * 获取所有的销售信息
      *

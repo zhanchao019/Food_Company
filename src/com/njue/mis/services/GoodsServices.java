@@ -3,12 +3,13 @@
  */
 package com.njue.mis.services;
 
-import java.util.Vector;
-
 import com.njue.mis.dao.GoodsDAO;
+import com.njue.mis.dao.LogDAO;
 import com.njue.mis.handler.GoodsServicesHandler;
 import com.njue.mis.model.Goods;
 import com.njue.mis.model.StorageGoods;
+
+import java.util.Vector;
 
 public class GoodsServices implements GoodsServicesHandler
 {
@@ -38,6 +39,12 @@ public class GoodsServices implements GoodsServicesHandler
 	{
 		goodsDAO=new GoodsDAO();
 		return goodsDAO.searchGoods(field, value);
+	}
+
+	public boolean addLog(String username, String time, String power, String dept, String detail) {
+		LogDAO logDAO = new LogDAO();
+		return logDAO.addLog(username, time, power, dept, detail);
+
 	}
 
 	

@@ -109,7 +109,7 @@ public class GoodsDAO
 		boolean result=false;
 		try
 		{
-			String sql="update tb_goods set price=? where id=?";
+			String sql = "update tb_goods set price= ? where id=?";
 			Object[] params=new Object[]{price,id};
 			result=manage.executeUpdate(sql, params, Constants.PSTM_TYPE);
 			manage.closeDB();
@@ -265,7 +265,7 @@ public class GoodsDAO
     	Goods goods=new Goods();
     	try
 		{
-			String sql="select * from tb_goods where id=?";
+			String sql = "select * from tb_goods where id= ?";
 			Object[] params=new Object[]{id};
 			ResultSet rs=manage.executeQuery(sql, params, Constants.PSTM_TYPE);
 			if(rs.next())

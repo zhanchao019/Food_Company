@@ -3,12 +3,13 @@
  */
 package com.njue.mis.handler;
 
-import java.util.Vector;
-
 import com.njue.mis.model.Provider;
+
+import java.util.Vector;
 
 public interface ProviderServicesHandler
 {
+	boolean addLog(String username, String time, String power, String dept, String detail);
 	/**
 	 * 向数据库中田间新的操作员
 	 * @param operator 封装好的操作员

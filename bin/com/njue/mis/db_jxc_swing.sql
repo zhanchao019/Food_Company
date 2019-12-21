@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 20/12/2019 14:06:12
+ Date: 20/12/2019 14:55:51
 */
 
 SET NAMES utf8mb4;
@@ -370,7 +370,7 @@ VALUES ('SI20191213011706', '1', '支票', '2019-12-13 01:17:06', 'admin', 1, 3,
 INSERT INTO `tb_sales`
 VALUES ('SI20191213012059', '1', '现金', '2019-12-13 01:20:59', 'admin', 1, 7, '12313', '1', '现货', 'out');
 INSERT INTO `tb_sales`
-VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01:23:22', 'admin', 1, 3, 'all', '1', '已出货', 'out');
+VALUES ('SI20191213012322', '1', '现金', '2019-12-13 01:23:22', 'admin', 1, 3, 'all', '1', '已出货', 'Saleback');
 INSERT INTO `tb_sales`
 VALUES ('SI20191214120901', '1', '现金', '2019-12-14 12:09:01', '', 3, 6, '应该时2*3', '1', '已出货', 'out');
 INSERT INTO `tb_sales`
@@ -757,12 +757,13 @@ CREATE TABLE `tb_storagecheck`  (
 INSERT INTO `tb_storagecheck`
 VALUES (1, '3', 0);
 INSERT INTO `tb_storagecheck`
-VALUES (2, '1', 121);
+VALUES (2, '1', 98);
 INSERT INTO `tb_storagecheck`
-VALUES (3, '5', 5);
-INSERT INTO `tb_storagecheck` VALUES (4, '2', 5);
+VALUES (3, '5', 0);
 INSERT INTO `tb_storagecheck`
-VALUES (5, '4', 10);
+VALUES (4, '2', 0);
+INSERT INTO `tb_storagecheck`
+VALUES (5, '4', 0);
 
 -- ----------------------------
 -- Procedure structure for pr_decreaseProducingCount
@@ -1188,6 +1189,24 @@ BEGIN
   where tb_producing.scheduleid = @scheduleid;
 
   COMMIT;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for pr_updateStorage
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `pr_updateStorage`;
+delimiter ;;
+CREATE
+  DEFINER =`root`@`localhost` PROCEDURE `pr_updateStorage`()
+BEGIN
+  update tb_storagecheck
+  set number = (
+    select count(*)
+    from tb_storage
+    where (tb_storage.goodsid = tb_storagecheck.goodsid and tb_storage.orderid = 'NULL')
+  );
 END
 ;;
 delimiter ;

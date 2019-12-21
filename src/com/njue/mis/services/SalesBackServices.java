@@ -3,6 +3,7 @@
  */
 package com.njue.mis.services;
 
+import com.njue.mis.dao.LogDAO;
 import com.njue.mis.dao.SalesBackDAO;
 import com.njue.mis.handler.SalesBackServicesHandler;
 import com.njue.mis.model.SalesBack;
@@ -17,6 +18,11 @@ public class SalesBackServices implements SalesBackServicesHandler
 		super();
 	}
 
+	public boolean addLog(String username, String time, String power, String dept, String detail) {
+		LogDAO logDAO = new LogDAO();
+		return logDAO.addLog(username, time, power, dept, detail);
+
+	}
 	
 	public boolean addSalesBack(SalesBack salesBack)
 	{

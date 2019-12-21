@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class LoginFrame extends JFrame implements ActionListener {
 
@@ -59,7 +61,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 			boolean isPass = operator.loginCheck(usernameString,
 					passwordString, selected_department);
 			if (isPass) {
-
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+				operator.addLog(usernameString, df.format(new Date()), operator.getPower(usernameString), selected_department, "登录");
 				MainFrame.username = usernameString;
 				MainFrame.power = operator.getPower(usernameString);
 				MainFrame.dept = selected_department;
